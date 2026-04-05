@@ -11,20 +11,14 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="/" class="site-logo">Scaled<span>AIOps</span></a>
-      <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
-      <nav class="site-nav">
-        <a href="/">Framework</a>
-        <a href="/disciplines/" class="active">Disciplines</a>
-        <a href="/principles/">Principles</a>
-        <a href="/roles/">Roles</a>
-        <a href="/about/">About</a>
-        <a href="https://github.com/Scaled-AIOps" class="btn btn-outline" style="padding:0.4rem 1rem;">GitHub</a>
-      </nav>
-    </div>
-  </header>
+  <div id="page-loader">
+    <div class="loader-logo">Scaled<span>AIOps</span></div>
+    <div class="loader-bars"><div></div><div></div><div></div><div></div><div></div></div>
+  </div>
+
+  <div id="site-header"></div>
+
+  <div id="page-content">
 
   <section class="hero" style="padding:3.5rem 1.5rem;">
     <div class="container">
@@ -76,21 +70,10 @@
     </div>
   </section>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-links">
-        <a href="/about/">About</a>
-        <a href="/principles/">Principles</a>
-        <a href="https://github.com/Scaled-AIOps">GitHub</a>
-      </div>
-      <p>&copy; 2026 ScaledAIOps Contributors. This work is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
-    </div>
-  </footer>
+  </div>
 
-  <script>
-    document.querySelector('.nav-toggle').addEventListener('click', function() {
-      document.querySelector('.site-nav').classList.toggle('open');
-    });
-  </script>
+  <div id="site-footer"></div>
+  <script src="/assets/js/components.js"></script>
+
 </body>
 </html>
