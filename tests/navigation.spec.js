@@ -33,4 +33,27 @@ test.describe('Navigation', () => {
     await expect(page).toHaveTitle('Page Not Found — ScaledAIOps');
     await expect(page.locator('h1')).toHaveText('404');
   });
+
+  const pendingPages = [
+    { name: 'Disciplines', path: '/disciplines/' },
+    { name: 'Principles', path: '/principles/' },
+    { name: 'Roles', path: '/roles/' },
+    { name: 'About', path: '/about/' },
+    { name: 'ML Engineering', path: '/disciplines/ml-engineering/' },
+    { name: 'Model Lifecycle', path: '/disciplines/model-lifecycle/' },
+    { name: 'Data Operations', path: '/disciplines/data-operations/' },
+    { name: 'Reliability', path: '/disciplines/reliability/' },
+    { name: 'Security & Ethics', path: '/disciplines/security-ethics/' },
+    { name: 'Strategy', path: '/disciplines/strategy/' },
+  ];
+
+  for (const { name, path } of pendingPages) {
+    test(`${name} page (${path}) shows proper 404`, async ({ page }) => {
+      const response = await page.goto(path);
+      expect(response.status()).toBe(404);
+      await expect(page).toHaveTitle('Page Not Found — ScaledAIOps');
+      await expect(page.locator('h1')).toHaveText('404');
+      await expect(page.locator('a.btn-primary')).toHaveAttribute('href', '/');
+    });
+  }
 });
