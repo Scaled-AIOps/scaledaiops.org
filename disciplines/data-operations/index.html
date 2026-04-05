@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Operations — ScaledAIOps Framework</title>
+  <meta name="description" content="Ensuring data quality, lineage, access, and governance to fuel trustworthy AI systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">Scaled<span>AIOps</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+      <nav class="site-nav">
+        <a href="/">Framework</a>
+        <a href="/disciplines/" class="active">Disciplines</a>
+        <a href="/principles/">Principles</a>
+        <a href="/roles/">Roles</a>
+        <a href="/about/">About</a>
+        <a href="https://github.com/Scaled-AIOps" class="btn btn-outline" style="padding:0.4rem 1rem;">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="subtitle" style="margin-bottom:0.5rem;"><a href="/disciplines/" style="color:rgba(255,255,255,0.7);">Disciplines</a> &rarr;</p>
+      <h1>Data Operations</h1>
+      <p class="subtitle">Ensuring data quality, lineage, access, and governance to fuel trustworthy AI systems.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2>Overview</h2>
+      <p>Data Operations is the discipline of managing the data that powers AI systems with the same rigor applied to production software. It encompasses data pipelines, quality assurance, lineage tracking, access controls, and governance — ensuring that models are built on a reliable, well-understood data foundation.</p>
+
+      <h2>Key Practices</h2>
+
+      <h3>Data Quality</h3>
+      <p>Implement automated data quality checks at every stage of the pipeline — completeness, consistency, accuracy, timeliness, and validity. Define data quality SLOs and alert when they are breached. Treat data quality failures as production incidents.</p>
+
+      <h3>Data Lineage</h3>
+      <p>Track the origin, transformation, and consumption of every dataset. Lineage enables impact analysis (what breaks if this source changes?), debugging (where did this bad prediction come from?), and compliance (can we prove where this data originated?).</p>
+
+      <h3>Data Contracts</h3>
+      <p>Establish formal agreements between data producers and consumers about schema, quality, and delivery guarantees. Data contracts prevent silent breakage when upstream systems change and make dependencies explicit and manageable.</p>
+
+      <h3>Data Versioning</h3>
+      <p>Version datasets alongside code and model artifacts. Reproducibility requires knowing exactly which data was used to train a given model. Use tools that support efficient storage and retrieval of large dataset versions.</p>
+
+      <h3>Data Governance</h3>
+      <p>Define and enforce policies around data access, retention, privacy, and usage. Implement role-based access controls, data classification, and audit logging. Ensure compliance with relevant regulations (GDPR, CCPA, industry-specific requirements).</p>
+
+      <h3>Pipeline Reliability</h3>
+      <p>Build data pipelines that are idempotent, observable, and recoverable. Implement retry logic, dead letter queues, and backfill capabilities. Monitor pipeline freshness and alert on delays — stale data leads to stale models.</p>
+
+      <h2>Related Roles</h2>
+      <ul>
+        <li><a href="/roles/">Data Engineer</a> — Builds and operates data pipelines</li>
+        <li><a href="/roles/">ML Engineer</a> — Consumes data for training and inference</li>
+        <li><a href="/roles/">AI Ethics Lead</a> — Ensures data governance meets ethical standards</li>
+      </ul>
+
+      <h2>Related Principles</h2>
+      <ul>
+        <li><a href="/principles/">Data as a First-Class Citizen</a> — The core principle behind this discipline</li>
+        <li><a href="/principles/">Automate Relentlessly</a> — Data quality and pipeline management must be automated</li>
+      </ul>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/about/">About</a>
+        <a href="/principles/">Principles</a>
+        <a href="https://github.com/Scaled-AIOps">GitHub</a>
+      </div>
+      <p>&copy; 2026 ScaledAIOps Contributors. This work is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.site-nav').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

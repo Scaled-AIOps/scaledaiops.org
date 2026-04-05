@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disciplines — ScaledAIOps Framework</title>
+  <meta name="description" content="The six core disciplines for operationalizing AI at scale.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">Scaled<span>AIOps</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+      <nav class="site-nav">
+        <a href="/">Framework</a>
+        <a href="/disciplines/" class="active">Disciplines</a>
+        <a href="/principles/">Principles</a>
+        <a href="/roles/">Roles</a>
+        <a href="/about/">About</a>
+        <a href="https://github.com/Scaled-AIOps" class="btn btn-outline" style="padding:0.4rem 1rem;">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <h1>Core Disciplines</h1>
+      <p class="subtitle">Six interconnected disciplines for building, deploying, and operating AI systems at scale.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="card-grid">
+
+        <div class="card">
+          <div class="card-icon">&#9881;</div>
+          <h3>ML Engineering &amp; Platform</h3>
+          <p>Infrastructure, tooling, and platforms that enable teams to build, train, and serve models reliably.</p>
+          <a href="/disciplines/ml-engineering/">Learn more &rarr;</a>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128295;</div>
+          <h3>Model Lifecycle Management</h3>
+          <p>End-to-end governance of models from development through deployment, monitoring, and retirement.</p>
+          <a href="/disciplines/model-lifecycle/">Learn more &rarr;</a>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128202;</div>
+          <h3>Data Operations</h3>
+          <p>Ensuring data quality, lineage, access, and governance to fuel trustworthy AI systems.</p>
+          <a href="/disciplines/data-operations/">Learn more &rarr;</a>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128680;</div>
+          <h3>Reliability &amp; Observability</h3>
+          <p>Monitoring, alerting, incident response, and SLOs for AI workloads in production.</p>
+          <a href="/disciplines/reliability/">Learn more &rarr;</a>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128272;</div>
+          <h3>Security, Ethics &amp; Compliance</h3>
+          <p>Responsible AI practices, threat modeling, privacy, bias mitigation, and regulatory compliance.</p>
+          <a href="/disciplines/security-ethics/">Learn more &rarr;</a>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#127919;</div>
+          <h3>Strategy &amp; Organization</h3>
+          <p>Aligning AI initiatives with business value, building AI-capable teams, and scaling adoption.</p>
+          <a href="/disciplines/strategy/">Learn more &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/about/">About</a>
+        <a href="/principles/">Principles</a>
+        <a href="https://github.com/Scaled-AIOps">GitHub</a>
+      </div>
+      <p>&copy; 2026 ScaledAIOps Contributors. This work is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.site-nav').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

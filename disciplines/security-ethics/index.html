@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security, Ethics &amp; Compliance — ScaledAIOps Framework</title>
+  <meta name="description" content="Responsible AI practices, threat modeling, privacy, bias mitigation, and regulatory compliance.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">Scaled<span>AIOps</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+      <nav class="site-nav">
+        <a href="/">Framework</a>
+        <a href="/disciplines/" class="active">Disciplines</a>
+        <a href="/principles/">Principles</a>
+        <a href="/roles/">Roles</a>
+        <a href="/about/">About</a>
+        <a href="https://github.com/Scaled-AIOps" class="btn btn-outline" style="padding:0.4rem 1rem;">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="subtitle" style="margin-bottom:0.5rem;"><a href="/disciplines/" style="color:rgba(255,255,255,0.7);">Disciplines</a> &rarr;</p>
+      <h1>Security, Ethics &amp; Compliance</h1>
+      <p class="subtitle">Responsible AI practices, threat modeling, privacy, bias mitigation, and regulatory compliance.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2>Overview</h2>
+      <p>AI systems introduce unique security risks and ethical challenges that traditional security and compliance practices do not fully address. This discipline covers the specific threats, governance requirements, and ethical obligations that come with deploying AI in production — from adversarial attacks to algorithmic bias to emerging regulation.</p>
+
+      <h2>Key Practices</h2>
+
+      <h3>AI Threat Modeling</h3>
+      <p>Identify and assess threats specific to AI systems — adversarial inputs, data poisoning, model extraction, membership inference, and prompt injection. Conduct threat modeling as part of the development lifecycle, not as an afterthought before launch.</p>
+
+      <h3>Bias Testing &amp; Fairness</h3>
+      <p>Evaluate models for bias across protected attributes before and after deployment. Define fairness metrics appropriate to the use case (demographic parity, equalized odds, calibration). Build bias testing into the CI/CD pipeline so it runs automatically with every model update.</p>
+
+      <h3>Explainability &amp; Transparency</h3>
+      <p>Provide appropriate explanations for model decisions. High-stakes applications (lending, hiring, healthcare) require interpretable models or robust post-hoc explanation methods. Document model capabilities, limitations, and intended use cases in model cards.</p>
+
+      <h3>Privacy &amp; Data Protection</h3>
+      <p>Implement privacy controls at every stage — differential privacy in training, data minimization in feature engineering, secure inference for sensitive inputs, and right-to-erasure compliance. Conduct privacy impact assessments for AI systems that process personal data.</p>
+
+      <h3>Regulatory Compliance</h3>
+      <p>Stay current with AI-specific regulation (EU AI Act, NIST AI RMF, industry-specific guidelines) and implement compliance controls proactively. Maintain audit trails, documentation, and governance structures that demonstrate compliance.</p>
+
+      <h3>Secure ML Infrastructure</h3>
+      <p>Harden the ML infrastructure stack — secure model artifact storage, encrypt data in transit and at rest, implement access controls on training data and model endpoints, and audit access patterns. Treat ML infrastructure with the same security rigor as any production system.</p>
+
+      <h2>Related Roles</h2>
+      <ul>
+        <li><a href="/roles/">AI Security Engineer</a> — Leads threat modeling and security implementation</li>
+        <li><a href="/roles/">AI Ethics Lead</a> — Champions fairness, transparency, and governance</li>
+        <li><a href="/roles/">Data Engineer</a> — Implements data privacy and governance controls</li>
+      </ul>
+
+      <h2>Related Principles</h2>
+      <ul>
+        <li><a href="/principles/">Responsible by Default</a> — Ethics and security are embedded, not bolted on</li>
+        <li><a href="/principles/">Measure What Matters</a> — Fairness and safety metrics alongside performance</li>
+      </ul>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/about/">About</a>
+        <a href="/principles/">Principles</a>
+        <a href="https://github.com/Scaled-AIOps">GitHub</a>
+      </div>
+      <p>&copy; 2026 ScaledAIOps Contributors. This work is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.site-nav').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

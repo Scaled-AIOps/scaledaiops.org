@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model Lifecycle Management — ScaledAIOps Framework</title>
+  <meta name="description" content="End-to-end governance of models from development through deployment, monitoring, and retirement.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">Scaled<span>AIOps</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+      <nav class="site-nav">
+        <a href="/">Framework</a>
+        <a href="/disciplines/" class="active">Disciplines</a>
+        <a href="/principles/">Principles</a>
+        <a href="/roles/">Roles</a>
+        <a href="/about/">About</a>
+        <a href="https://github.com/Scaled-AIOps" class="btn btn-outline" style="padding:0.4rem 1rem;">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="subtitle" style="margin-bottom:0.5rem;"><a href="/disciplines/" style="color:rgba(255,255,255,0.7);">Disciplines</a> &rarr;</p>
+      <h1>Model Lifecycle Management</h1>
+      <p class="subtitle">End-to-end governance of models from development through deployment, monitoring, and retirement.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2>Overview</h2>
+      <p>Model Lifecycle Management covers the complete journey of a model — from initial development and validation through production deployment, ongoing monitoring, and eventual retirement. It provides the governance structure that ensures models are reliable, auditable, and aligned with business objectives throughout their lifespan.</p>
+
+      <h2>Key Practices</h2>
+
+      <h3>Model Registry</h3>
+      <p>Maintain a centralized catalog of all models, their versions, metadata, and lineage. The registry serves as the single source of truth for what models exist, where they are deployed, and who owns them. Every model in production should be traceable in the registry.</p>
+
+      <h3>Model Validation &amp; Testing</h3>
+      <p>Validate models rigorously before deployment. This includes offline evaluation against holdout sets, fairness and bias testing, performance benchmarks, integration tests with downstream systems, and shadow deployment validation. No model should reach production without passing a defined set of quality gates.</p>
+
+      <h3>Deployment Strategies</h3>
+      <p>Use progressive deployment techniques — canary releases, shadow mode, A/B testing, and blue-green deployments — to reduce risk. Define rollback criteria and automate rollback when thresholds are breached. Every deployment should be reversible.</p>
+
+      <h3>Model Monitoring</h3>
+      <p>Monitor models continuously in production for data drift, concept drift, prediction quality degradation, and performance anomalies. Set up alerts that trigger retraining or human review when models deviate from expected behavior.</p>
+
+      <h3>Version Control &amp; Reproducibility</h3>
+      <p>Version everything — code, data, configurations, and model artifacts. Any model version should be fully reproducible from its inputs. This is critical for debugging production issues, meeting audit requirements, and building trust.</p>
+
+      <h3>Model Retirement</h3>
+      <p>Define clear criteria for when models should be retrained, replaced, or decommissioned. Retired models should be archived with their full context — training data references, evaluation results, and the rationale for retirement.</p>
+
+      <h2>Related Roles</h2>
+      <ul>
+        <li><a href="/roles/">ML Engineer</a> — Implements deployment and monitoring infrastructure</li>
+        <li><a href="/roles/">Data Scientist</a> — Develops and validates models</li>
+        <li><a href="/roles/">AI Product Manager</a> — Defines success criteria and retirement decisions</li>
+      </ul>
+
+      <h2>Related Principles</h2>
+      <ul>
+        <li><a href="/principles/">Continuous Feedback Loops</a> — Production monitoring drives model improvement</li>
+        <li><a href="/principles/">Embrace Incremental Value</a> — Ship early, iterate based on real-world signals</li>
+      </ul>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/about/">About</a>
+        <a href="/principles/">Principles</a>
+        <a href="https://github.com/Scaled-AIOps">GitHub</a>
+      </div>
+      <p>&copy; 2026 ScaledAIOps Contributors. This work is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.site-nav').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

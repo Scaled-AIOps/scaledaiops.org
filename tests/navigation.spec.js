@@ -34,26 +34,26 @@ test.describe('Navigation', () => {
     await expect(page.locator('h1')).toHaveText('404');
   });
 
-  const pendingPages = [
-    { name: 'Disciplines', path: '/disciplines/' },
-    { name: 'Principles', path: '/principles/' },
-    { name: 'Roles', path: '/roles/' },
-    { name: 'About', path: '/about/' },
-    { name: 'ML Engineering', path: '/disciplines/ml-engineering/' },
-    { name: 'Model Lifecycle', path: '/disciplines/model-lifecycle/' },
-    { name: 'Data Operations', path: '/disciplines/data-operations/' },
-    { name: 'Reliability', path: '/disciplines/reliability/' },
-    { name: 'Security & Ethics', path: '/disciplines/security-ethics/' },
-    { name: 'Strategy', path: '/disciplines/strategy/' },
+  const livePages = [
+    { name: 'Disciplines', path: '/disciplines/', titleContains: 'Disciplines' },
+    { name: 'Principles', path: '/principles/', titleContains: 'Principles' },
+    { name: 'Roles', path: '/roles/', titleContains: 'Roles' },
+    { name: 'About', path: '/about/', titleContains: 'About' },
+    { name: 'ML Engineering', path: '/disciplines/ml-engineering/', titleContains: 'ML Engineering' },
+    { name: 'Model Lifecycle', path: '/disciplines/model-lifecycle/', titleContains: 'Model Lifecycle' },
+    { name: 'Data Operations', path: '/disciplines/data-operations/', titleContains: 'Data Operations' },
+    { name: 'Reliability', path: '/disciplines/reliability/', titleContains: 'Reliability' },
+    { name: 'Security & Ethics', path: '/disciplines/security-ethics/', titleContains: 'Security' },
+    { name: 'Strategy', path: '/disciplines/strategy/', titleContains: 'Strategy' },
   ];
 
-  for (const { name, path } of pendingPages) {
-    test(`${name} page (${path}) shows proper 404`, async ({ page }) => {
+  for (const { name, path, titleContains } of livePages) {
+    test(`${name} page (${path}) loads successfully`, async ({ page }) => {
       const response = await page.goto(path);
-      expect(response.status()).toBe(404);
-      await expect(page).toHaveTitle('Page Not Found — ScaledAIOps');
-      await expect(page.locator('h1')).toHaveText('404');
-      await expect(page.locator('a.btn-primary')).toHaveAttribute('href', '/');
+      expect(response.status()).toBe(200);
+      const title = await page.title();
+      expect(title).toContain(titleContains);
+      await expect(page.locator('h1')).toBeVisible();
     });
   }
 });

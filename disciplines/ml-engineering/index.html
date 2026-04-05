@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ML Engineering &amp; Platform — ScaledAIOps Framework</title>
+  <meta name="description" content="Infrastructure, tooling, and platforms that enable teams to build, train, and serve models reliably.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">Scaled<span>AIOps</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+      <nav class="site-nav">
+        <a href="/">Framework</a>
+        <a href="/disciplines/" class="active">Disciplines</a>
+        <a href="/principles/">Principles</a>
+        <a href="/roles/">Roles</a>
+        <a href="/about/">About</a>
+        <a href="https://github.com/Scaled-AIOps" class="btn btn-outline" style="padding:0.4rem 1rem;">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="subtitle" style="margin-bottom:0.5rem;"><a href="/disciplines/" style="color:rgba(255,255,255,0.7);">Disciplines</a> &rarr;</p>
+      <h1>ML Engineering &amp; Platform</h1>
+      <p class="subtitle">Infrastructure, tooling, and platforms that enable teams to build, train, and serve models reliably.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2>Overview</h2>
+      <p>ML Engineering & Platform is the foundation that all other disciplines build upon. It encompasses the compute infrastructure, development environments, training pipelines, serving systems, and platform tooling that enable data scientists and ML engineers to go from idea to production efficiently.</p>
+
+      <h2>Key Practices</h2>
+
+      <h3>Training Infrastructure</h3>
+      <p>Provide scalable, cost-efficient compute for model training. This includes GPU/TPU cluster management, job scheduling, distributed training frameworks, and resource allocation policies. Teams should be able to launch training jobs without managing infrastructure directly.</p>
+
+      <h3>Serving &amp; Inference</h3>
+      <p>Deploy models as reliable, low-latency services. This covers model serving frameworks, autoscaling, batching strategies, A/B testing infrastructure, and canary deployments. Serving systems must handle traffic spikes, graceful degradation, and zero-downtime updates.</p>
+
+      <h3>Feature Stores</h3>
+      <p>Centralize feature computation and serving to ensure consistency between training and inference. Feature stores reduce duplicated effort, prevent training-serving skew, and provide a shared vocabulary of features across teams.</p>
+
+      <h3>Experiment Tracking</h3>
+      <p>Track experiments systematically — hyperparameters, metrics, artifacts, and code versions. Reproducibility is essential for debugging, auditing, and iterating on models. Every experiment should be traceable back to its exact configuration.</p>
+
+      <h3>ML Pipelines</h3>
+      <p>Orchestrate end-to-end workflows from data ingestion through training, evaluation, and deployment. Pipelines should be versioned, testable, and composable. Invest in pipeline reliability — a broken pipeline blocks the entire team.</p>
+
+      <h3>Developer Experience</h3>
+      <p>Reduce friction for practitioners. This includes standardized project templates, local development environments that mirror production, clear documentation, and self-service tooling. The best platform is one that teams actually want to use.</p>
+
+      <h2>Related Roles</h2>
+      <ul>
+        <li><a href="/roles/">ML Engineer</a> — Builds and maintains training and serving pipelines</li>
+        <li><a href="/roles/">Platform Engineer</a> — Develops and operates the ML platform</li>
+        <li><a href="/roles/">Data Scientist</a> — Primary consumer of the platform</li>
+      </ul>
+
+      <h2>Related Principles</h2>
+      <ul>
+        <li><a href="/principles/">Automate Relentlessly</a> — Automation is the backbone of a reliable ML platform</li>
+        <li><a href="/principles/">Production-First Thinking</a> — Platform design should prioritize production readiness</li>
+      </ul>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/about/">About</a>
+        <a href="/principles/">Principles</a>
+        <a href="https://github.com/Scaled-AIOps">GitHub</a>
+      </div>
+      <p>&copy; 2026 ScaledAIOps Contributors. This work is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.site-nav').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

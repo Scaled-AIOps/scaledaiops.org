@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Principles — ScaledAIOps Framework</title>
+  <meta name="description" content="The eight guiding principles of the ScaledAIOps Framework.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">Scaled<span>AIOps</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+      <nav class="site-nav">
+        <a href="/">Framework</a>
+        <a href="/disciplines/">Disciplines</a>
+        <a href="/principles/" class="active">Principles</a>
+        <a href="/roles/">Roles</a>
+        <a href="/about/">About</a>
+        <a href="https://github.com/Scaled-AIOps" class="btn btn-outline" style="padding:0.4rem 1rem;">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <h1>Guiding Principles</h1>
+      <p class="subtitle">The foundational beliefs that shape how we approach AI operations at scale.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <div class="principle-detail">
+        <h2>1. Production-First Thinking</h2>
+        <p>Every model is built with deployment, monitoring, and maintenance in mind from day one. A model that cannot be served, monitored, and maintained in production delivers zero value. Teams should consider operational requirements — latency, throughput, resource constraints, rollback strategies — from the earliest stages of development.</p>
+        <p><strong>In practice:</strong> Define serving requirements before training begins. Include production readiness reviews in the model development lifecycle. Build deployment pipelines alongside the model, not after.</p>
+      </div>
+
+      <div class="principle-detail">
+        <h2>2. Automate Relentlessly</h2>
+        <p>Pipelines, testing, deployment, and monitoring should be automated to reduce toil and errors. Manual processes are the enemy of reliability and speed. Every repetitive task in the AI lifecycle — data validation, model training, evaluation, deployment, monitoring — is a candidate for automation.</p>
+        <p><strong>In practice:</strong> Invest in CI/CD for ML pipelines. Automate data quality checks. Use infrastructure as code for all environments. Treat automation as a first-class engineering activity, not an afterthought.</p>
+      </div>
+
+      <div class="principle-detail">
+        <h2>3. Data as a First-Class Citizen</h2>
+        <p>Data quality, lineage, and governance are as important as model performance. Models are only as good as the data they consume. Organizations must treat data pipelines, schemas, quality metrics, and lineage tracking with the same rigor as application code.</p>
+        <p><strong>In practice:</strong> Implement data contracts between producers and consumers. Track data lineage end-to-end. Monitor data drift alongside model drift. Version datasets as carefully as code.</p>
+      </div>
+
+      <div class="principle-detail">
+        <h2>4. Continuous Feedback Loops</h2>
+        <p>Production signals feed back into development to improve models and processes iteratively. AI systems degrade over time as the world changes. Continuous monitoring, evaluation, and retraining loops ensure that models stay aligned with reality.</p>
+        <p><strong>In practice:</strong> Instrument models to capture prediction quality in production. Build automated retraining triggers based on drift detection. Conduct regular retrospectives on model performance and operational incidents.</p>
+      </div>
+
+      <div class="principle-detail">
+        <h2>5. Responsible by Default</h2>
+        <p>Ethics, fairness, transparency, and security are embedded in every stage, not bolted on. Responsible AI is not a compliance checkbox — it is a design principle. Bias testing, explainability, privacy controls, and adversarial robustness should be part of the standard development workflow.</p>
+        <p><strong>In practice:</strong> Include fairness metrics in model evaluation. Require explainability reports for high-stakes models. Conduct threat modeling for AI-specific attack vectors. Build privacy controls into data pipelines from the start.</p>
+      </div>
+
+      <div class="principle-detail">
+        <h2>6. Cross-Functional Ownership</h2>
+        <p>AI systems are co-owned by engineering, data science, product, and operations teams. The "throw it over the wall" model — where data scientists build models and engineers figure out how to run them — does not scale. Effective AI operations require shared ownership and shared accountability.</p>
+        <p><strong>In practice:</strong> Form cross-functional teams with data scientists, ML engineers, and platform engineers working together. Define shared SLOs. Use common tools and processes across the AI lifecycle.</p>
+      </div>
+
+      <div class="principle-detail">
+        <h2>7. Measure What Matters</h2>
+        <p>Business impact and operational health are tracked alongside model accuracy. Accuracy on a test set is necessary but not sufficient. Teams must measure the metrics that matter to the business — revenue impact, user satisfaction, operational cost — and the operational metrics that keep systems healthy.</p>
+        <p><strong>In practice:</strong> Define business KPIs for every model before deployment. Track inference latency, error rates, and resource utilization. Build dashboards that connect model metrics to business outcomes.</p>
+      </div>
+
+      <div class="principle-detail">
+        <h2>8. Embrace Incremental Value</h2>
+        <p>Ship small, learn fast. Iterative delivery beats waiting for the perfect model. The pursuit of the perfect model is the enemy of delivering value. Start with simple approaches, deploy quickly, learn from production, and iterate. A deployed simple model that solves 80% of the problem is more valuable than a complex model that never ships.</p>
+        <p><strong>In practice:</strong> Start with baseline models and improve incrementally. Use A/B testing and shadow deployments to validate improvements. Celebrate shipped models, not just accuracy improvements in notebooks.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/about/">About</a>
+        <a href="/principles/">Principles</a>
+        <a href="https://github.com/Scaled-AIOps">GitHub</a>
+      </div>
+      <p>&copy; 2026 ScaledAIOps Contributors. This work is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.site-nav').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

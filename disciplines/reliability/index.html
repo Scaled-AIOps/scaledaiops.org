@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reliability &amp; Observability — ScaledAIOps Framework</title>
+  <meta name="description" content="Monitoring, alerting, incident response, and SLOs for AI workloads in production.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">Scaled<span>AIOps</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+      <nav class="site-nav">
+        <a href="/">Framework</a>
+        <a href="/disciplines/" class="active">Disciplines</a>
+        <a href="/principles/">Principles</a>
+        <a href="/roles/">Roles</a>
+        <a href="/about/">About</a>
+        <a href="https://github.com/Scaled-AIOps" class="btn btn-outline" style="padding:0.4rem 1rem;">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="subtitle" style="margin-bottom:0.5rem;"><a href="/disciplines/" style="color:rgba(255,255,255,0.7);">Disciplines</a> &rarr;</p>
+      <h1>Reliability &amp; Observability</h1>
+      <p class="subtitle">Monitoring, alerting, incident response, and SLOs for AI workloads in production.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2>Overview</h2>
+      <p>Reliability & Observability extends SRE principles to AI systems. AI workloads present unique challenges — models degrade silently, data drift causes subtle failures, and inference latency has different characteristics than traditional services. This discipline ensures AI systems are monitored, reliable, and maintainable in production.</p>
+
+      <h2>Key Practices</h2>
+
+      <h3>AI-Specific SLOs</h3>
+      <p>Define service level objectives that capture both system health (latency, availability, error rate) and model health (prediction quality, drift metrics, freshness). SLOs should be agreed upon with stakeholders and reflect the business impact of degraded AI performance.</p>
+
+      <h3>Model Observability</h3>
+      <p>Go beyond system metrics to observe model behavior. Track prediction distributions, feature value distributions, confidence scores, and model-specific metrics. Detect data drift and concept drift before they impact users.</p>
+
+      <h3>Alerting Strategy</h3>
+      <p>Design alerts that are actionable and prioritized. Distinguish between system-level alerts (the service is down) and model-level alerts (predictions are degrading). Avoid alert fatigue by setting meaningful thresholds and using multi-signal correlation.</p>
+
+      <h3>Incident Response</h3>
+      <p>Establish incident response procedures specific to AI failures. Model degradation may require different runbooks than system outages — rollback to a previous model version, switch to a fallback model, or gracefully degrade to a rules-based system.</p>
+
+      <h3>Capacity Planning</h3>
+      <p>Plan compute and storage capacity for AI workloads, accounting for training bursts, inference scaling patterns, and data growth. GPU/TPU resources are expensive — optimize utilization while maintaining performance headroom.</p>
+
+      <h3>Chaos Engineering for AI</h3>
+      <p>Test AI system resilience by injecting failures — corrupted input data, model serving outages, feature store latency spikes, and upstream data pipeline delays. Verify that fallback mechanisms and graceful degradation work as designed.</p>
+
+      <h2>Related Roles</h2>
+      <ul>
+        <li><a href="/roles/">SRE / AI Ops Engineer</a> — Primary owner of reliability and observability</li>
+        <li><a href="/roles/">ML Engineer</a> — Instruments models and builds monitoring</li>
+        <li><a href="/roles/">Platform Engineer</a> — Provides monitoring infrastructure</li>
+      </ul>
+
+      <h2>Related Principles</h2>
+      <ul>
+        <li><a href="/principles/">Measure What Matters</a> — SLOs connect operational metrics to business outcomes</li>
+        <li><a href="/principles/">Continuous Feedback Loops</a> — Observability data drives model improvement</li>
+      </ul>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/about/">About</a>
+        <a href="/principles/">Principles</a>
+        <a href="https://github.com/Scaled-AIOps">GitHub</a>
+      </div>
+      <p>&copy; 2026 ScaledAIOps Contributors. This work is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.site-nav').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

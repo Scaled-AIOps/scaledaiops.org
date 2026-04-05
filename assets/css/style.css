@@ -326,6 +326,73 @@ a:hover {
   margin-bottom: 1rem;
 }
 
+/* Content pages */
+.content-page {
+  max-width: 780px;
+}
+
+.content-page h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.75rem;
+  color: var(--color-primary);
+}
+
+.content-page h2:first-child {
+  margin-top: 0;
+}
+
+.content-page h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.5rem;
+  color: var(--color-secondary);
+}
+
+.content-page p {
+  margin-bottom: 1rem;
+}
+
+.content-page ul {
+  margin: 0.5rem 0 1.25rem 1.5rem;
+}
+
+.content-page li {
+  margin-bottom: 0.4rem;
+}
+
+.content-page strong {
+  color: var(--color-text);
+}
+
+/* Principle detail blocks */
+.principle-detail {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.75rem;
+  margin-bottom: 1.25rem;
+  transition: box-shadow 0.2s;
+}
+
+.principle-detail:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.principle-detail h2 {
+  margin-top: 0;
+  color: var(--color-primary);
+}
+
+/* Breadcrumb in hero */
+.hero .subtitle a {
+  color: rgba(255,255,255,0.7);
+}
+
+.hero .subtitle a:hover {
+  color: #fff;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .hero h1 { font-size: 2rem; }
