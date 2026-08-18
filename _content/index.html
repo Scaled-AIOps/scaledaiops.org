@@ -12,7 +12,229 @@
         that describe how organisations operate AI systems reliably at scale. No vendor, no certification.
       </p>
       <div class="cta-group">
-        <a href="#overview" class="btn btn-primary">See the framework</a>
+        <a href="#lifecycle-architecture" class="btn btn-primary">Compare SDLC vs ScaledAIOps</a>
+        <a href="#overview" class="btn btn-outline">Explore Framework</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Animated Architecture Comparison Diagram -->
+  <section class="arch-section" id="lifecycle-architecture">
+    <div class="container">
+      <div class="arch-header">
+        <div class="arch-badge">
+          <span class="arch-badge-dot"></span>
+          Operational Architecture Comparison
+        </div>
+        <h2 class="section-title">From Classic SDLC to ScaledAIOps</h2>
+        <p class="section-subtitle">
+          Traditional Software Development is code-centric and deterministic. ScaledAIOps operationalizes probabilistic AI systems through continuous feedback loops, governed data pipelines, and full model lifecycle observability.
+        </p>
+      </div>
+
+      <div class="arch-container" id="native-arch-box">
+        
+        <!-- Left: SDLC Column -->
+        <div class="arch-column sdlc-col">
+          <div class="arch-col-header">
+            <div class="arch-col-title">Traditional SDLC</div>
+            <span class="arch-col-tag">Deterministic &bull; Code-Centric &bull; Static Logic</span>
+          </div>
+
+          <div class="arch-flow-stage" id="live-sdlc-area">
+            <svg class="arch-svg-overlay" id="live-sdlc-svg"></svg>
+            
+            <div class="arch-nodes-layer">
+              <!-- Step 1 -->
+              <div class="arch-card main-step" id="ls-1">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">1. Requirements &amp; Scoping</div>
+                  <div class="arch-card-sub">Functional Specs &amp; User Stories</div>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="arch-card main-step" id="ls-2">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">2. System Architecture &amp; Design</div>
+                  <div class="arch-card-sub">Technical &amp; API Specifications</div>
+                </div>
+              </div>
+
+              <!-- Subnodes -->
+              <div class="arch-subnodes-row">
+                <div class="arch-subnode" id="ls-2a">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+                  <div class="arch-subnode-label">System Architecture</div>
+                </div>
+                <div class="arch-subnode" id="ls-2b">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+                  <div class="arch-subnode-label">Module &amp; API Design</div>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="arch-card main-step" id="ls-3">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">3. Implementation &amp; Coding</div>
+                  <div class="arch-card-sub">Deterministic Codebase &amp; Unit Tests</div>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="arch-card main-step" id="ls-4">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">4. Quality Assurance &amp; Testing</div>
+                  <div class="arch-card-sub">Code Coverage &amp; Functional Checks</div>
+                </div>
+              </div>
+
+              <!-- Subnodes -->
+              <div class="arch-subnodes-row">
+                <div class="arch-subnode" id="ls-4a">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+                  <div class="arch-subnode-label">Unit-Level Testing</div>
+                </div>
+                <div class="arch-subnode" id="ls-4b">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M6 21V9a9 9 0 0 0 9 9"></path></svg></div>
+                  <div class="arch-subnode-label">Integration Testing</div>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="arch-card main-step" id="ls-5">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">5. Release &amp; Deployment</div>
+                  <div class="arch-card-sub">CI/CD Binary Artifacts to Cloud</div>
+                </div>
+              </div>
+
+              <!-- Step 6 -->
+              <div class="arch-card main-step" id="ls-6">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">6. Maintenance &amp; Bug Fixes</div>
+                  <div class="arch-card-sub">Infrastructure &amp; Patch Releases</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: ScaledAIOps Column -->
+        <div class="arch-column aidlc-col">
+          <div class="arch-col-header">
+            <div class="arch-col-title">ScaledAIOps Lifecycle</div>
+            <span class="arch-col-tag">Probabilistic &bull; Data-Centric &bull; 6 Core Disciplines</span>
+          </div>
+
+          <div class="arch-flow-stage" id="live-aidlc-area">
+            <svg class="arch-svg-overlay" id="live-aidlc-svg"></svg>
+            <div class="arch-feedback-ribbon">Continuous Feedback Loop &uarr;</div>
+
+            <div class="arch-nodes-layer">
+              <!-- Step 1 -->
+              <a href="/disciplines/strategy/" class="arch-card main-step" id="la-1">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">1. Problem Framing &amp; Strategy</div>
+                  <div class="arch-card-sub">Strategy &amp; Organization Discipline</div>
+                </div>
+              </a>
+
+              <!-- Step 2 -->
+              <a href="/disciplines/data-operations/" class="arch-card main-step" id="la-2">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">2. Data Operations &amp; Lineage</div>
+                  <div class="arch-card-sub">Data Operations Discipline</div>
+                </div>
+              </a>
+
+              <!-- Subnodes -->
+              <div class="arch-subnodes-row">
+                <div class="arch-subnode" id="la-2a">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><line x1="6" y1="3" x2="6" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg></div>
+                  <div class="arch-subnode-label">Data Lineage &amp; Ingestion</div>
+                </div>
+                <div class="arch-subnode" id="la-2b">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></div>
+                  <div class="arch-subnode-label">Annotation &amp; Cleansing</div>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <a href="/disciplines/ml-engineering/" class="arch-card main-step" id="la-3">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">3. Model Building &amp; Architecture</div>
+                  <div class="arch-card-sub">ML Engineering &amp; Platform</div>
+                </div>
+              </a>
+
+              <!-- Step 4 -->
+              <a href="/disciplines/security-ethics/" class="arch-card main-step" id="la-4">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">4. Validation &amp; Responsible AI</div>
+                  <div class="arch-card-sub">Security, Ethics &amp; Compliance</div>
+                </div>
+              </a>
+
+              <!-- Subnodes -->
+              <div class="arch-subnodes-row">
+                <div class="arch-subnode" id="la-4a">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg></div>
+                  <div class="arch-subnode-label">Training &amp; Tuning</div>
+                </div>
+                <div class="arch-subnode" id="la-4b">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg></div>
+                  <div class="arch-subnode-label">Bias, Fairness &amp; Threat Scans</div>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <a href="/disciplines/model-lifecycle/" class="arch-card main-step" id="la-5">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">5. Serving &amp; Model Governance</div>
+                  <div class="arch-card-sub">Model Lifecycle Management</div>
+                </div>
+              </a>
+
+              <!-- Step 6 -->
+              <a href="/disciplines/reliability/" class="arch-card main-step" id="la-6">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">6. Observability &amp; Continuous Feedback</div>
+                  <div class="arch-card-sub">Reliability &amp; Observability Discipline</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center; margin-top:1.5rem;">
+        <p style="font-size:0.9rem; color:var(--color-text-light); margin-bottom:0.75rem;">
+          Want to use this animated diagram in your slides or documentation?
+        </p>
+        <div style="display:inline-flex; gap:0.75rem; flex-wrap:wrap; justify-content:center;">
+          <a href="/assets/img/scaledaiops-sdlc-vs-aidlc.gif" download class="btn btn-outline" style="border-color:var(--color-border); color:var(--color-primary); font-size:0.85rem; padding:0.5rem 1.25rem; display:inline-flex; align-items:center; gap:0.4rem;">
+            <svg viewBox="0 0 24 24" style="width:16px; height:16px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download Animated Infographic (GIF)
+          </a>
+          <a href="/assets/img/scaledaiops-sdlc-vs-aidlc-landscape.gif" download class="btn btn-outline" style="border-color:var(--color-border); color:var(--color-primary); font-size:0.85rem; padding:0.5rem 1.25rem; display:inline-flex; align-items:center; gap:0.4rem;">
+            <svg viewBox="0 0 24 24" style="width:16px; height:16px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download 16:9 Slide (GIF)
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -28,12 +250,12 @@
           <p>What teams must do</p>
         </div>
         <div class="card-grid card-grid--compact">
-          <div class="card"><div class="card-icon">&#9881;</div><a href="/disciplines/ml-engineering/"><h3>ML Engineering &amp; Platform</h3></a><p>Build, train and serve models reliably.</p></div>
-          <div class="card"><div class="card-icon">&#128295;</div><a href="/disciplines/model-lifecycle/"><h3>Model Lifecycle Management</h3></a><p>Govern models from development to retirement.</p></div>
-          <div class="card"><div class="card-icon">&#128202;</div><a href="/disciplines/data-operations/"><h3>Data Operations</h3></a><p>Data quality, lineage, access and governance.</p></div>
-          <div class="card"><div class="card-icon">&#128680;</div><a href="/disciplines/reliability/"><h3>Reliability &amp; Observability</h3></a><p>Monitoring, SLOs and incident response for AI.</p></div>
-          <div class="card"><div class="card-icon">&#128272;</div><a href="/disciplines/security-ethics/"><h3>Security, Ethics &amp; Compliance</h3></a><p>Responsible AI, threat modelling, regulation.</p></div>
-          <div class="card"><div class="card-icon">&#127919;</div><a href="/disciplines/strategy/"><h3>Strategy &amp; Organization</h3></a><p>Business value, teams and adoption.</p></div>
+          <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div><a href="/disciplines/ml-engineering/"><h3>ML Engineering &amp; Platform</h3></a><p>Build, train and serve models reliably.</p></div>
+          <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><a href="/disciplines/model-lifecycle/"><h3>Model Lifecycle Management</h3></a><p>Govern models from development to retirement.</p></div>
+          <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div><a href="/disciplines/data-operations/"><h3>Data Operations</h3></a><p>Data quality, lineage, access and governance.</p></div>
+          <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div><a href="/disciplines/reliability/"><h3>Reliability &amp; Observability</h3></a><p>Monitoring, SLOs and incident response for AI.</p></div>
+          <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div><a href="/disciplines/security-ethics/"><h3>Security, Ethics &amp; Compliance</h3></a><p>Responsible AI, threat modelling, regulation.</p></div>
+          <div class="card"><div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div><a href="/disciplines/strategy/"><h3>Strategy &amp; Organization</h3></a><p>Business value, teams and adoption.</p></div>
         </div>
       </div>
 
@@ -80,3 +302,136 @@
       <a href="https://github.com/Scaled-AIOps" class="btn btn-primary">Contribute on GitHub</a>
     </div>
   </section>
+
+  <script>
+    // Live Browser Flow Animation for SDLC vs ScaledAIOps Diagram
+    (function() {
+      function getRelPos(el, parent) {
+        if (!el || !parent) return { x: 0, yTop: 0, yBottom: 0, xRight: 0, height: 0 };
+        const elRect = el.getBoundingClientRect();
+        const pRect = parent.getBoundingClientRect();
+        return {
+          x: elRect.left - pRect.left + elRect.width / 2,
+          yTop: elRect.top - pRect.top,
+          yBottom: elRect.bottom - pRect.top,
+          xLeft: elRect.left - pRect.left,
+          xRight: elRect.right - pRect.left,
+          width: elRect.width,
+          height: elRect.height
+        };
+      }
+
+      function setupTrack(prefix, color, svgId, areaId, hasFeedback) {
+        const area = document.getElementById(areaId);
+        const svg = document.getElementById(svgId);
+        if (!area || !svg) return;
+        const w = area.clientWidth;
+        const h = area.clientHeight;
+        if (w === 0 || h === 0) return;
+        svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+
+        const n1 = getRelPos(document.getElementById(prefix + '-1'), area);
+        const n2 = getRelPos(document.getElementById(prefix + '-2'), area);
+        const n2a = getRelPos(document.getElementById(prefix + '-2a'), area);
+        const n2b = getRelPos(document.getElementById(prefix + '-2b'), area);
+        const n3 = getRelPos(document.getElementById(prefix + '-3'), area);
+        const n4 = getRelPos(document.getElementById(prefix + '-4'), area);
+        const n4a = getRelPos(document.getElementById(prefix + '-4a'), area);
+        const n4b = getRelPos(document.getElementById(prefix + '-4b'), area);
+        const n5 = getRelPos(document.getElementById(prefix + '-5'), area);
+        const n6 = getRelPos(document.getElementById(prefix + '-6'), area);
+
+        const paths = [];
+        paths.push('M ' + n1.x + ' ' + n1.yBottom + ' L ' + n2.x + ' ' + n2.yTop);
+
+        const midY1 = (n2.yBottom + n2a.yTop) / 2;
+        const midY2 = (n2a.yBottom + n3.yTop) / 2;
+        paths.push('M ' + n2.x + ' ' + n2.yBottom + ' L ' + n2.x + ' ' + midY1 + ' L ' + n2a.x + ' ' + midY1 + ' L ' + n2a.x + ' ' + n2a.yTop);
+        paths.push('M ' + n2.x + ' ' + n2.yBottom + ' L ' + n2.x + ' ' + midY1 + ' L ' + n2b.x + ' ' + midY1 + ' L ' + n2b.x + ' ' + n2b.yTop);
+        paths.push('M ' + n2a.x + ' ' + n2a.yBottom + ' L ' + n2a.x + ' ' + midY2 + ' L ' + n3.x + ' ' + midY2 + ' L ' + n3.x + ' ' + n3.yTop);
+        paths.push('M ' + n2b.x + ' ' + n2b.yBottom + ' L ' + n2b.x + ' ' + midY2 + ' L ' + n3.x + ' ' + midY2 + ' L ' + n3.x + ' ' + n3.yTop);
+        paths.push('M ' + n2.x + ' ' + midY1 + ' L ' + n3.x + ' ' + midY2);
+
+        paths.push('M ' + n3.x + ' ' + n3.yBottom + ' L ' + n4.x + ' ' + n4.yTop);
+
+        const midY3 = (n4.yBottom + n4a.yTop) / 2;
+        const midY4 = (n4a.yBottom + n5.yTop) / 2;
+        paths.push('M ' + n4.x + ' ' + n4.yBottom + ' L ' + n4.x + ' ' + midY3 + ' L ' + n4a.x + ' ' + midY3 + ' L ' + n4a.x + ' ' + n4a.yTop);
+        paths.push('M ' + n4.x + ' ' + n4.yBottom + ' L ' + n4.x + ' ' + midY3 + ' L ' + n4b.x + ' ' + midY3 + ' L ' + n4b.x + ' ' + n4b.yTop);
+        paths.push('M ' + n4a.x + ' ' + n4a.yBottom + ' L ' + n4a.x + ' ' + midY4 + ' L ' + n5.x + ' ' + midY4 + ' L ' + n5.x + ' ' + n5.yTop);
+        paths.push('M ' + n4b.x + ' ' + n4b.yBottom + ' L ' + n4b.x + ' ' + midY4 + ' L ' + n5.x + ' ' + midY4 + ' L ' + n5.x + ' ' + n5.yTop);
+        paths.push('M ' + n4.x + ' ' + midY3 + ' L ' + n5.x + ' ' + midY4);
+
+        paths.push('M ' + n5.x + ' ' + n5.yBottom + ' L ' + n6.x + ' ' + n6.yTop);
+
+        let feedbackPath = '';
+        if (hasFeedback) {
+          const rightTrack = w - 10;
+          feedbackPath = 'M ' + n6.xRight + ' ' + (n6.yTop + n6.height/2) + ' C ' + (rightTrack + 16) + ' ' + (n6.yTop + n6.height/2 + 20) + ', ' + (rightTrack + 16) + ' ' + (n2.yTop + n2.height/2 - 20) + ', ' + n2.xRight + ' ' + (n2.yTop + n2.height/2);
+        }
+
+        let svgHtml = '<marker id="' + prefix + '-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="' + color + '"/></marker>';
+        paths.forEach(function(d, idx) {
+          svgHtml += '<path id="' + prefix + '-p-' + idx + '" d="' + d + '" fill="none" stroke="' + color + '" stroke-width="2.5" opacity="0.65"/>';
+        });
+
+        if (feedbackPath) {
+          svgHtml += '<path id="' + prefix + '-fb" d="' + feedbackPath + '" fill="none" stroke="' + color + '" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.75" marker-end="url(#' + prefix + '-arrow)"/>';
+        }
+
+        svgHtml += '<g id="' + prefix + '-pts"></g>';
+        svg.innerHTML = svgHtml;
+      }
+
+      function updateAnimation(progress) {
+        ['ls', 'la'].forEach(function(prefix) {
+          const color = prefix === 'ls' ? '#ea580c' : '#0284c7';
+          const glow = prefix === 'ls' ? '#fdba74' : '#7dd3fc';
+          const pGroup = document.getElementById(prefix + '-pts');
+          if (!pGroup) return;
+
+          let circlesHtml = '';
+          const paths = Array.from(document.querySelectorAll('[id^="' + prefix + '-p-"]'));
+          const fb = document.getElementById(prefix + '-fb');
+          if (fb) paths.push(fb);
+
+          paths.forEach(function(pEl) {
+            const len = pEl.getTotalLength();
+            if (len <= 0) return;
+            const isFb = pEl.id.indexOf('-fb') !== -1;
+            const dotCount = isFb ? 3 : Math.max(1, Math.round(len / 55));
+            for (let i = 0; i < dotCount; i++) {
+              const offset = ((progress + (i / dotCount)) % 1.0) * len;
+              const pt = pEl.getPointAtLength(offset);
+              circlesHtml += '<circle cx="' + pt.x + '" cy="' + pt.y + '" r="5.5" fill="' + glow + '" opacity="0.4"/><circle cx="' + pt.x + '" cy="' + pt.y + '" r="3" fill="' + color + '"/><circle cx="' + pt.x + '" cy="' + pt.y + '" r="1.2" fill="#fff"/>';
+            }
+          });
+          pGroup.innerHTML = circlesHtml;
+        });
+      }
+
+      function init() {
+        setupTrack('ls', '#f97316', 'live-sdlc-svg', 'live-sdlc-area', false);
+        setupTrack('la', '#0ea5e9', 'live-aidlc-svg', 'live-aidlc-area', true);
+      }
+
+      window.addEventListener('load', function() {
+        init();
+        let start = null;
+        function loop(timestamp) {
+          if (!start) start = timestamp;
+          const progress = ((timestamp - start) % 2000) / 2000;
+          updateAnimation(progress);
+          requestAnimationFrame(loop);
+        }
+        requestAnimationFrame(loop);
+      });
+
+      let resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(init, 150);
+      });
+    })();
+  </script>
+

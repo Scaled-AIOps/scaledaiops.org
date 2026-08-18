@@ -5,60 +5,157 @@
 <section class="hero" style="padding:3.5rem 1.5rem;">
     <div class="container">
       <h1>Guiding Principles</h1>
-      <p class="subtitle">The foundational beliefs that shape how we approach AI operations at scale.</p>
+      <p class="subtitle">The foundational beliefs and architectural mindset that shape how engineering and data teams operate AI at scale.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container content-page">
 
-      <div class="principle-detail">
-        <h2>1. Production-First Thinking</h2>
-        <p>Every model is built with deployment, monitoring, and maintenance in mind from day one. A model that cannot be served, monitored, and maintained in production delivers zero value. Teams should consider operational requirements — latency, throughput, resource constraints, rollback strategies — from the earliest stages of development.</p>
-        <p><strong>In practice:</strong> Define serving requirements before training begins. Include production readiness reviews in the model development lifecycle. Build deployment pipelines alongside the model, not after.</p>
+      <div class="callout-box" style="margin-top:0; margin-bottom:2.5rem;">
+        <h3><span class="icon-inline"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span> The ScaledAIOps Mindset</h3>
+        <p style="margin:0; font-size:0.98rem; color:#334155;">
+          Unlike traditional software where logic is deterministic and code-centric, AI systems are probabilistic, data-dependent, and degrade over time. These eight principles guide engineering decisions across every stage of the lifecycle.
+        </p>
       </div>
 
+      <!-- Principle 1 -->
       <div class="principle-detail">
-        <h2>2. Automate Relentlessly</h2>
-        <p>Pipelines, testing, deployment, and monitoring should be automated to reduce toil and errors. Manual processes are the enemy of reliability and speed. Every repetitive task in the AI lifecycle — data validation, model training, evaluation, deployment, monitoring — is a candidate for automation.</p>
-        <p><strong>In practice:</strong> Invest in CI/CD for ML pipelines. Automate data quality checks. Use infrastructure as code for all environments. Treat automation as a first-class engineering activity, not an afterthought.</p>
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">1</div>
+            <h2>Production-First Thinking</h2>
+          </div>
+          <span class="principle-tag core-phase">Deployment &amp; Serving</span>
+        </div>
+        <p class="principle-body-text">
+          Every model is built with deployment, monitoring, and maintenance in mind from day one. A model that cannot be served, monitored, and maintained in production delivers zero value. Teams must address operational requirements — latency budgets, throughput limits, memory footprint, fallback mechanisms, and rollback strategies — from the earliest inception.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Define serving requirements before training begins &bull; Include production readiness reviews (PRRs) in model development &bull; Build deployment automation pipelines alongside the model, not as an afterthought.
+        </div>
       </div>
 
+      <!-- Principle 2 -->
       <div class="principle-detail">
-        <h2>3. Data as a First-Class Citizen</h2>
-        <p>Data quality, lineage, and governance are as important as model performance. Models are only as good as the data they consume. Organizations must treat data pipelines, schemas, quality metrics, and lineage tracking with the same rigor as application code.</p>
-        <p><strong>In practice:</strong> Implement data contracts between producers and consumers. Track data lineage end-to-end. Monitor data drift alongside model drift. Version datasets as carefully as code.</p>
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">2</div>
+            <h2>Automate Relentlessly</h2>
+          </div>
+          <span class="principle-tag core-phase">CI/CD &amp; Automation</span>
+        </div>
+        <p class="principle-body-text">
+          Pipelines, testing, deployment, and monitoring should be automated to eliminate toil and human error. Manual processes are the primary bottleneck to reliability and velocity. Every repetitive step in the AI lifecycle — data validation, feature extraction, model retraining, regression testing, and canary rollouts — is a candidate for full automation.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Invest in CI/CD pipelines tailored for ML artifacts &bull; Automate continuous data quality verification &bull; Manage infrastructure as code (IaC) &bull; Treat pipeline automation as a core engineering priority.
+        </div>
       </div>
 
+      <!-- Principle 3 -->
       <div class="principle-detail">
-        <h2>4. Continuous Feedback Loops</h2>
-        <p>Production signals feed back into development to improve models and processes iteratively. AI systems degrade over time as the world changes. Continuous monitoring, evaluation, and retraining loops ensure that models stay aligned with reality.</p>
-        <p><strong>In practice:</strong> Instrument models to capture prediction quality in production. Build automated retraining triggers based on drift detection. Conduct regular retrospectives on model performance and operational incidents.</p>
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">3</div>
+            <h2>Data as a First-Class Citizen</h2>
+          </div>
+          <span class="principle-tag core-phase">Data Operations</span>
+        </div>
+        <p class="principle-body-text">
+          Data quality, lineage, and governance are as crucial as model weights and architecture. Models are only as dependable as the data they consume. Organizations must treat datasets, schema contracts, feature stores, and lineage tracking with the same rigor and testing discipline applied to source code.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Enforce strict data contracts between upstream producers and AI consumers &bull; Track end-to-end data lineage &bull; Monitor input feature drift continuously &bull; Version and immutably snapshot training datasets.
+        </div>
       </div>
 
+      <!-- Principle 4 -->
       <div class="principle-detail">
-        <h2>5. Responsible by Default</h2>
-        <p>Ethics, fairness, transparency, and security are embedded in every stage, not bolted on. Responsible AI is not a compliance checkbox — it is a design principle. Bias testing, explainability, privacy controls, and adversarial robustness should be part of the standard development workflow.</p>
-        <p><strong>In practice:</strong> Include fairness metrics in model evaluation. Require explainability reports for high-stakes models. Conduct threat modeling for AI-specific attack vectors. Build privacy controls into data pipelines from the start.</p>
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">4</div>
+            <h2>Continuous Feedback Loops</h2>
+          </div>
+          <span class="principle-tag core-phase">Observability &amp; Feedback</span>
+        </div>
+        <p class="principle-body-text">
+          Production telemetry feeds directly back into development to improve models and data pipelines iteratively. AI systems inevitably degrade due to concept drift and changing real-world dynamics. Continuous observability, ground-truth harvesting, and automated retraining loops keep models aligned with reality.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Instrument inference endpoints to capture prediction distributions and user feedback &bull; Build automated retraining triggers based on statistical drift thresholds &bull; Conduct regular post-mortems on model drift incidents.
+        </div>
       </div>
 
+      <!-- Principle 5 -->
       <div class="principle-detail">
-        <h2>6. Cross-Functional Ownership</h2>
-        <p>AI systems are co-owned by engineering, data science, product, and operations teams. The "throw it over the wall" model — where data scientists build models and engineers figure out how to run them — does not scale. Effective AI operations require shared ownership and shared accountability.</p>
-        <p><strong>In practice:</strong> Form cross-functional teams with data scientists, ML engineers, and platform engineers working together. Define shared SLOs. Use common tools and processes across the AI lifecycle.</p>
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">5</div>
+            <h2>Responsible by Default</h2>
+          </div>
+          <span class="principle-tag core-phase">Security &amp; Ethics</span>
+        </div>
+        <p class="principle-body-text">
+          Ethics, fairness, transparency, and security are embedded in every stage of development, never bolted on as a final compliance check. Responsible AI is an engineering design principle: bias testing, model cards, explainability metrics, differential privacy, and adversarial threat modeling must be automated within standard CI pipelines.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Automate demographic parity and fairness testing in CI &bull; Publish transparent Model Cards for all high-stakes systems &bull; Conduct prompt injection and adversarial threat modeling &bull; Bake privacy controls into data pipelines.
+        </div>
       </div>
 
+      <!-- Principle 6 -->
       <div class="principle-detail">
-        <h2>7. Measure What Matters</h2>
-        <p>Business impact and operational health are tracked alongside model accuracy. Accuracy on a test set is necessary but not sufficient. Teams must measure the metrics that matter to the business — revenue impact, user satisfaction, operational cost — and the operational metrics that keep systems healthy.</p>
-        <p><strong>In practice:</strong> Define business KPIs for every model before deployment. Track inference latency, error rates, and resource utilization. Build dashboards that connect model metrics to business outcomes.</p>
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">6</div>
+            <h2>Cross-Functional Ownership</h2>
+          </div>
+          <span class="principle-tag core-phase">Strategy &amp; Roles</span>
+        </div>
+        <p class="principle-body-text">
+          AI systems are co-owned by data scientists, ML engineers, platform engineers, product managers, and security leads. The traditional siloed "throw models over the wall" handoff fails in production. Operating AI reliably requires shared Service Level Objectives (SLOs), unified tooling, and joint accountability for business outcomes.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Embed ML and platform engineers directly alongside data scientists &bull; Establish shared model uptime and quality SLOs &bull; Standardize on a unified internal developer platform for AI development and deployment.
+        </div>
       </div>
 
+      <!-- Principle 7 -->
       <div class="principle-detail">
-        <h2>8. Embrace Incremental Value</h2>
-        <p>Ship small, learn fast. Iterative delivery beats waiting for the perfect model. The pursuit of the perfect model is the enemy of delivering value. Start with simple approaches, deploy quickly, learn from production, and iterate. A deployed simple model that solves 80% of the problem is more valuable than a complex model that never ships.</p>
-        <p><strong>In practice:</strong> Start with baseline models and improve incrementally. Use A/B testing and shadow deployments to validate improvements. Celebrate shipped models, not just accuracy improvements in notebooks.</p>
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">7</div>
+            <h2>Measure What Matters</h2>
+          </div>
+          <span class="principle-tag core-phase">Business Value &amp; SRE</span>
+        </div>
+        <p class="principle-body-text">
+          Business impact and system operational health are tracked alongside offline model accuracy. A 99% accurate model that costs 10x its return or introduces 5-second latency is a failure. Teams must measure real-world business KPIs (revenue impact, conversion, user retention) alongside runtime latency, GPU cost, and error rates.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Define measurable business KPIs for every AI initiative prior to development &bull; Track P95/P99 latency, cost per inference, and token utilization &bull; Build executive dashboards connecting model metrics to ROI.
+        </div>
+      </div>
+
+      <!-- Principle 8 -->
+      <div class="principle-detail">
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">8</div>
+            <h2>Embrace Incremental Value</h2>
+          </div>
+          <span class="principle-tag core-phase">Iteration &amp; Delivery</span>
+        </div>
+        <p class="principle-body-text">
+          Ship early, learn from real feedback, and iterate rapidly. The pursuit of a theoretical "perfect" model in isolation is the enemy of enterprise value. A deployed baseline model that solves 80% of the problem and generates real production learning is far superior to an over-engineered model stuck in a notebook.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Start with baseline heuristics or lightweight models &bull; Validate improvements with shadow deployments and A/B canary routing &bull; Reward shipping reliable production systems over offline notebook benchmarks.
+        </div>
       </div>
 
     </div>
   </section>
+
+
