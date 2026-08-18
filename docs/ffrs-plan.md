@@ -18,10 +18,14 @@ FFRS treats feedback as a pipeline with four stages and one loop-closing event. 
 | **Respond** | A human replies or a decision is recorded | `feedback.responded_at` |
 | **Close** (loop) | Outcome communicated back to the submitter | `feedback.closed_at`, `outcome` |
 
+**Respond is agentic (Phase 8, the defining FFRS rule):** a scheduled AI agent produces the first substantive response — a complete PR (fix + tests + evidence) for a developer to review and merge, or a proposal that is executed only after the requester accepts and a reviewer confirms. Humans judge; they are not the bottleneck.
+
 **Metrics** (all P50/P90, per category, per week):
 - **TTA** time-to-acknowledge — must be seconds (automated)
 - **TTR** time-to-route — must be seconds (automated)
-- **TTFR** time-to-first-response — the human number; target < 72 h
+- **TTFR** time-to-first-response — agent or human; target < 1 h (agent schedule)
+- **TTHR** time-to-first-human-decision — target < 72 h
+- **Agent share** — closed items resolved by an agent PR / executed proposal
 - **TTC** time-to-close — target < 30 d for bugs
 - **Loop-closure rate** — % of items with `closed_at` and outcome sent
 - **Signal ratio** — accepted / (accepted + spam + duplicate)
@@ -125,6 +129,7 @@ Reusability contract: the widget is configured by data-attributes only; `ffrs-ap
 | 5 | Loop closure | GitHub webhook `issues.closed` → closing email; `GET /api/feedback/:ref` status from GitHub | ½ d |
 | 6 | Measurement | metrics from the Issues API; weekly report issue; CSV export CLI | ½ d |
 | 7 | Case-study pack | `docs/ffrs-case-study.md`: architecture, decisions log, metrics after 4 and 12 weeks, lessons | ongoing |
+| 8 | **Agentic Respond stage** | `ffrs-api/agent/` (Claude Code headless runner) + GitHub Actions workflow in the tracker repo: every new item gets a first response within 30 min — a PR on the site (code/content path) or a proposal (`/accept` by requester, `/confirm` by maintainer → agent executes, `/reject`); humans decide, agent produces. Metrics: TTFR (any), TTHR (human), agent share. | 1 d |
 
 Total build ≈ 7 days effort; measurement window 12 weeks before the paper's numbers are final.
 
