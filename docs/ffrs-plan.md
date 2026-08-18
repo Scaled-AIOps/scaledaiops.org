@@ -1,6 +1,6 @@
 # Fast Feedback Response System (FFRS) — Implementation Plan
 
-Status: **built (phases 0–7), revised 2026-08-18 to a no-database design; go-live pending Turnstile + apply** · Case study: [ffrs-case-study.md](ffrs-case-study.md) · Owner: ScaledAIOps maintainers · Target: scaledaiops.org · Date: 2026-08-18
+Status: **built and live (phases 0–8), 2026-08-18; no-database design** · Case study: [ffrs-case-study.md](ffrs-case-study.md) · Owner: ScaledAIOps maintainers · Target: scaledaiops.org · Date: 2026-08-18
 
 ## 1. Purpose
 
@@ -113,7 +113,7 @@ Reusability contract: the widget is configured by data-attributes only; `ffrs-ap
 - **Structured logs** (JSON, one line per request, `ref` correlation id) → CloudWatch; the GitHub Issues API is the analytics source, no third-party analytics.
 - **Testing pyramid**: vitest unit + handler contract tests against in-memory Tracker/Store (no network) → Playwright E2E on the built site with the API stubbed → manual smoke on production after apply.
 - **Security**: Turnstile server-side verify + honeypot field + token-bucket rate limit (per IP hash, 5/min, in-memory per Lambda instance — good enough at this scale, documented as the known limit); size limits; strict Content-Security-Policy on the form page; GitHub webhook HMAC verified.
-- **Widget**: no framework, no globals except `window.FFRS` (open/close/version), styles scoped to `.ffrs-*`, `<dialog>` element with focus trap and Escape, `prefers-reduced-motion` respected, hides itself on `/feedback/`. Screenshot is opt-out (thumbnail with ✕, as in fmg).
+- **Widget**: no framework, no globals except `window.FFRS` (open/close/version), styles scoped to `.ffrs-*`, `<dialog>` element with focus trap and Escape, `prefers-reduced-motion` respected, hides itself on `/feedback/`. Screenshot is opt-out (thumbnail with ✕).
 - **Accessibility**: `/feedback/` works without JS (plain POST → 303 to `/feedback/thanks/?ref=…`), labelled fields, visible errors, Turnstile in invisible mode.
 - **CI**: GitHub Actions on `ffrs-api` — typecheck, test, bundle, `terraform plan` comment; deploy on tag. Site repo unchanged (build.sh + sync).
 
@@ -125,7 +125,7 @@ Reusability contract: the widget is configured by data-attributes only; `ffrs-ap
 | 1 | Core API | `ffrs-api` repo: `POST /api/feedback` with guards, GitHub tracker + S3 store behind ports, unit tests, bundle | 1½ d |
 | 2 | Infra | `modules/ffrs` + `enable_ffrs` flag, CloudFront `/api/*` behaviour, `plan` → `apply`; smoke test with curl; prove `enable_ffrs=false` plan removes everything | 1 d |
 | 3 | Emails | ack email, maintainer alert (SES), issue template with presigned screenshot | ½ d |
-| 4 | Widget | `ffrs-widget.js/.css` ported from fmg `FeedbackButton.tsx`; `FFRS_ENABLED` in `build.sh` + footer placeholder; `/feedback/` fallback page; E2E spec; deploy with flag **on** | 1½ d |
+| 4 | Widget | `ffrs-widget.js/.css` (edge-tab pattern); `FFRS_ENABLED` in `build.sh` + footer placeholder; `/feedback/` fallback page; E2E spec; deploy with flag **on** | 1½ d |
 | 5 | Loop closure | GitHub webhook `issues.closed` → closing email; `GET /api/feedback/:ref` status from GitHub | ½ d |
 | 6 | Measurement | metrics from the Issues API; weekly report issue; CSV export CLI | ½ d |
 | 7 | Case-study pack | `docs/ffrs-case-study.md`: architecture, decisions log, metrics after 4 and 12 weeks, lessons | ongoing |
@@ -142,13 +142,12 @@ Total build ≈ 7 days effort; measurement window 12 weeks before the paper's nu
 | GitHub Issues as the triage tool | Custom admin UI | Zero new UI to secure; contributors already live there; webhook closes the loop |
 | Synchronous capture, no outbox (revised) | Outbox table / SQS | With GitHub as the store there is nothing to buffer *into*; an honest 502 + client retry with idempotency key is simpler and truthful |
 | Turnstile + honeypot | hCaptcha, none | Invisible for humans, free, privacy-preserving |
-| Edge-tab widget over a nav link/page | Dedicated page only | Feedback is contextual — capture *where* the visitor is, with a screenshot; proven pattern from fmg |
+| Edge-tab widget over a nav link/page | Dedicated page only | Feedback is contextual — capture *where* the visitor is, with a screenshot; a pattern proven in commercial widgets |
 | Three-layer toggle (build, runtime, infra) | Single env flag | Build flag ships zero bytes when off; runtime flag stops abuse without a deploy; infra flag makes the case study reproducible from a clean account |
 | Optional email + explicit consent | Mandatory email | Lowers friction, honours "responsible by default"; anonymous items still get routed, just not closed by email |
 
 ## 9. Open items
 
-- Confirm SES production access in `eu-central-1` (sandbox limits recipients).
-- Turnstile site key + secret (only remaining Phase 0 item besides `apply`).
-- Confirm the widget stays subordinate to the "Contribute on GitHub" CTA (it does not replace it).
-- Screenshot default: on with opt-out (fmg behaviour) vs off with opt-in — recommend on/opt-out for bugs, off for feature requests.
+- SES: production access granted 2026-08-18; monitor bounce/complaint rates.
+- Screenshot default: on with opt-out for bug reports, off for feature requests (current behaviour); revisit after the week-4 read-out.
+- Sidecar retention: add a lifecycle rule for `sidecar/` objects once a retention period is decided.

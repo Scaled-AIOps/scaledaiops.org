@@ -1,6 +1,6 @@
 # FFRS Case Study — scaledaiops.org
 
-Companion to the FFRS paper. Status: **live on production since 2026-08-18 (T0); measurement window running** — first item `FB-DT343N` captured 16:57 UTC, responded 17:12, closed 17:12 with closing email delivered. Sections marked ⏳ are filled from data; everything else is fact as of 2026-08-18. Plan and rationale: [ffrs-plan.md](ffrs-plan.md).
+Companion to the FFRS paper. Status: **live in production since 2026-08-18 (T0); measurement window running.** First genuine item `FB-6PR9NJ`: captured 17:20 UTC, agent pull request 19:15, reviewed and merged 19:22, closed (`shipped`). Sections marked ⏳ are filled from data; everything else is fact as of 2026-08-18. Plan and rationale: [ffrs-plan.md](ffrs-plan.md).
 
 ## 1. Context
 
@@ -9,7 +9,7 @@ Companion to the FFRS paper. Status: **live on production since 2026-08-18 (T0);
 | Subject | scaledaiops.org — a static, non-commercial reference site for an AI-Operations framework; volunteer-maintained; no accounts, no analytics |
 | Problem | Visitors had no way to report a bug or request content short of opening a GitHub issue themselves; maintainers had no signal on response quality |
 | Constraints | Zero-budget hosting (S3 + CloudFront), no server to run, **no database / no new external service**, privacy-first (no third-party analytics), removable without trace, reusable by other small projects |
-| Team | 1 maintainer + AI pair (Claude Code); build effort ≈ 1 working day of wall-clock across 7 phases |
+| Team | one maintainer, working with an AI coding assistant; build effort ≈ 1 working day of wall-clock across 8 phases |
 
 ## 2. The FFRS model as implemented
 
@@ -74,9 +74,9 @@ See [ffrs-plan.md §8](ffrs-plan.md#8-decisions-log-for-the-paper). Two decision
 
 | Change | Was | Now | Why |
 |---|---|---|---|
-| Capture surface | dedicated `/feedback/` page | edge-tab widget on every page + `/feedback/` as no-JS fallback | feedback is contextual; screenshot + page URL are the most useful triage signals (pattern proven on fixmygadgets.in) |
+| Capture surface | dedicated `/feedback/` page | edge-tab widget on every page + `/feedback/` as no-JS fallback | feedback is contextual; screenshot + page URL are the most useful triage signals (a pattern used by an independent commercial site) |
 | Screenshot embedding | — | 7-day presigned S3 link inside the GitHub issue | keeps the bucket private while triage still sees the image |
-| Store | Neon Postgres + outbox | GitHub Issues + private S3 sidecar, synchronous capture | owner asked for the least-dependency form; the tracker already held respond/close facts, so the DB was duplicating them |
+| Store | Neon Postgres + outbox | GitHub Issues + private S3 sidecar, synchronous capture | minimal-dependency requirement; the tracker already held the respond/close facts, so the database duplicated them |
 
 ## 7. Lessons so far (build phase)
 
@@ -85,8 +85,8 @@ See [ffrs-plan.md §8](ffrs-plan.md#8-decisions-log-for-the-paper). Two decision
 3. **Removing the database was a net simplification:** −1 external service, −1 secret, −1 schedule, −276 KB bundle; the cost is a synchronous dependency on GitHub at capture time, made explicit as `502 route_failed` + client retry.
 4. **Secrets at cold start** avoided the usual Terraform-state leak with ~20 lines; the cost is one SSM call per cold start.
 5. **Feature-toggle discipline is cheap if decided up front:** five well-known locations, one build variable, one Terraform count; verified by an `enable_ffrs=false` plan showing *No changes*.
-6. **Go-live findings (2026-08-18):** three defects surfaced only in production — S3 needs `s3:ListBucket` for a missing key to read as `NoSuchKey`; the GitHub token was twice overwritten with clipboard text (verify shape before use); SES sandbox blocks unverified recipients even with a verified domain. All fixed within the hour; capture itself never failed.
-7. **Pair-programming friction worth naming:** two commits initially slipped past failing checks because a `grep` pipeline masked the exit code in a `&&` chain — fixed by checking `$?` explicitly. Process, not tooling.
+6. **Production-only findings (2026-08-18):** three defects surfaced only after deployment — S3 requires `s3:ListBucket` for a missing key to be reported as `NoSuchKey`; a credential stored with the wrong content is only detected by verifying its shape and a live call before use; the SES sandbox blocks unverified recipients even with a verified domain. All were fixed within the hour; capture itself never failed.
+7. **Check exit codes explicitly:** two commits initially passed a shell chain in which a `grep` filter masked a failing check; the fix was to test the exit status directly. A process lesson, not a tooling one.
 
 ## 8. Threats to validity
 
