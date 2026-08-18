@@ -14,7 +14,8 @@ FFRS_ENABLED=false ./build.sh                # build without the feedback widget
 aws s3 sync dist/ s3://scaledaiops.org --profile scaledaiops
 aws cloudfront create-invalidation --distribution-id EJE5SGJ73Q1SL --paths "/*" --profile scaledaiops
 
-npx playwright test                          # all E2E tests
+npx playwright test                          # all E2E tests (production)
+npm run test:local                           # build + serve dist/ on :8765 + all tests locally (skips the CloudFront 404 test)
 npx playwright test tests/homepage.spec.js   # one file
 npx playwright test -g "404 page"            # one test by title
 FFRS_ENABLED=true npx playwright test tests/feedback.spec.js   # widget E2E (spec runs only when this env is set)

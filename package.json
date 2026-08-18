@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "test:local": "./build.sh >/dev/null && (python3 -m http.server 8765 -d dist >/dev/null 2>&1 & echo $! > .server.pid) && sleep 1 && FFRS_ENABLED=true playwright test --config playwright.local.config.js --reporter=line; s=$?; kill $(cat .server.pid) 2>/dev/null; rm -f .server.pid; exit $s"
   },
   "repository": {
     "type": "git",
