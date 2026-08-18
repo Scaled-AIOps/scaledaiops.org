@@ -5,9 +5,12 @@ test.describe('FFRS feedback widget', () => {
   test.skip(process.env.FFRS_ENABLED !== 'true', 'FFRS_ENABLED is not true');
 
   test.beforeEach(async ({ page }) => {
-    // Never create real feedback from tests — stub the API.
+    // Never create real feedback from tests — stub the API and Turnstile (a token can't be issued for the test host).
     await page.route('**/api/feedback', (route) =>
       route.fulfill({ status: 202, contentType: 'application/json', body: JSON.stringify({ ref: 'FB-TEST42', status: 'received' }) }),
+    );
+    await page.route('https://challenges.cloudflare.com/turnstile/**', (route) =>
+      route.fulfill({ contentType: 'application/javascript', body: 'window.turnstile={render:(el,o)=>{setTimeout(()=>o.callback("test-token"),0);return "w1";},reset:()=>{}};' }),
     );
     await page.goto('/');
   });
