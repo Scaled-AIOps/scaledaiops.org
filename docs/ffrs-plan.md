@@ -1,6 +1,6 @@
 # Fast Feedback Response System (FFRS) — Implementation Plan
 
-Status: **proposed** · Owner: ScaledAIOps maintainers · Target: scaledaiops.org · Date: 2026-08-18
+Status: **built (phases 0–7); go-live pending account setup** · Case study: [ffrs-case-study.md](ffrs-case-study.md) · Owner: ScaledAIOps maintainers · Target: scaledaiops.org · Date: 2026-08-18
 
 ## 1. Purpose
 
