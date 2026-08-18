@@ -39,6 +39,7 @@ test.describe('Navigation', () => {
     { name: 'Principles', path: '/principles/', titleContains: 'Principles' },
     { name: 'Roles', path: '/roles/', titleContains: 'Roles' },
     { name: 'About', path: '/about/', titleContains: 'About' },
+    { name: 'Blog: FFRS', path: '/blog/ffrs/', titleContains: 'FFRS' },
     { name: 'ML Engineering', path: '/disciplines/ml-engineering/', titleContains: 'ML Engineering' },
     { name: 'Model Lifecycle', path: '/disciplines/model-lifecycle/', titleContains: 'Model Lifecycle' },
     { name: 'Data Operations', path: '/disciplines/data-operations/', titleContains: 'Data Operations' },

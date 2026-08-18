@@ -1,0 +1,202 @@
+<!-- title: How scaledaiops.org resolves feedback with FFRS · ScaledAIOps – AI Operations Framework -->
+<!-- description: The Fast Feedback Resolution System (FFRS) on scaledaiops.org: a five-stage pipeline from capture to close, an AI agent that produces the first response, humans who decide, and metrics anyone can recompute. Architecture, costs, comparisons and lessons. -->
+<!-- active: none -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="eyebrow">Blog · Engineering</p>
+      <h1>Closing the loop: how this site resolves feedback with FFRS</h1>
+      <p class="subtitle">Every page here has a Feedback tab. What happens after you press it is a five-stage pipeline in which an AI agent writes the first answer, a human decides, and the outcome comes back to you — measured end to end.</p>
+    </div>
+  </section>
+
+  <article class="section post">
+    <div class="container content-page">
+
+      <p class="post-meta">Published 19 August 2026 · ScaledAIOps maintainers · <a href="https://github.com/Scaled-AIOps/feedback">tracker</a> · <a href="https://github.com/Scaled-AIOps/ffrs-api">code</a></p>
+
+      <h2>The problem: feedback is captured, then it stalls</h2>
+      <p>Most projects have a way to <em>collect</em> feedback — a form, an inbox, an issue tracker. Far fewer have a working <em>loop</em>: the item is acknowledged, someone acts on it, and the person who raised it hears the outcome. The interval between "raised" and "resolved" is usually owned by nobody and measured by nothing, so it is slow without anyone noticing.</p>
+      <p>Until this month scaledaiops.org had exactly that gap. The only feedback path was a link to our GitHub organisation: no account, no way to report; with an account, leave the site, pick a repository, open an issue, and hope. Nobody was notified. Nobody could say how long an issue typically waited.</p>
+
+      <h2>The FFRS pipeline</h2>
+      <p>The <strong>Fast Feedback Resolution System (FFRS)</strong> treats each item as a five-stage pipeline. Each stage is a <em>timestamp</em>, recorded by whichever system naturally owns the event — so nothing needs manual bookkeeping and the metrics fall out of the timestamps.</p>
+
+      <figure class="ffrs-pipe" aria-label="The five FFRS stages">
+        <svg viewBox="0 0 900 150" role="img">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="currentColor"/></marker>
+          </defs>
+          <g class="pipe-stage s1"><rect x="10" y="40" width="150" height="60" rx="10"/><text x="85" y="66">Capture</text><text class="sub" x="85" y="86">issue created</text></g>
+          <g class="pipe-stage s2"><rect x="195" y="40" width="150" height="60" rx="10"/><text x="270" y="66">Acknowledge</text><text class="sub" x="270" y="86">e-mail, if consented</text></g>
+          <g class="pipe-stage s3"><rect x="380" y="40" width="150" height="60" rx="10"/><text x="455" y="66">Route</text><text class="sub" x="455" y="86">labels kind · severity</text></g>
+          <g class="pipe-stage s4 agent"><rect x="565" y="40" width="150" height="60" rx="10"/><text x="640" y="66">Respond</text><text class="sub" x="640" y="86">agent PR or proposal</text></g>
+          <g class="pipe-stage s5"><rect x="750" y="40" width="140" height="60" rx="10"/><text x="820" y="66">Close</text><text class="sub" x="820" y="86">outcome sent back</text></g>
+          <g class="pipe-arrows" marker-end="url(#ah)"><line x1="160" y1="70" x2="193" y2="70"/><line x1="345" y1="70" x2="378" y2="70"/><line x1="530" y1="70" x2="563" y2="70"/><line x1="715" y1="70" x2="748" y2="70"/></g>
+          <circle class="pipe-dot" cx="0" cy="70" r="7"/>
+          <text class="pipe-caption" x="450" y="135">TTFR = Respond − Capture · TTHR = first human decision − Capture · TTC = Close − Capture</text>
+        </svg>
+        <figcaption>The five stages. The Respond stage is performed by an agent by default; every stage is a timestamp.</figcaption>
+      </figure>
+
+      <p>The rule that makes FFRS <em>fast</em>: the first substantive response is produced without waiting for a maintainer. The rule that keeps it <em>safe</em>: nothing the agent produces takes effect without a human decision.</p>
+
+      <h2>How it runs on this site</h2>
+      <p>The implementation adds no new system of record. The GitHub issue tracker we already use <em>is</em> the store; a small function, a private object-store prefix and a mail API do the rest. FFRS is defined by these roles, not by these products — each can be swapped for an equivalent (see the table further down).</p>
+
+      <figure class="ffrs-arch" aria-label="FFRS architecture on scaledaiops.org">
+        <svg viewBox="0 0 900 330" role="img">
+          <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="currentColor"/></marker></defs>
+          <g class="box ours"><rect x="10" y="120" width="140" height="70" rx="10"/><text x="80" y="150">Feedback widget</text><text class="sub" x="80" y="170">4 KB, every page</text></g>
+          <g class="box ext"><rect x="10" y="215" width="140" height="60" rx="10"/><text x="80" y="242">/feedback/ page</text><text class="sub" x="80" y="260">no-JS form · status</text></g>
+          <g class="box ext"><rect x="190" y="120" width="140" height="70" rx="10"/><text x="260" y="150">CDN /api/*</text><text class="sub" x="260" y="170">→ API gateway</text></g>
+          <g class="box ours"><rect x="370" y="110" width="150" height="90" rx="10"/><text x="445" y="140">Function</text><text class="sub" x="445" y="160">validate · guards</text><text class="sub" x="445" y="178">capture · status</text></g>
+          <g class="box store"><rect x="590" y="20" width="170" height="80" rx="10"/><text x="675" y="48" font-weight="700">Issue tracker</text><text class="sub" x="675" y="68">system of record</text><text class="sub" x="675" y="86">route · respond · close</text></g>
+          <g class="box store"><rect x="590" y="125" width="170" height="80" rx="10"/><text x="675" y="153">Private object store</text><text class="sub" x="675" y="173">sidecar {e-mail}</text><text class="sub" x="675" y="191">idempotency · screenshots</text></g>
+          <g class="box ext"><rect x="590" y="230" width="170" height="60" rx="10"/><text x="675" y="257">Mail API</text><text class="sub" x="675" y="275">ack · alert · close</text></g>
+          <g class="box agent"><rect x="790" y="20" width="100" height="80" rx="10"/><text x="840" y="48">Coding</text><text x="840" y="66">agent</text><text class="sub" x="840" y="86">hourly</text></g>
+          <g class="arrows" marker-end="url(#ah2)">
+            <line x1="150" y1="155" x2="188" y2="155"/><line x1="80" y1="215" x2="80" y2="200"/>
+            <line x1="330" y1="155" x2="368" y2="155"/>
+            <line x1="520" y1="130" x2="588" y2="70"/><line x1="520" y1="160" x2="588" y2="163"/><line x1="520" y1="185" x2="588" y2="255"/>
+          </g>
+          <path class="loop" d="M600 100 C 560 130, 540 110, 520 118" marker-end="url(#ah2)"/>
+          <text class="lbl" x="548" y="98">webhook: closed</text>
+          <line class="agentline" x1="790" y1="60" x2="762" y2="60" marker-end="url(#ah2)"/>
+          <path class="agentline" d="M840 100 C 840 200, 840 250, 840 300" marker-end="url(#ah2)"/>
+          <text class="lbl" x="840" y="318" text-anchor="middle">PRs on the site repo</text>
+        </svg>
+        <figcaption>Solid: capture path. Dashed: loop closure. Dotted: the agent. Blue built for FFRS, green stores, grey existing platform services.</figcaption>
+      </figure>
+
+      <h3>1. Capture</h3>
+      <p>The edge tab opens a small dialog: feature or bug, a title, details, an optional e-mail with an explicit "tell me when it's resolved" checkbox, and — for bugs — a screenshot of the page you were on. The function validates the input, applies three guards (a hidden honeypot field, a per-address rate limit, a bot check), stores the screenshot privately and <strong>creates the GitHub issue synchronously</strong>. Only then do you get a reference like <code>FB-6PR9NJ</code>. If the tracker were down you would get an honest error and the widget would retry with the same idempotency key — nothing is half-stored.</p>
+      <figure class="shot"><img src="/assets/img/blog/ffrs-widget.jpg" alt="The FFRS feedback dialog on the Disciplines page, bug tab, with an automatic page screenshot" loading="lazy"><figcaption>The widget on the Disciplines page. Bug reports capture a screenshot automatically; you can remove it before sending.</figcaption></figure>
+
+      <h3>2. Acknowledge and route</h3>
+      <p>If you left an e-mail and ticked the box, you receive an acknowledgement with your reference and a status link. Routing is a label: <code>kind:bug</code> or <code>kind:feature</code>, plus severity. Your e-mail never appears in the public issue; it lives in a private per-item record and is deleted with it.</p>
+      <figure class="shot"><img src="/assets/img/blog/ffrs-issue.jpg" alt="The GitHub issue created for feedback FB-6PR9NJ with FFRS labels" loading="lazy"><figcaption>The issue that FFRS filed for the first real request — the placeholder text of the widget's own title field.</figcaption></figure>
+
+      <h3>3. Respond — the agent</h3>
+      <p>Every hour a coding agent reads the tracker for items without a first response and takes one of two paths.</p>
+      <figure class="ffrs-paths" aria-label="The two paths of the agentic Respond stage">
+        <svg viewBox="0 0 900 300" role="img">
+          <defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="currentColor"/></marker></defs>
+          <g class="box ext"><rect x="10" y="120" width="120" height="60" rx="10"/><text x="70" y="147">Item</text><text class="sub" x="70" y="166">captured · routed</text></g>
+          <g class="box agent"><polygon points="200,150 260,110 320,150 260,190"/><text x="260" y="154">agent triage</text></g>
+          <g class="box agent"><rect x="380" y="20" width="160" height="60" rx="10"/><text x="460" y="45">Pull request</text><text class="sub" x="460" y="65">fix · tests · evidence</text></g>
+          <g class="box human"><rect x="580" y="20" width="130" height="60" rx="10"/><text x="645" y="45">Developer</text><text class="sub" x="645" y="65">reviews · merges</text></g>
+          <g class="box agent"><rect x="380" y="220" width="160" height="60" rx="10"/><text x="460" y="245">Proposal</text><text class="sub" x="460" y="265">what · needs · risk</text></g>
+          <g class="box human"><rect x="580" y="220" width="130" height="60" rx="10"/><text x="645" y="245">Requester /accept</text><text class="sub" x="645" y="265">Reviewer /confirm</text></g>
+          <g class="box ext"><rect x="760" y="120" width="130" height="60" rx="10"/><text x="825" y="147">Close</text><text class="sub" x="825" y="166">outcome sent back</text></g>
+          <g class="arrows" marker-end="url(#ah3)">
+            <line x1="130" y1="150" x2="198" y2="150"/>
+            <path d="M260 110 L260 50 L378 50" fill="none"/><path d="M260 190 L260 250 L378 250" fill="none"/>
+            <line x1="540" y1="50" x2="578" y2="50"/><line x1="540" y1="250" x2="578" y2="250"/>
+            <path d="M710 50 L825 50 L825 118" fill="none"/><path d="M710 250 L825 250 L825 182" fill="none"/>
+          </g>
+          <text class="lbl" x="325" y="42">code / content change</text>
+          <text class="lbl" x="325" y="243">decision or outside the repo</text>
+        </svg>
+        <figcaption>Blue: produced by the agent. Orange: human decisions. Nothing takes effect without a merge or an accept-and-confirm.</figcaption>
+      </figure>
+      <ul>
+        <li><strong>Code path.</strong> If the item is a change the agent can make safely — content, code, tests — it makes it on a branch, runs the site build and test suite, and opens a pull request with what changed, what it ran, and a link back to the item. A maintainer reviews and merges. Merge closes the item.</li>
+        <li><strong>Proposal path.</strong> Otherwise it posts a proposal — what it would do, what it needs, any risk. The requester replies <code>/accept</code>, a maintainer replies <code>/confirm</code>, and only then does the agent execute. <code>/reject</code> returns the item to the human queue.</li>
+      </ul>
+      <figure class="shot"><img src="/assets/img/blog/ffrs-pr.jpg" alt="Pull request #1 opened by the FFRS agent on the scaledaiops.org repository" loading="lazy"><figcaption>The agent's pull request for that first item: a one-line change, the tests it ran, and a link back to the issue.</figcaption></figure>
+
+      <h3>4. Close</h3>
+      <p>Closing the issue — by merging the PR or by hand — records the outcome (<em>fixed</em>, <em>shipped</em>, <em>answered</em>, <em>declined</em>, …) and, if you opted in, sends you a closing note. The public status page <a href="/feedback/">/feedback/</a> shows the same timeline for any reference id.</p>
+
+      <h2>The first real item, end to end</h2>
+      <p>On the day the system went live, a visitor (the maintainer, testing as a user) reported that the widget's title field showed the meaningless placeholder "One line". Here is what happened, from the public record:</p>
+      <table class="post-table">
+        <thead><tr><th>Time</th><th>Event</th></tr></thead>
+        <tbody>
+          <tr><td>T+0:00</td><td>Item captured through the widget (feature request, anonymous).</td></tr>
+          <tr><td>T+1:10</td><td>First agent run starts (the routine was created that hour). By T+1:19 it has a correct two-line fix but cannot push: its tracker identity lacked write permission on the organisation. It reports this precisely and stops.</td></tr>
+          <tr><td>T+1:21</td><td>Maintainer grants the permission.</td></tr>
+          <tr><td>T+1:55</td><td>Second agent run opens the pull request with the fix and its test results, comments on the issue, applies labels.</td></tr>
+          <tr><td>T+2:02</td><td>Maintainer reviews the one-line diff and merges within a minute. Issue closes automatically with outcome <em>shipped</em>. The change is deployed.</td></tr>
+        </tbody>
+      </table>
+      <p>Time to first response ≈ 2 h, time to first human decision ≈ 2 h, time to close ≈ 2 h, human effort ≈ 1 minute. Since then the agent runs hourly, so a first response normally arrives within an hour of capture.</p>
+
+      <h2>How this compares</h2>
+      <table class="post-table compare">
+        <thead><tr><th></th><th>Plain tracker link</th><th>Vendor feedback widget</th><th>Service desk</th><th class="hl">FFRS</th></tr></thead>
+        <tbody>
+          <tr><td>Anonymous reporting</td><td>no (account needed)</td><td>yes</td><td>usually via e-mail</td><td class="hl">yes</td></tr>
+          <tr><td>Acknowledgement to reporter</td><td>none</td><td>yes</td><td>yes (SLA)</td><td class="hl">yes, if consented</td></tr>
+          <tr><td>First substantive response</td><td>whenever a maintainer looks</td><td>whenever a maintainer looks</td><td>staffed queue</td><td class="hl">agent, hourly</td></tr>
+          <tr><td>Outcome reported back</td><td>only if the reporter watches the issue</td><td>sometimes</td><td>yes</td><td class="hl">yes (closing note)</td></tr>
+          <tr><td>System of record</td><td>tracker</td><td>vendor database</td><td>ITSM tool</td><td class="hl">tracker (no new store)</td></tr>
+          <tr><td>Metrics</td><td>none</td><td>vendor dashboard</td><td>SLA reports</td><td class="hl">timestamps; recomputable by anyone</td></tr>
+          <tr><td>Personal data</td><td>GitHub profile</td><td>held by vendor</td><td>held by tool</td><td class="hl">e-mail only, private, deletable</td></tr>
+          <tr><td>New systems to run</td><td>0</td><td>1 (SaaS)</td><td>1–2</td><td class="hl">1 small function</td></tr>
+          <tr><td>Removable</td><td>—</td><td>cancel subscription</td><td>hard</td><td class="hl">three switches; no trace</td></tr>
+        </tbody>
+      </table>
+
+      <h2>What it costs</h2>
+      <p>At this site's volume — tens of items a month, not thousands — the running cost is effectively the free tier of the cloud we already use, plus the coding-agent subscription the maintainers already have.</p>
+      <table class="post-table">
+        <thead><tr><th>Component</th><th>Role</th><th>Monthly cost at our volume</th></tr></thead>
+        <tbody>
+          <tr><td>Serverless function + API gateway</td><td>capture, status, webhook</td><td>free tier (≈ 1 M requests/month included)</td></tr>
+          <tr><td>Private object store</td><td>sidecar, screenshots (90-day expiry)</td><td>cents</td></tr>
+          <tr><td>Transactional e-mail</td><td>ack · alert · close</td><td>fractions of a cent per message</td></tr>
+          <tr><td>CDN path <code>/api/*</code></td><td>same-origin API</td><td>included in the site's existing distribution</td></tr>
+          <tr><td>Bot check</td><td>anti-spam</td><td>free tier</td></tr>
+          <tr><td>Issue tracker</td><td>system of record</td><td>free (public repository)</td></tr>
+          <tr><td>Coding agent</td><td>Respond stage</td><td>within an existing subscription; no per-item API charge</td></tr>
+          <tr><td><strong>Total</strong></td><td></td><td><strong>≈ €0–2 per month</strong> at current volume; the marginal cost of an item is the reviewer's minute</td></tr>
+        </tbody>
+      </table>
+      <p>For comparison, hosted feedback products typically start in the tens of euros per month per seat and hold the data on the vendor's side. The trade FFRS makes is deliberate: no triage UI beyond the tracker itself, in exchange for no vendor, no database and no data leaving the project.</p>
+      <p>Build cost: about one working day across eight phases, by one maintainer with an AI coding assistant. The whole history — infrastructure, code, content and the agent's own instructions — is in version control, so the audit trail is the commit and pull-request log.</p>
+
+      <h2>Benefits we see</h2>
+      <div class="benefit-grid">
+        <div><h4>Faster first response</h4><p>Hours instead of "when someone gets to it", because the first response is produced, not scheduled.</p></div>
+        <div><h4>Human effort goes to judgement</h4><p>Reviewing a diff or a proposal takes a minute; producing it took the agent's time, not the maintainer's.</p></div>
+        <div><h4>The loop actually closes</h4><p>Reporters get a reference, a status page and — if they want — an e-mail when it's done.</p></div>
+        <div><h4>Honest metrics</h4><p>Every stage is a timestamp in a public tracker; anyone can recompute TTFR, TTC, loop closure and agent share.</p></div>
+        <div><h4>Nothing new to operate</h4><p>The tracker is the store; one function; no database; three switches remove it all.</p></div>
+        <div><h4>Privacy by construction</h4><p>Consent-gated e-mail kept apart from the public record; expiring screenshots; no analytics.</p></div>
+      </div>
+
+      <h2>Limits, stated plainly</h2>
+      <ul>
+        <li>Items that need a decision the project hasn't made still wait for a human — the agent makes the wait visible, not shorter.</li>
+        <li>Anonymous reporters cannot <code>/accept</code> a proposal; a maintainer's <code>/confirm</code> then stands for both.</li>
+        <li>An agent that opens pull requests is only as safe as the review culture around it. The checkpoint is structural; reading the diff is still a human's job.</li>
+        <li>Capture depends on the tracker being up. An outage is an explicit error and a client retry, not a silent loss.</li>
+      </ul>
+
+      <h2>Roles, not products</h2>
+      <p>FFRS prescribes roles and the contracts between them. Ours are filled with what this project already ran on; any equivalent works.</p>
+      <table class="post-table">
+        <thead><tr><th>Role</th><th>Here</th><th>Equivalents</th></tr></thead>
+        <tbody>
+          <tr><td>Issue tracker</td><td>GitHub Issues</td><td>Jira, GitLab Issues, Linear, Azure Boards, Gitea</td></tr>
+          <tr><td>Capture function</td><td>AWS Lambda + API Gateway</td><td>Cloud Run / Functions, Azure Functions, Cloudflare Workers, any container behind an HTTP gateway</td></tr>
+          <tr><td>Object store</td><td>S3 (private prefix)</td><td>Google Cloud Storage, Azure Blob, MinIO</td></tr>
+          <tr><td>Mail</td><td>SES</td><td>SendGrid, Postmark, Mailgun, SMTP</td></tr>
+          <tr><td>Bot check</td><td>Cloudflare Turnstile</td><td>reCAPTCHA, hCaptcha, honeypot only</td></tr>
+          <tr><td>Coding agent</td><td>hosted Claude Code routine</td><td>Copilot coding agent, OpenHands, Aider or SWE-agent in a scheduled job</td></tr>
+          <tr><td>Infrastructure as code</td><td>Terraform</td><td>OpenTofu, Pulumi, CloudFormation, Bicep</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Adopting it</h2>
+      <p>One script tag on your pages, one function deployment configured by environment variables, and a webhook on your tracker:</p>
+      <pre><code>&lt;script src="/assets/js/ffrs-widget.js"
+  data-endpoint="/api/feedback" data-site="example.org"
+  data-turnstile="&lt;sitekey&gt;" data-screenshot="bug" defer&gt;&lt;/script&gt;</code></pre>
+      <p>Code, infrastructure module and the agent's protocol are open: <a href="https://github.com/Scaled-AIOps/ffrs-api">ffrs-api</a> (MIT), <a href="https://github.com/Scaled-AIOps/scaledaiops.org">this site</a> (widget, CC BY-SA), <a href="https://github.com/Scaled-AIOps/aiops-tf-infra">infrastructure</a>. The tracker that receives this site's feedback is public too: <a href="https://github.com/Scaled-AIOps/feedback">Scaled-AIOps/feedback</a> — every item, response and outcome is there to inspect. A weekly metrics report is filed there each Monday.</p>
+
+      <p class="post-cta">Try it now: the <strong>Feedback</strong> tab is on the right edge of this page. Tell us what's wrong with this post.</p>
+    </div>
+  </article>

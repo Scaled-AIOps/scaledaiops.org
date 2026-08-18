@@ -922,3 +922,49 @@ a:hover {
     font-size: 1.15rem;
   }
 }
+
+/* Blog post: FFRS */
+.post-meta { color: var(--color-text-light); font-size: 0.9rem; margin-bottom: 1.5rem; }
+.post figure { margin: 1.5rem 0 2rem; }
+.post figcaption { color: var(--color-text-light); font-size: 0.85rem; margin-top: 0.5rem; text-align: center; }
+.post figure.shot img { width: 100%; border: 1px solid var(--color-border); border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.post svg { width: 100%; height: auto; font-family: var(--font-sans); font-size: 14px; color: var(--color-text); }
+.post svg text { fill: var(--color-text); text-anchor: middle; font-weight: 600; }
+.post svg text.sub { font-weight: 400; font-size: 11px; fill: var(--color-text-light); }
+.post svg text.lbl { font-weight: 400; font-size: 11px; fill: var(--color-text-light); }
+.post svg .box rect, .post svg .box polygon { stroke: #94a3b8; stroke-width: 1; }
+.post svg .box.ours rect { fill: #e0f2fe; }
+.post svg .box.store rect { fill: #dcfce7; }
+.post svg .box.agent rect, .post svg .box.agent polygon { fill: #ffedd5; }
+.post svg .box.human rect { fill: #fef3c7; }
+.post svg .box.ext rect { fill: #f1f5f9; }
+.post svg .arrows line, .post svg .arrows path { stroke: var(--color-text); stroke-width: 1.5; fill: none; }
+.post svg .loop { stroke: var(--color-text); stroke-width: 1.5; stroke-dasharray: 5 4; fill: none; }
+.post svg .agentline { stroke: #c2410c; stroke-width: 2; stroke-dasharray: 2 4; fill: none; }
+/* pipeline animation */
+.ffrs-pipe .pipe-stage rect { fill: #f1f5f9; stroke: #94a3b8; }
+.ffrs-pipe .pipe-stage.agent rect { fill: #ffedd5; }
+.ffrs-pipe .pipe-arrows line { stroke: var(--color-text); stroke-width: 1.5; }
+.ffrs-pipe .pipe-caption { font-weight: 400; font-size: 12px; fill: var(--color-text-light); }
+.ffrs-pipe .pipe-dot { fill: var(--color-accent); animation: pipe-travel 8s linear infinite; }
+.ffrs-pipe .pipe-stage rect { animation: pipe-glow 8s linear infinite; }
+.ffrs-pipe .s1 rect { animation-delay: 0s; } .ffrs-pipe .s2 rect { animation-delay: 1.6s; } .ffrs-pipe .s3 rect { animation-delay: 3.2s; } .ffrs-pipe .s4 rect { animation-delay: 4.8s; } .ffrs-pipe .s5 rect { animation-delay: 6.4s; }
+@keyframes pipe-travel { 0% { cx: 20; opacity: 0; } 5% { opacity: 1; } 95% { opacity: 1; } 100% { cx: 880; opacity: 0; } }
+@keyframes pipe-glow { 0%, 12%, 100% { stroke: #94a3b8; stroke-width: 1; } 4% { stroke: var(--color-accent); stroke-width: 3; } }
+@media (prefers-reduced-motion: reduce) { .ffrs-pipe .pipe-dot, .ffrs-pipe .pipe-stage rect { animation: none; } .ffrs-pipe .pipe-dot { display: none; } }
+/* tables */
+.post-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1rem 0 2rem; }
+.post-table th, .post-table td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
+.post-table th { background: var(--color-bg); font-weight: 600; }
+.post-table td:first-child { white-space: nowrap; font-weight: 500; }
+.post-table.compare th.hl, .post-table.compare td.hl { background: #e0f2fe; }
+.post-table.compare td:first-child { white-space: normal; }
+.content-page .post-table-wrap { overflow-x: auto; }
+/* benefits */
+.benefit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; margin: 1rem 0 2rem; }
+.benefit-grid div { background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: 10px; padding: 1rem 1.1rem; }
+.benefit-grid h4 { font-size: 1rem; margin: 0 0 0.35rem; }
+.benefit-grid p { margin: 0; font-size: 0.9rem; color: var(--color-text-light); }
+.post pre { background: var(--color-bg-dark); color: #e2e8f0; padding: 1rem 1.2rem; border-radius: 10px; overflow-x: auto; font-size: 0.85rem; }
+.post-cta { margin-top: 2rem; padding: 1rem 1.2rem; border-left: 4px solid var(--color-accent); background: var(--color-bg); }
+@media (max-width: 640px) { .post-table.compare { display: block; overflow-x: auto; } }
