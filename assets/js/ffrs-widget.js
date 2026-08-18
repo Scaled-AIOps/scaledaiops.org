@@ -33,7 +33,7 @@
     '    <button type="button" role="tab" data-kind="bug" aria-selected="false">Report a bug</button>' +
     '  </div>' +
     '  <div class="ffrs-shot" hidden><img alt="Screenshot of this page"><button type="button" class="ffrs-shot-x" aria-label="Remove screenshot">&times;</button></div>' +
-    '  <label>Title<input name="title" required minlength="3" maxlength="140" placeholder="One line"></label>' +
+    '  <label>Title<input name="title" required minlength="3" maxlength="140" placeholder="Short summary"></label>' +
     '  <label>Details<textarea name="body" required minlength="10" maxlength="5000" rows="4" placeholder="What would you like to see?"></textarea></label>' +
     '  <label class="ffrs-sev" hidden>Severity<select name="severity"><option value="low">Low — cosmetic</option><option value="medium" selected>Medium — annoying</option><option value="high">High — blocks a task</option><option value="critical">Critical — site unusable</option></select></label>' +
     '  <label><span>Email <em class="ffrs-opt">(optional)</em></span><input name="email" type="email" maxlength="254" placeholder="you@example.org" autocomplete="email"></label>' +
