@@ -4,9 +4,9 @@
 
 set -euo pipefail
 
-# Feature toggle: FFRS_ENABLED=true ships the feedback widget + /feedback/ page; default off = zero FFRS bytes.
-FFRS_ENABLED="${FFRS_ENABLED:-false}"
-FFRS_TURNSTILE_SITEKEY="${FFRS_TURNSTILE_SITEKEY:-}"
+# Feature toggle: FFRS ships the feedback widget + /feedback/ page (live since 2026-08-18). FFRS_ENABLED=false = zero FFRS bytes.
+FFRS_ENABLED="${FFRS_ENABLED:-true}"
+FFRS_TURNSTILE_SITEKEY="${FFRS_TURNSTILE_SITEKEY:-0x4AAAAAAEUQz0HJ_ZRQDr3H}"  # public site key
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 LAYOUT_DIR="$SCRIPT_DIR/_layout"
