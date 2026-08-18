@@ -1,6 +1,6 @@
 # FFRS Case Study — scaledaiops.org
 
-Companion to the FFRS paper. Status: **implementation complete (no-database revision), measurement not started** (go-live pending Turnstile + `terraform apply`). Sections marked ⏳ are filled from data; everything else is fact as of 2026-08-18. Plan and rationale: [ffrs-plan.md](ffrs-plan.md).
+Companion to the FFRS paper. Status: **live on production since 2026-08-18 (T0); measurement window running** — first item `FB-DT343N` captured 16:57 UTC, responded 17:12, closed 17:12 with closing email delivered. Sections marked ⏳ are filled from data; everything else is fact as of 2026-08-18. Plan and rationale: [ffrs-plan.md](ffrs-plan.md).
 
 ## 1. Context
 
@@ -49,14 +49,14 @@ Key mechanisms and why they matter for the paper:
 |---|---|---|
 | Capture/loop API | `Scaled-AIOps/ffrs-api` @ `ceb9486` | 24 TS files, ~900 LOC src, ~330 LOC tests, **32 tests**, bundle 414 KB zip (no DB driver; AWS SDK external) |
 | Widget + fallback page + build toggle | `Scaled-AIOps/scaledaiops.org` @ `3e048d1` | widget 10.9 KB (4.1 KB gz) + 5.8 KB CSS, no framework, no deps except on-click html2canvas |
-| Infra | `Scaled-AIOps/aiops-tf-infra` @ `2b2ecf6` | `modules/ffrs`, ~230 lines HCL, 19 resources |
+| Infra | `Scaled-AIOps/aiops-tf-infra` @ `c6d04c6` | `modules/ffrs`, ~230 lines HCL, 19 resources, applied 2026-08-18 |
 | Data model | GitHub issue + `sidecar/<ref>.json` in S3 (see plan §4) | 0 tables |
 
 Engineering standards applied (verifiable in the repos): TypeScript strict + `exactOptionalPropertyTypes`, no `any`; Zod at every boundary (HTTP body, env, GitHub webhook, Turnstile, GitHub responses); persistence behind two ports (`Tracker`, `Store`) with GitHub/S3 and in-memory implementations (tests need no network); structured JSON logs keyed by `ref`; `npm run check` = typecheck + tests + bundle; Terraform `fmt`/`validate`/`plan` before every commit.
 
 ## 5. Measurement protocol ⏳
 
-- **Window:** 12 weeks from go-live (T0 = first production submission). Interim read-out at week 4.
+- **Window:** 12 weeks from **T0 = 2026-08-18** (first production submission `FB-DT343N`); week-4 read-out 2026-09-15, week-12 read-out 2026-11-10.
 - **Source of truth:** `npm run metrics` / `npm run export` read the `Scaled-AIOps/feedback` issues (public) — anyone can re-run them; commit both CSVs under `docs/data/` with the export date in the filename.
 - **Report:** per kind × week table (n, TTFR p50/p90, TTC p50, loop closure, signal ratio) plus overall medians; the Monday GitHub report issues (`ffrs-report`) are the running log.
 - **Targets stated in advance:** TTFR < 72 h p50; TTC (bugs) < 30 d p50; loop closure → 100 % of consented items (closing email sent); signal ratio reported, no target.
@@ -85,7 +85,8 @@ See [ffrs-plan.md §8](ffrs-plan.md#8-decisions-log-for-the-paper). Two decision
 3. **Removing the database was a net simplification:** −1 external service, −1 secret, −1 schedule, −276 KB bundle; the cost is a synchronous dependency on GitHub at capture time, made explicit as `502 route_failed` + client retry.
 4. **Secrets at cold start** avoided the usual Terraform-state leak with ~20 lines; the cost is one SSM call per cold start.
 5. **Feature-toggle discipline is cheap if decided up front:** five well-known locations, one build variable, one Terraform count; verified by an `enable_ffrs=false` plan showing *No changes*.
-6. **Pair-programming friction worth naming:** two commits initially slipped past failing checks because a `grep` pipeline masked the exit code in a `&&` chain — fixed by checking `$?` explicitly. Process, not tooling.
+6. **Go-live findings (2026-08-18):** three defects surfaced only in production — S3 needs `s3:ListBucket` for a missing key to read as `NoSuchKey`; the GitHub token was twice overwritten with clipboard text (verify shape before use); SES sandbox blocks unverified recipients even with a verified domain. All fixed within the hour; capture itself never failed.
+7. **Pair-programming friction worth naming:** two commits initially slipped past failing checks because a `grep` pipeline masked the exit code in a `&&` chain — fixed by checking `$?` explicitly. Process, not tooling.
 
 ## 8. Threats to validity
 
