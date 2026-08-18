@@ -6,14 +6,14 @@ test.describe('Homepage', () => {
   });
 
   test('loads with correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('ScaledAIOps Framework');
+    await expect(page).toHaveTitle('ScaledAIOps — the open framework for running AI in production');
   });
 
   test('displays hero section', async ({ page }) => {
     const hero = page.locator('.hero');
     await expect(hero).toBeVisible();
-    await expect(hero.locator('h1')).toHaveText('The ScaledAIOps Framework');
-    await expect(hero.locator('.subtitle')).toContainText('community-driven');
+    await expect(hero.locator('h1')).toHaveText('The open framework for running AI in production.');
+    await expect(hero.locator('.subtitle')).toContainText('community-maintained');
   });
 
   test('displays all six discipline cards', async ({ page }) => {

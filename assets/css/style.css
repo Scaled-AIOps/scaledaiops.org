@@ -121,7 +121,19 @@ a:hover {
   text-align: center;
 }
 
+.hero .eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
 .hero h1 {
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 2.75rem;
   font-weight: 800;
   margin-bottom: 1rem;
@@ -129,11 +141,13 @@ a:hover {
 }
 
 .hero .subtitle {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   color: rgba(255,255,255,0.8);
-  max-width: 700px;
+  max-width: 720px;
   margin: 0 auto 2rem;
 }
+
+.hero .subtitle strong { color: #fff; }
 
 .hero .cta-group {
   display: flex;
@@ -243,53 +257,73 @@ a:hover {
   font-size: 0.9rem;
 }
 
-/* Principles strip */
-.principles {
-  background: var(--color-bg-dark);
-  color: #fff;
+/* Overview: three tiers */
+.overview .section-subtitle { margin-bottom: 2rem; }
+
+.tier {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 1.5rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--color-border);
 }
 
-.principles .section-title {
-  color: #fff;
-}
+.tier-label h3 { font-size: 1.15rem; margin-bottom: 0.25rem; }
+.tier-label h3 a { color: var(--color-primary); }
+.tier-label p { color: var(--color-text-light); font-size: 0.9rem; }
 
-.principles .section-subtitle {
-  color: rgba(255,255,255,0.6);
-}
+.card-grid--compact { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+@media (min-width: 900px) { .card-grid--compact { grid-template-columns: repeat(3, 1fr); } }
+.card-grid--compact .card { position: relative; padding: 1.25rem; }
+.card-grid--compact .card-icon { width: 36px; height: 36px; font-size: 1.1rem; margin-bottom: 0.75rem; }
+.card-grid--compact .card h3 { font-size: 1rem; }
+.card-grid--compact .card p { font-size: 0.85rem; }
+.card-grid--compact .card a { margin: 0; color: inherit; }
+.card-grid--compact .card a::after { content: ""; position: absolute; inset: 0; }
 
 .principle-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
   counter-reset: principle;
 }
 
 .principle-item {
   counter-increment: principle;
-  padding: 1.5rem;
-  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
-  background: rgba(255,255,255,0.03);
+  background: var(--color-card-bg);
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 0.95rem;
 }
+
+.principle-item:hover { border-color: var(--color-accent); color: var(--color-accent); }
 
 .principle-item::before {
   content: counter(principle);
-  display: block;
-  font-size: 2rem;
   font-weight: 800;
   color: var(--color-accent);
-  margin-bottom: 0.5rem;
+  min-width: 1.25rem;
 }
 
-.principle-item h4 {
-  font-size: 1.05rem;
-  margin-bottom: 0.5rem;
-}
+.role-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
-.principle-item p {
-  color: rgba(255,255,255,0.6);
+.role-list a {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-card-bg);
+  color: var(--color-text);
   font-size: 0.9rem;
+  font-weight: 500;
 }
+
+.role-list a:hover { border-color: var(--color-accent); color: var(--color-accent); }
 
 /* Community CTA */
 .community {
@@ -451,6 +485,7 @@ a:hover {
   .hero h1 { font-size: 2rem; }
   .hero { padding: 3rem 1.5rem; }
   .section { padding: 3rem 0; }
+  .tier { grid-template-columns: 1fr; gap: 1rem; }
 
   .nav-toggle { display: block; }
 
