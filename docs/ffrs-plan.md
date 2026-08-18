@@ -31,20 +31,32 @@ FFRS treats feedback as a pipeline with four stages and one loop-closing event. 
 ## 3. Architecture
 
 ```
-Browser (static page, /feedback/)              CloudFront (existing dist EJE5SGJ73Q1SL)
-  form + Turnstile widget  ──POST /api/feedback──▶  behaviour /api/* ──▶ API Gateway HTTP API ──▶ Lambda (Node 22, TS)
-                                                                                                    │
-                                              ┌─────────────────────────────────────────────────────┤
-                                              ▼                         ▼                           ▼
-                                        Neon Postgres            SES (ack email,          GitHub Issues API
-                                        (source of truth)        maintainer alert)        (route + label)
+Any page (widget injected by footer)          CloudFront (existing dist EJE5SGJ73Q1SL)
+  ┌ right-edge "Feedback" tab ┐
+  │ modal: Feature | Bug      │──POST /api/feedback──▶  behaviour /api/* ──▶ API Gateway HTTP API ──▶ Lambda (Node 22, TS)
+  │ auto page screenshot      │                                                                          │
+  │ description, email, page  │                                  ┌───────────────────────────────────────┤
+  └───────────────────────────┘                                  ▼               ▼              ▼         ▼
+                                                           Neon Postgres    S3 (screenshots)  SES       GitHub Issues
+                                                           (source of truth)                  (ack,alert) (route + label)
 ```
 
-- **One Lambda, three routes**: `POST /api/feedback` (public), `GET /api/feedback/:ref` (public status by reference id), `POST /api/webhooks/github` (issue closed → `closed_at`, outcome, closing email). Keeps cold-start surface small and deploy trivial.
-- **Side effects after commit**: insert row → return 202 with `ref` → then ack email, GitHub issue, alert. Failures in side effects are retried by a lightweight outbox (`side_effects` table, polled by the same Lambda on an EventBridge schedule every minute). Nothing is lost if GitHub or SES is down.
-- **Same-origin API** via CloudFront `/api/*` behaviour — no CORS, no second domain, cookies not needed.
-- **Neon**: serverless driver over HTTP (`@neondatabase/serverless`), one branch per environment (`main`, `preview`), migrations with `drizzle-kit`.
-- **Secrets**: SSM Parameter Store (Neon URL, Turnstile secret, GitHub App private key), read at cold start.
+- **Widget, not a page.** `ffrs-widget.js` is one dependency-free script (≈6 KB gz) that renders the right-edge tab and modal, exactly the pattern of `fmg`'s `FeedbackButton.tsx`: tab → capture screenshot (html2canvas lazy-loaded only on click, JPEG ≤300 KB, floating UI hidden during capture) → modal with **Request a feature / Report a bug** tabs, description, optional email + consent, page path shown read-only → `202 {ref}` → "Received · FB-7K3M2Q". A plain `/feedback/` page remains as the no-JS/accessibility fallback and as the deep link from emails.
+- **Embeddable anywhere.** Configuration is data-attributes on the script tag — `<script src="/assets/js/ffrs-widget.js" data-endpoint="/api/feedback" data-site="scaledaiops.org" data-turnstile="…" defer>` — so any other project (fmg included) can adopt it with one tag. That single-tag adoption story is the reusability claim of the paper.
+- **One Lambda, three routes**: `POST /api/feedback` (public), `GET /api/feedback/:ref` (public status), `POST /api/webhooks/github` (issue closed → `closed_at`, outcome, closing email).
+- **Side effects after commit**: insert row (+ screenshot to S3) → return 202 → ack email, GitHub issue (screenshot embedded), alert. Failures are retried via an outbox (`side_effects` table drained by the same Lambda on a one-minute EventBridge schedule). Nothing is lost if GitHub or SES is down.
+- **Same-origin API** via CloudFront `/api/*` behaviour — no CORS, no second domain. Third-party embedders get CORS enabled per `ALLOWED_ORIGINS`.
+- **Neon**: serverless driver over HTTP (`@neondatabase/serverless`), one branch per environment, migrations with `drizzle-kit`. **Secrets**: SSM Parameter Store, read at cold start.
+
+## 3a. Feature toggle — FFRS is detachable at three layers
+
+| Layer | Switch | Effect when OFF | Where |
+|---|---|---|---|
+| **Site (build-time)** | `FFRS_ENABLED=false ./build.sh` (default **false** until launch) | Footer emits no widget `<script>`, no widget CSS, no `/feedback/` page; zero FFRS bytes ship. Playwright `feedback.spec.js` self-skips when the flag is off. | `build.sh`, `_layout/footer.html` (`{{FFRS_WIDGET}}` placeholder) |
+| **API (runtime kill switch)** | SSM `/ffrs/enabled` = `false` (no redeploy) | `POST /api/feedback` → `503 {code:"ffrs_disabled"}`; widget reads it and hides its tab on next load. Stops capture in seconds during abuse or an incident. | Lambda config, cached 60 s |
+| **Infra (provisioning)** | `enable_ffrs = false` in `aiops-tf-infra` | Terraform module `ffrs` has `count = var.enable_ffrs ? 1 : 0` — Lambda, API GW, `/api/*` behaviour, S3 screenshots bucket, SES identity, EventBridge rule all removed on `apply`. Neon and the site are untouched. | `modules/ffrs`, `variables.tf` |
+
+Rules: no FFRS code path lives outside `ffrs-api/`, `assets/js/ffrs-widget.js`, `_content/feedback/`, `_layout` placeholder and `modules/ffrs`; removing those five locations removes FFRS completely. The homepage/CTA never depends on it.
 
 ## 4. Data model (Neon)
 
@@ -60,12 +72,14 @@ create table feedback (
   title            text not null check (length(title) between 3 and 140),
   body             text not null check (length(body) between 10 and 5000),
   page_url         text,                            -- where the visitor was
+  severity         text check (severity in ('low','medium','high','critical')),  -- bugs only
+  screenshot_key   text,                            -- S3 object key, ≤300 KB JPEG, purged with email
+  meta             jsonb,                           -- viewport, ua_hash, widget version — never identity
   email            text,                            -- optional; needed for ack + close
   consent          boolean not null default false,  -- may we email you?
   status           feedback_status not null default 'new',
   outcome          feedback_outcome,
   github_issue_url text,
-  ua_hash          text,                            -- sha256(user-agent), for abuse analysis, not identity
   created_at       timestamptz not null default now(),
   acknowledged_at  timestamptz,
   routed_at        timestamptz,
@@ -95,15 +109,17 @@ select kind, date_trunc('week', created_at) wk,
 from feedback group by 1,2;
 ```
 
-PII stance: `email` is the only personal field, optional, deleted (nulled) 90 days after `closed_at` by a scheduled job. IP addresses are used only transiently for rate limiting and never stored.
+PII stance: `email` is the only personal field, optional, deleted (nulled) 90 days after `closed_at` by a scheduled job; the screenshot object is deleted at the same time (it may show what the visitor typed). IP addresses are used only transiently for rate limiting and never stored.
 
 ## 5. Repository layout (reusable-by-design)
 
 ```
 scaledaiops.org/
-├── _content/feedback/index.html      # the form page (one page, three kinds via <select>)
-├── assets/js/feedback.js             # progressive enhancement: Turnstile, fetch, inline status
-└── tests/feedback.spec.js            # E2E against production (happy path + validation errors)
+├── assets/js/ffrs-widget.js          # the embeddable widget (vanilla, no build step; ships only when FFRS_ENABLED)
+├── assets/css/ffrs-widget.css        # tab + modal styles, scoped under .ffrs-*
+├── _content/feedback/index.html      # no-JS fallback form + deep-link target from emails
+├── _layout/footer.html               # {{FFRS_WIDGET}} placeholder → script tag or nothing
+└── tests/feedback.spec.js            # E2E: tab visible, modal opens, submit → ref; skips when flag off
 
 ffrs-api/                             # NEW repo — the reusable core; other projects can adopt it as-is
 ├── src/
@@ -120,13 +136,12 @@ ffrs-api/                             # NEW repo — the reusable core; other pr
 └── package.json                      # esbuild bundle → dist/handler.zip
 
 aiops-tf-infra/                       # EXISTING repo
-├── api.tf                            # Lambda, API GW HTTP API, IAM, log group, EventBridge minute rule
-├── cloudfront.tf                     # + ordered_cache_behavior /api/* → API GW origin (no cache)
-├── ses.tf                            # verified identity feedback@scaledaiops.org, templates
-└── ssm.tf                            # parameters (values set out-of-band, never in state)
+├── modules/ffrs/                     # everything FFRS: Lambda, API GW, IAM, logs, EventBridge, S3 screenshots, SES, SSM
+├── ffrs.tf                           # module "ffrs" { count = var.enable_ffrs ? 1 : 0 … }
+└── cloudfront.tf                     # dynamic ordered_cache_behavior /api/* only when enable_ffrs
 ```
 
-Reusability contract: `ffrs-api` depends on nothing site-specific except environment variables (`SITE_NAME`, `GITHUB_REPO`, `FROM_EMAIL`, `ALERT_EMAIL`). Effects are plug-ins behind one interface, so a project without GitHub can drop `githubIssue.ts` and add `linear.ts`.
+Reusability contract: the widget is configured by data-attributes only; `ffrs-api` depends on nothing site-specific except environment variables (`SITE_NAME`, `GITHUB_REPO`, `FROM_EMAIL`, `ALERT_EMAIL`). Effects are plug-ins behind one interface, so a project without GitHub can drop `githubIssue.ts` and add `linear.ts`.
 
 ## 6. Engineering standards (applied, not aspirational)
 
@@ -136,7 +151,8 @@ Reusability contract: `ffrs-api` depends on nothing site-specific except environ
 - **Structured logs** (JSON, one line per request, `ref` correlation id) → CloudWatch; metrics view in Neon is the analytics source, no third-party analytics.
 - **Testing pyramid**: vitest unit (domain, guards, ref) → contract tests of the handler with a Neon preview branch → Playwright E2E on production (submit → 202 → status page shows "received").
 - **Security**: Turnstile server-side verify + honeypot field + token-bucket rate limit (per IP hash, 5/min, in-memory per Lambda instance — good enough at this scale, documented as the known limit); size limits; strict Content-Security-Policy on the form page; GitHub webhook HMAC verified.
-- **Accessibility**: form works without JS (plain POST → 303 to `/feedback/thanks/?ref=…`), labelled fields, visible errors, Turnstile in invisible mode.
+- **Widget**: no framework, no globals except `window.FFRS` (open/close/version), styles scoped to `.ffrs-*`, `<dialog>` element with focus trap and Escape, `prefers-reduced-motion` respected, hides itself on `/feedback/`. Screenshot is opt-out (thumbnail with ✕, as in fmg).
+- **Accessibility**: `/feedback/` works without JS (plain POST → 303 to `/feedback/thanks/?ref=…`), labelled fields, visible errors, Turnstile in invisible mode.
 - **CI**: GitHub Actions on `ffrs-api` — typecheck, test, bundle, `terraform plan` comment; deploy on tag. Site repo unchanged (build.sh + sync).
 
 ## 7. Delivery phases
@@ -145,14 +161,14 @@ Reusability contract: `ffrs-api` depends on nothing site-specific except environ
 |---|---|---|---|
 | 0 | Foundations | Neon project + branches; SES identity verified; Turnstile site; GitHub App (`issues:write`); SSM params | ½ d |
 | 1 | Core API | `ffrs-api` repo: schema, migration, `POST /api/feedback` with guards, outbox skeleton, unit tests, bundle | 1½ d |
-| 2 | Infra | `api.tf`, CloudFront `/api/*` behaviour, `plan` → `apply`; smoke test with curl | ½ d |
+| 2 | Infra | `modules/ffrs` + `enable_ffrs` flag, CloudFront `/api/*` behaviour, `plan` → `apply`; smoke test with curl; prove `enable_ffrs=false` plan removes everything | 1 d |
 | 3 | Effects | ack email, GitHub issue (labels `kind:bug` etc.), maintainer alert; outbox drain on schedule | 1 d |
-| 4 | Form page | `/feedback/` content page + `feedback.js`; nav/footer link; E2E spec; deploy | 1 d |
+| 4 | Widget | `ffrs-widget.js/.css` ported from fmg `FeedbackButton.tsx`; `FFRS_ENABLED` in `build.sh` + footer placeholder; `/feedback/` fallback page; E2E spec; deploy with flag **on** | 1½ d |
 | 5 | Loop closure | GitHub webhook → `closed_at`/`outcome`; closing email; `GET /api/feedback/:ref` status | 1 d |
 | 6 | Measurement | `ffrs_metrics` view; weekly metrics job posting a summary issue; export script for the paper (CSV) | ½ d |
 | 7 | Case-study pack | `docs/ffrs-case-study.md`: architecture, decisions log, metrics after 4 and 12 weeks, lessons | ongoing |
 
-Total build ≈ 6 days effort; measurement window 12 weeks before the paper's numbers are final.
+Total build ≈ 7 days effort; measurement window 12 weeks before the paper's numbers are final.
 
 ## 8. Decisions log (for the paper)
 
@@ -163,10 +179,13 @@ Total build ≈ 6 days effort; measurement window 12 weeks before the paper's nu
 | GitHub Issues as the triage tool | Custom admin UI | Zero new UI to secure; contributors already live there; webhook closes the loop |
 | Outbox table over SQS | SQS, EventBridge | One fewer service; Postgres already there; volume is tiny |
 | Turnstile + honeypot | hCaptcha, none | Invisible for humans, free, privacy-preserving |
+| Edge-tab widget over a nav link/page | Dedicated page only | Feedback is contextual — capture *where* the visitor is, with a screenshot; proven pattern from fmg |
+| Three-layer toggle (build, runtime, infra) | Single env flag | Build flag ships zero bytes when off; runtime flag stops abuse without a deploy; infra flag makes the case study reproducible from a clean account |
 | Optional email + explicit consent | Mandatory email | Lowers friction, honours "responsible by default"; anonymous items still get routed, just not closed by email |
 
 ## 9. Open items
 
 - Confirm SES production access in `eu-central-1` (sandbox limits recipients).
 - Choose GitHub repo for issues: `Scaled-AIOps/scaledaiops.org` (site) vs a new `Scaled-AIOps/feedback` (keeps site repo clean — recommended).
-- Decide whether `/feedback/` also replaces the "Contribute on GitHub" CTA on the homepage or sits beside it.
+- Confirm the widget stays subordinate to the "Contribute on GitHub" CTA (it does not replace it).
+- Screenshot default: on with opt-out (fmg behaviour) vs off with opt-in — recommend on/opt-out for bugs, off for feature requests.
