@@ -1,0 +1,83 @@
+<!-- title: Feedback · ScaledAIOps – AI Operations Framework -->
+<!-- description: Report a bug, request a feature or check the status of feedback you sent to the ScaledAIOps framework. -->
+<!-- active: none -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <h1>Feedback</h1>
+      <p class="subtitle">Report a bug, request a feature, or check on something you already sent.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <div id="ffrs-status" class="ffrs-status" hidden>
+        <h2>Status of <code id="ffrs-status-ref"></code></h2>
+        <ol class="ffrs-timeline" id="ffrs-timeline"></ol>
+        <p id="ffrs-status-note"></p>
+      </div>
+
+      <div id="ffrs-sent" class="ffrs-sent" hidden>
+        <h2>Received — thank you.</h2>
+        <p>Your reference is <strong id="ffrs-sent-ref"></strong>. Bookmark this page to follow progress.</p>
+      </div>
+
+      <div id="ffrs-error" class="ffrs-error" hidden>
+        <h2>That didn't go through</h2>
+        <p id="ffrs-error-msg"></p>
+      </div>
+
+      <h2>Send feedback</h2>
+      <p>Every submission gets a reference id, is filed as a GitHub issue for maintainers, and — if you leave an email — you hear back when it's resolved. Nothing here needs an account.</p>
+
+      <form class="ffrs-page-form" method="post" action="/api/feedback" enctype="application/x-www-form-urlencoded">
+        <label>Type
+          <select name="kind" required>
+            <option value="feature">Feature request</option>
+            <option value="bug">Bug report</option>
+            <option value="contact">General message</option>
+          </select>
+        </label>
+        <label>Title <input name="title" required minlength="3" maxlength="140"></label>
+        <label>Details <textarea name="body" required minlength="10" maxlength="5000" rows="6"></textarea></label>
+        <label><span>Severity <em class="ffrs-opt">(bugs only)</em></span>
+          <select name="severity">
+            <option value="">—</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="critical">Critical</option>
+          </select>
+        </label>
+        <label><span>Page it concerns <em class="ffrs-opt">(optional)</em></span> <input name="pageUrl" type="url" placeholder="https://www.scaledaiops.org/…"></label>
+        <label><span>Email <em class="ffrs-opt">(optional)</em></span> <input name="email" type="email" maxlength="254" autocomplete="email"></label>
+        <label class="ffrs-consent"><input name="consent" type="checkbox" value="true"> Email me when this is resolved</label>
+        <label class="ffrs-hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+
+      <h2>Check a reference</h2>
+      <form class="ffrs-lookup" method="get" action="/feedback/">
+        <label>Reference <input name="ref" pattern="FB-[A-Z0-9]{6}" placeholder="FB-7K3M2Q" required></label>
+        <button type="submit" class="btn btn-outline">Look up</button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+  (function () {
+    var q = new URLSearchParams(location.search), ref = q.get('ref'), sent = q.get('sent'), error = q.get('error');
+    if (error) { show('ffrs-error'); document.getElementById('ffrs-error-msg').textContent = error; }
+    if (sent && ref) { show('ffrs-sent'); document.getElementById('ffrs-sent-ref').textContent = ref; }
+    if (!ref) return;
+    fetch('/api/feedback/' + encodeURIComponent(ref)).then(function (r) { return r.ok ? r.json() : null; }).then(function (s) {
+      if (!s) { show('ffrs-error'); document.getElementById('ffrs-error-msg').textContent = 'No feedback found for ' + ref + '.'; return; }
+      show('ffrs-status'); document.getElementById('ffrs-status-ref').textContent = s.ref;
+      var steps = [['Received', s.createdAt], ['Acknowledged', s.acknowledgedAt], ['Routed to maintainers', s.routedAt, s.githubIssueUrl], ['Responded', s.respondedAt], ['Closed' + (s.outcome ? ' — ' + s.outcome : ''), s.closedAt]];
+      document.getElementById('ffrs-timeline').innerHTML = steps.map(function (st) {
+        var when = st[1] ? new Date(st[1]).toLocaleString() : 'pending';
+        var link = st[2] ? ' · <a href="' + st[2] + '">issue</a>' : '';
+        return '<li class="' + (st[1] ? 'done' : 'todo') + '"><strong>' + st[0] + '</strong> <span>' + when + link + '</span></li>';
+      }).join('');
+      document.getElementById('ffrs-status-note').textContent = s.status === 'closed' ? 'This item is closed.' : 'Maintainers usually respond within three days.';
+    });
+    function show(id) { document.getElementById(id).hidden = false; }
+  })();
+  </script>

@@ -2,7 +2,11 @@
 # ScaledAIOps — Static Site Builder
 # Assembles pages from _layout/ partials and _content/ source files into dist/
 
-set -e
+set -euo pipefail
+
+# Feature toggle: FFRS_ENABLED=true ships the feedback widget + /feedback/ page; default off = zero FFRS bytes.
+FFRS_ENABLED="${FFRS_ENABLED:-false}"
+FFRS_TURNSTILE_SITEKEY="${FFRS_TURNSTILE_SITEKEY:-}"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 LAYOUT_DIR="$SCRIPT_DIR/_layout"
@@ -16,13 +20,24 @@ mkdir -p "$DIST_DIR"
 # Copy static assets
 cp -r "$SCRIPT_DIR/assets" "$DIST_DIR/assets"
 
+if [ "$FFRS_ENABLED" = "true" ]; then
+  FFRS_WIDGET="  <link rel=\"stylesheet\" href=\"/assets/css/ffrs-widget.css\">
+  <script src=\"/assets/js/ffrs-widget.js\" data-endpoint=\"/api/feedback\" data-site=\"scaledaiops.org\" data-turnstile=\"$FFRS_TURNSTILE_SITEKEY\" defer></script>"
+else
+  FFRS_WIDGET=""
+  rm -f "$DIST_DIR/assets/js/ffrs-widget.js" "$DIST_DIR/assets/css/ffrs-widget.css"
+  rm -rf "$DIST_DIR/assets/js/vendor"
+  rmdir "$DIST_DIR/assets/js" 2>/dev/null || true
+fi
+
 # Read layout partials
 HEAD=$(cat "$LAYOUT_DIR/head.html")
 HEADER=$(cat "$LAYOUT_DIR/header.html")
 FOOTER=$(cat "$LAYOUT_DIR/footer.html")
 
-# Find all content files
+# Find all content files (skip the FFRS page unless enabled)
 find "$CONTENT_DIR" -name '*.html' | while read -r content_file; do
+  case "$content_file" in "$CONTENT_DIR"/feedback/*) [ "$FFRS_ENABLED" = "true" ] || continue;; esac
   # Determine output path
   rel_path="${content_file#$CONTENT_DIR/}"
   out_file="$DIST_DIR/$rel_path"
@@ -63,12 +78,12 @@ find "$CONTENT_DIR" -name '*.html' | while read -r content_file; do
     echo ""
     echo "$body"
     echo ""
-    echo "$FOOTER"
+    echo "${FOOTER//\{\{FFRS_WIDGET\}\}/$FFRS_WIDGET}"
   } > "$out_file"
 
   echo "  built: $rel_path"
 done
 
 echo ""
-echo "Build complete → dist/"
+echo "Build complete → dist/  (FFRS_ENABLED=$FFRS_ENABLED)"
 echo "Files: $(find "$DIST_DIR" -name '*.html' | wc -l | tr -d ' ') pages, $(find "$DIST_DIR/assets" -type f | wc -l | tr -d ' ') assets"
