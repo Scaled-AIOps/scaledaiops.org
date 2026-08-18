@@ -23,7 +23,7 @@ FFRS treats feedback as a pipeline with four stages and one loop-closing event. 
 **Metrics** (all P50/P90, per category, per week):
 - **TTA** time-to-acknowledge — must be seconds (automated)
 - **TTR** time-to-route — must be seconds (automated)
-- **TTFR** time-to-first-response — agent or human; target < 1 h (agent schedule)
+- **TTFR** time-to-first-response — agent or human; target < 2 h (hourly agent routine)
 - **TTHR** time-to-first-human-decision — target < 72 h
 - **Agent share** — closed items resolved by an agent PR / executed proposal
 - **TTC** time-to-close — target < 30 d for bugs
@@ -129,7 +129,7 @@ Reusability contract: the widget is configured by data-attributes only; `ffrs-ap
 | 5 | Loop closure | GitHub webhook `issues.closed` → closing email; `GET /api/feedback/:ref` status from GitHub | ½ d |
 | 6 | Measurement | metrics from the Issues API; weekly report issue; CSV export CLI | ½ d |
 | 7 | Case-study pack | `docs/ffrs-case-study.md`: architecture, decisions log, metrics after 4 and 12 weeks, lessons | ongoing |
-| 8 | **Agentic Respond stage** | `ffrs-api/agent/` (Claude Code headless runner) + GitHub Actions workflow in the tracker repo: every new item gets a first response within 30 min — a PR on the site (code/content path) or a proposal (`/accept` by requester, `/confirm` by maintainer → agent executes, `/reject`); humans decide, agent produces. Metrics: TTFR (any), TTHR (human), agent share. | 1 d |
+| 8 | **Agentic Respond stage** | A Claude Code cloud **routine** (`FFRS agent`, hourly, sources: site + tracker repos, built-in GitHub tools) gives every new item a first response within ~1 h; `ffrs-api/agent/` (headless runner + Actions workflow) is the self-hosted alternative. Paths: — a PR on the site (code/content path) or a proposal (`/accept` by requester, `/confirm` by maintainer → agent executes, `/reject`); humans decide, agent produces. Metrics: TTFR (any), TTHR (human), agent share. | 1 d |
 
 Total build ≈ 7 days effort; measurement window 12 weeks before the paper's numbers are final.
 
