@@ -9,6 +9,10 @@ FFRS_ENABLED="${FFRS_ENABLED:-true}"
 FFRS_TURNSTILE_SITEKEY="${FFRS_TURNSTILE_SITEKEY:-0x4AAAAAAEUQz0HJ_ZRQDr3H}"  # public site key
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# Cache-busting version for CSS/JS: short hash of the asset contents (query string changes only when assets change)
+ASSET_V=$(cat "$SCRIPT_DIR"/assets/css/*.css "$SCRIPT_DIR"/assets/js/*.js 2>/dev/null | shasum | cut -c1-8)
+
+
 LAYOUT_DIR="$SCRIPT_DIR/_layout"
 CONTENT_DIR="$SCRIPT_DIR/_content"
 DIST_DIR="$SCRIPT_DIR/dist"
@@ -21,8 +25,8 @@ mkdir -p "$DIST_DIR"
 cp -r "$SCRIPT_DIR/assets" "$DIST_DIR/assets"
 
 if [ "$FFRS_ENABLED" = "true" ]; then
-  FFRS_WIDGET="  <link rel=\"stylesheet\" href=\"/assets/css/ffrs-widget.css\">
-  <script src=\"/assets/js/ffrs-widget.js\" data-endpoint=\"/api/feedback\" data-site=\"scaledaiops.org\" data-turnstile=\"$FFRS_TURNSTILE_SITEKEY\" defer></script>"
+  FFRS_WIDGET="  <link rel=\"stylesheet\" href=\"/assets/css/ffrs-widget.css?v=$ASSET_V\">
+  <script src=\"/assets/js/ffrs-widget.js?v=$ASSET_V\" data-endpoint=\"/api/feedback\" data-site=\"scaledaiops.org\" data-turnstile=\"$FFRS_TURNSTILE_SITEKEY\" defer></script>"
 else
   FFRS_WIDGET=""
   rm -f "$DIST_DIR/assets/js/ffrs-widget.js" "$DIST_DIR/assets/css/ffrs-widget.css"
@@ -32,6 +36,7 @@ fi
 
 # Read layout partials
 HEAD=$(cat "$LAYOUT_DIR/head.html")
+HEAD="${HEAD//\{\{ASSET_V\}\}/$ASSET_V}"
 HEADER=$(cat "$LAYOUT_DIR/header.html")
 FOOTER=$(cat "$LAYOUT_DIR/footer.html")
 
