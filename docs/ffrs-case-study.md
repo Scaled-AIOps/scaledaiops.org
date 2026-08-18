@@ -19,7 +19,7 @@ Five stages, each a timestamp recorded by the system that naturally owns it. Met
 |---|---|---|
 | Capture + Route | `POST /api/feedback` creates the GitHub issue synchronously (labels `kind:*`, `severity:*`, marker `<!-- ffrs:REF -->`) | issue `created_at` |
 | Acknowledge | ack email to consented submitters | sidecar `acknowledgedAt` |
-| Respond | first response on the issue — the **FFRS agent** (Claude Code cloud routine, hourly: PR on the site or a proposal) or a human comment; TTHR tracks the first *human* decision | GitHub comments API, `agent:*` labels |
+| Respond | first response on the issue — the **FFRS agent** (hosted coding-agent routine, hourly: PR on the site or a proposal) or a human comment; TTHR tracks the first *human* decision | GitHub comments API, `agent:*` labels |
 | Close | issue closed → outcome from `outcome:*` label / `state_reason`; webhook sends the closing email | issue `closed_at`, sidecar `closeEmailAt` |
 
 Metrics (per kind, per ISO week; `aggregate()` over items collected from the Issues API, unit-tested): **TTFR** p50/p90 (first human comment − created — the human number), **TTC** p50, **loop-closure rate** (share closed), **signal ratio** (share not `spam`/duplicate). Route is sub-second by construction; the ack timestamp is kept in the sidecar for audit.

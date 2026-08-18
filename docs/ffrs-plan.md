@@ -129,7 +129,7 @@ Reusability contract: the widget is configured by data-attributes only; `ffrs-ap
 | 5 | Loop closure | GitHub webhook `issues.closed` → closing email; `GET /api/feedback/:ref` status from GitHub | ½ d |
 | 6 | Measurement | metrics from the Issues API; weekly report issue; CSV export CLI | ½ d |
 | 7 | Case-study pack | `docs/ffrs-case-study.md`: architecture, decisions log, metrics after 4 and 12 weeks, lessons | ongoing |
-| 8 | **Agentic Respond stage** | A Claude Code cloud **routine** (`FFRS agent`, hourly, sources: site + tracker repos, built-in GitHub tools) gives every new item a first response within ~1 h; `ffrs-api/agent/` (headless runner + Actions workflow) is the self-hosted alternative. Paths: — a PR on the site (code/content path) or a proposal (`/accept` by requester, `/confirm` by maintainer → agent executes, `/reject`); humans decide, agent produces. Metrics: TTFR (any), TTHR (human), agent share. | 1 d |
+| 8 | **Agentic Respond stage** | A hosted coding-agent **routine** (`FFRS agent`, hourly, sources: site + tracker repos, built-in GitHub tools) gives every new item a first response within ~1 h; `ffrs-api/agent/` (headless runner + Actions workflow) is the self-hosted alternative. Paths: — a PR on the site (code/content path) or a proposal (`/accept` by requester, `/confirm` by maintainer → agent executes, `/reject`); humans decide, agent produces. Metrics: TTFR (any), TTHR (human), agent share. | 1 d |
 
 Total build ≈ 7 days effort; measurement window 12 weeks before the paper's numbers are final.
 
