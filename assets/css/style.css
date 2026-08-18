@@ -278,8 +278,15 @@ a:hover {
 .card-grid--compact .card-icon { width: 36px; height: 36px; font-size: 1.1rem; margin-bottom: 0.75rem; }
 .card-grid--compact .card h3 { font-size: 1rem; }
 .card-grid--compact .card p { font-size: 0.85rem; }
-.card-grid--compact .card a { margin: 0; color: inherit; }
-.card-grid--compact .card a::after { content: ""; position: absolute; inset: 0; }
+.card-grid--compact .card a,
+.card-grid--clickable .card a { margin: 0; color: inherit; }
+.card-grid--clickable .card { position: relative; }
+.card-grid--compact .card a::after,
+.card-grid--clickable .card a::after { content: ""; position: absolute; inset: 0; }
+.card-grid--clickable .card h3::after,
+.card-grid--compact .card h3::after { content: " \2192"; color: var(--color-accent); }
+.card--static:hover { box-shadow: none; transform: none; }
+.card--static { scroll-margin-top: 80px; }
 
 .principle-list {
   display: grid;
@@ -352,6 +359,8 @@ a:hover {
 .site-footer a {
   color: rgba(255,255,255,0.8);
 }
+
+.footer-tagline { color: rgba(255,255,255,0.75); margin-bottom: 0.75rem; }
 
 .footer-links {
   display: flex;

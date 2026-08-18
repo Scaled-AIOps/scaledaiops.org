@@ -26,7 +26,7 @@ npx playwright install chromium              # first-time browser install
 `build.sh` walks every `_content/**/*.html`, strips its three metadata comments, and writes `dist/<same path>` as `head.html` + `header.html` + body + `footer.html`.
 
 - **Metadata** (must be at top of the content file, exact format, one per line):
-  `<!-- title: … -->`, `<!-- description: … -->`, `<!-- active: framework|disciplines|principles|roles|about|none -->`
+  `<!-- title: … -->`, `<!-- description: … -->`, `<!-- active: disciplines|principles|roles|about|none -->`
 - `{{TITLE}}` / `{{DESCRIPTION}}` are substituted in `head.html`; `{{ACTIVE_<nav>}}` in `header.html` becomes ` class="active"` for the matching nav item and is removed for the rest. Substitution is `sed` with `|` as delimiter — **don't use `|` in title/description**.
 - The mobile nav toggle script lives in `_layout/footer.html`; `assets/` is copied verbatim to `dist/assets/`.
 - Clean URLs: every page is `folder/index.html`; a CloudFront Function rewrites `/about/` → `/about/index.html`. Link with trailing slashes (`/disciplines/strategy/`), never `.html`.

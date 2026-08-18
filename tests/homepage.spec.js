@@ -41,8 +41,7 @@ test.describe('Homepage', () => {
 
   test('has working navigation links', async ({ page }) => {
     const nav = page.locator('.site-nav');
-    await expect(nav.locator('a')).toHaveCount(6);
-    await expect(nav.locator('a[href="/"]')).toHaveText('Framework');
+    await expect(nav.locator('a')).toHaveCount(5);
     await expect(nav.locator('a[href="/disciplines/"]')).toHaveText('Disciplines');
     await expect(nav.locator('a[href="/principles/"]')).toHaveText('Principles');
     await expect(nav.locator('a[href="/roles/"]')).toHaveText('Roles');

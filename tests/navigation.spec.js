@@ -30,7 +30,7 @@ test.describe('Navigation', () => {
   test('404 page renders for unknown routes', async ({ page }) => {
     const response = await page.goto('/nonexistent-page/');
     expect(response.status()).toBe(404);
-    await expect(page).toHaveTitle('Page Not Found — ScaledAIOps');
+    await expect(page).toHaveTitle('Page Not Found · ScaledAIOps');
     await expect(page.locator('h1')).toHaveText('404');
   });
 
