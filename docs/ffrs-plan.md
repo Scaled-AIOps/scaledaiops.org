@@ -1,4 +1,4 @@
-# Fast Feedback Response System (FFRS) — Implementation Plan
+# Fast Feedback Resolution System (FFRS) — Implementation Plan
 
 Status: **built and live (phases 0–8), 2026-08-18; no-database design** · Case study: [ffrs-case-study.md](ffrs-case-study.md) · Owner: ScaledAIOps maintainers · Target: scaledaiops.org · Date: 2026-08-18
 

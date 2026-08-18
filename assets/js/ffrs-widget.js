@@ -1,4 +1,4 @@
-/*! FFRS widget v0.1.0 — Fast Feedback Response System. MIT. https://github.com/Scaled-AIOps/ffrs-api
+/*! FFRS widget v0.1.0 — Fast Feedback Resolution System. MIT. https://github.com/Scaled-AIOps/ffrs-api
  * Embed: <script src="/assets/js/ffrs-widget.js" data-endpoint="/api/feedback" data-site="example.org"
  *          data-turnstile="<sitekey>" data-screenshot="bug|always|never" defer></script>
  * No dependencies. html2canvas is loaded on demand from data-html2canvas (default /assets/js/vendor/html2canvas.min.js).
