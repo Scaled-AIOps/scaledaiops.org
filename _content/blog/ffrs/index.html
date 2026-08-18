@@ -13,7 +13,7 @@
   <article class="section post">
     <div class="container content-page">
 
-      <p class="post-meta">Published 19 August 2026 · <a href="https://www.linkedin.com/in/gkbatchu/" rel="author">Ganesh Butcha</a> · <a href="https://github.com/Scaled-AIOps/feedback">tracker</a> · <a href="https://github.com/Scaled-AIOps/ffrs-api">code</a></p>
+      <p class="post-meta">Published 19 August 2026 · <a href="https://www.linkedin.com/in/gkbatchu/" rel="author">Ganesh Butcha</a> · <a href="https://github.com/Scaled-AIOps/feedback">tracker</a> · <a href="https://github.com/Scaled-AIOps/ffrs-api">code</a> · <a href="https://github.com/Scaled-AIOps/ffrs-paper">paper</a></p>
 
       <h2>The problem: feedback is captured, then it stalls</h2>
       <p>Most projects have a way to <em>collect</em> feedback — a form, an inbox, an issue tracker. Far fewer have a working <em>loop</em>: the item is acknowledged, someone acts on it, and the person who raised it hears the outcome. The interval between "raised" and "resolved" is usually owned by nobody and measured by nothing, so it is slow without anyone noticing.</p>
@@ -195,7 +195,7 @@
       <pre><code>&lt;script src="/assets/js/ffrs-widget.js"
   data-endpoint="/api/feedback" data-site="example.org"
   data-turnstile="&lt;sitekey&gt;" data-screenshot="bug" defer&gt;&lt;/script&gt;</code></pre>
-      <p>Code, infrastructure module and the agent's protocol are open: <a href="https://github.com/Scaled-AIOps/ffrs-api">ffrs-api</a> (MIT), <a href="https://github.com/Scaled-AIOps/scaledaiops.org">this site</a> (widget, CC BY-SA), <a href="https://github.com/Scaled-AIOps/aiops-tf-infra">infrastructure</a>. The tracker that receives this site's feedback is public too: <a href="https://github.com/Scaled-AIOps/feedback">Scaled-AIOps/feedback</a> — every item, response and outcome is there to inspect. A weekly metrics report is filed there each Monday.</p>
+      <p>Code, infrastructure module and the agent's protocol are open: <a href="https://github.com/Scaled-AIOps/ffrs-api">ffrs-api</a> (MIT), <a href="https://github.com/Scaled-AIOps/scaledaiops.org">this site</a> (widget, CC BY-SA), <a href="https://github.com/Scaled-AIOps/aiops-tf-infra">infrastructure</a>. The tracker that receives this site's feedback is public too: <a href="https://github.com/Scaled-AIOps/feedback">Scaled-AIOps/feedback</a> — every item, response and outcome is there to inspect. A weekly metrics report is filed there each Monday. A preprint describing the FFRS model, its metrics and this deployment as a case study is being written in the open at <a href="https://github.com/Scaled-AIOps/ffrs-paper">Scaled-AIOps/ffrs-paper</a>.</p>
 
       <p class="post-cta">Try it now: the <strong>Feedback</strong> tab is on the right edge of this page. Tell us what's wrong with this post.</p>
     </div>
