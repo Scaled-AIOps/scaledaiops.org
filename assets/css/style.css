@@ -957,17 +957,12 @@ a:hover {
 .post svg .arrows line, .post svg .arrows path { stroke: #0f172a; stroke-width: 2; fill: none; }
 .post svg .loop { stroke: #0f172a; stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
 .post svg .agentline { stroke: #c2410c; stroke-width: 2.5; stroke-dasharray: 2 5; stroke-linecap: round; fill: none; }
-/* pipeline animation */
-.ffrs-pipe .pipe-stage rect { fill: #f8fafc; stroke: #64748b; stroke-width: 1.5; filter: drop-shadow(0 3px 4px rgba(15,23,42,0.18)); }
-.ffrs-pipe .pipe-stage.agent rect { fill: #fed7aa; stroke: #ea580c; }
+/* pipeline animation (SVG-native; see the SVG's <animate> elements) */
+.ffrs-pipe .pipe-stage rect { filter: drop-shadow(0 3px 4px rgba(15,23,42,0.18)); }
 .ffrs-pipe .pipe-arrows line { stroke: #0f172a; stroke-width: 2; }
 .ffrs-pipe .pipe-caption { font-weight: 500; font-size: 13px; fill: #475569; }
-.ffrs-pipe .pipe-dot { fill: var(--color-accent); filter: drop-shadow(0 0 6px rgba(14,165,233,0.8)); animation: pipe-travel 8s linear infinite; }
-.ffrs-pipe .pipe-stage rect { animation: pipe-glow 8s linear infinite; }
-.ffrs-pipe .s1 rect { animation-delay: 0s; } .ffrs-pipe .s2 rect { animation-delay: 1.6s; } .ffrs-pipe .s3 rect { animation-delay: 3.2s; } .ffrs-pipe .s4 rect { animation-delay: 4.8s; } .ffrs-pipe .s5 rect { animation-delay: 6.4s; }
-@keyframes pipe-travel { 0% { cx: 20; opacity: 0; } 5% { opacity: 1; } 95% { opacity: 1; } 100% { cx: 880; opacity: 0; } }
-@keyframes pipe-glow { 0%, 14%, 100% { stroke-width: 1.5; } 5% { stroke: var(--color-accent); stroke-width: 4; } }
-@media (prefers-reduced-motion: reduce) { .ffrs-pipe .pipe-dot, .ffrs-pipe .pipe-stage rect { animation: none; } .ffrs-pipe .pipe-dot { display: none; } }
+.ffrs-pipe .pipe-dot { fill: var(--color-accent); filter: drop-shadow(0 0 5px rgba(14,165,233,0.7)); }
+@media (prefers-reduced-motion: reduce) { .ffrs-pipe .pipe-dot { display: none; } }
 /* tables */
 .post-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1rem 0 2rem; }
 .post-table th, .post-table td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
