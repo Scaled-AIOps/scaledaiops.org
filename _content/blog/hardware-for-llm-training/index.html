@@ -1,0 +1,70 @@
+<!-- title: Minimum hardware for training and fine-tuning LLMs and SLMs · ScaledAIOps – AI Operations Framework -->
+<!-- description: A practical, price-tier overview of what hardware actually gets you into LLM/SLM training and fine-tuning today — consumer GPUs, prosumer workstations and cloud rental — and what each tier is realistically good for. -->
+<!-- active: none -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="eyebrow">Blog · ML Engineering</p>
+      <h1>Minimum hardware for training and fine-tuning LLMs and SLMs</h1>
+      <p class="subtitle">You don't need a data-center to start training language models. This is a practical map of the hardware tiers people actually use — consumer GPU, prosumer workstation and cloud rental — and what each one is realistically good for.</p>
+    </div>
+  </section>
+
+  <article class="section post">
+    <div class="container content-page">
+
+      <p class="post-meta">Published 20 August 2026 · <a href="/blog/ffrs/">FFRS request FB-C3M76N</a></p>
+
+      <p><strong>A note on scope and staleness before anything else:</strong> GPU models, VRAM capacities and cloud rental prices change every few months, and this page will not be updated to track them. What follows describes durable categories and the trade-offs between them, not specific current products or prices — treat any dollar figures as order-of-magnitude and check a vendor's current listing before buying or renting anything.</p>
+
+      <h2>Training, fine-tuning and pretraining are different asks</h2>
+      <p>"Minimum hardware for training an LLM" has no single answer because "training" covers very different workloads:</p>
+      <ul>
+        <li><strong>Inference / running a model</strong> — loading a pretrained model and generating text from it. Cheapest by far; a quantized small model can run on a laptop CPU.</li>
+        <li><strong>Parameter-efficient fine-tuning</strong> (LoRA, QLoRA, adapters) — adjusting a small fraction of a pretrained model's weights on your own data. This is what "fine-tune an LLM on a consumer GPU" articles are usually describing, and it's realistic on modest hardware because the base model's weights stay frozen and quantized.</li>
+        <li><strong>Full fine-tuning</strong> — updating all of a pretrained model's weights. Needs to hold gradients and optimizer state for every parameter, which multiplies memory needs several times over LoRA for the same model size.</li>
+        <li><strong>Pretraining from scratch</strong> — training a model's weights from random initialization on a large corpus. Even for a "small" language model (SLM) this needs far more compute and data-pipeline engineering than fine-tuning; pretraining a frontier-scale LLM from scratch is a multi-node, multi-million-dollar undertaking and out of scope for a "minimum hardware" post.</li>
+      </ul>
+      <p>The tiers below are organized around the first two — the workloads an individual or small team can actually run — with a note on where full fine-tuning and small-scale pretraining fit.</p>
+
+      <h2>The tiers</h2>
+      <table class="post-table">
+        <thead><tr><th>Tier</th><th>What it looks like</th><th>Realistic for</th><th>Cost shape</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Consumer / hobbyist</strong></td>
+            <td>One modern consumer GPU with mid-to-high VRAM (the kind sold for gaming), in a normal desktop.</td>
+            <td>Local inference of small-to-mid models (quantized); LoRA/QLoRA fine-tuning of small models (roughly single-digit billions of parameters, quantized to 4-bit).</td>
+            <td>One-time purchase; hundreds to low thousands of currency units. Runs indefinitely at the cost of electricity.</td>
+          </tr>
+          <tr>
+            <td><strong>Prosumer / workstation</strong></td>
+            <td>One high-VRAM "workstation-class" GPU, or two-to-four consumer/prosumer GPUs in one machine.</td>
+            <td>LoRA fine-tuning of larger models; full fine-tuning of small models; small-scale architecture experiments; comfortably running larger quantized models for inference.</td>
+            <td>One-time purchase; low-to-mid thousands, scaling with GPU count. Same ongoing electricity cost, now non-trivial.</td>
+          </tr>
+          <tr>
+            <td><strong>Cloud rental</strong></td>
+            <td>Pay-by-the-hour access to one or many data-center-class GPUs (much higher VRAM per card than consumer parts), from a cloud or GPU-rental provider.</td>
+            <td>Anything above, without the upfront cost; the only realistic option for full fine-tuning of large models or pretraining an SLM, since it lets you rent many GPUs for a short burst instead of owning them.</td>
+            <td>No upfront cost; billed per GPU-hour. A single card runs a small fraction of a currency unit to a few units per hour depending on the card and provider; a multi-GPU pretraining run can still add up to a meaningful sum over days.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>The lever that matters most: quantization</h2>
+      <p>Across all three tiers, the single biggest factor in what fits is <strong>quantization</strong> — representing model weights (and sometimes optimizer state) in fewer bits than the 16 or 32 bits they were trained in. Loading a model in 4-bit roughly quarters its memory footprint against a 16-bit load, which is why techniques like QLoRA make it possible to fine-tune models on consumer GPUs that would otherwise need a data-center card just to load. The trade-off is a small amount of quality loss, which is usually acceptable for fine-tuning and often negligible for inference.</p>
+
+      <h2>What actually constrains you</h2>
+      <ul>
+        <li><strong>VRAM, not raw compute, is usually the wall.</strong> A card can be fast and still unable to fit the model, its activations, gradients and optimizer state in memory at once. This is why "how much VRAM" is the first question, and why quantization and parameter-efficient methods matter more than raw FLOPS for getting started.</li>
+        <li><strong>Multi-GPU needs fast interconnect to scale well.</strong> Two GPUs in one desktop can split a model, but training throughput across GPUs (and across machines) depends heavily on how fast they can exchange data — a detail that matters far more once you move past a single card.</li>
+        <li><strong>Data engineering, not hardware, is usually the actual bottleneck</strong> for anyone starting out — sourcing, cleaning and formatting training data (see <a href="/disciplines/data-operations/">Data Operations</a>) — regardless of which hardware tier you're on.</li>
+      </ul>
+
+      <h2>Where to start</h2>
+      <p>For most people asking this question, the practical path is: start with parameter-efficient fine-tuning of a small, openly-licensed model on whatever consumer GPU you already have or can afford, using an established fine-tuning library rather than writing a training loop from scratch. Move to a prosumer machine or cloud rental only once you've validated that the approach works and you specifically need more scale — renting compute for a focused run is usually cheaper and faster than buying hardware for an unproven workload.</p>
+
+      <p class="post-cta">This page is deliberately light on specific model names and prices, since both go stale fast — <a href="/disciplines/ml-engineering/">ML Engineering &amp; Platform</a> and <a href="/disciplines/model-lifecycle/">Model Lifecycle Management</a> cover the durable practices around building and operating models once you're past the hardware question. Something missing or wrong here? Use the <strong>Feedback</strong> tab on the right.</p>
+    </div>
+  </article>
