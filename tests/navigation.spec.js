@@ -39,6 +39,7 @@ test.describe('Navigation', () => {
     { name: 'Principles', path: '/principles/', titleContains: 'Principles' },
     { name: 'Roles', path: '/roles/', titleContains: 'Roles' },
     { name: 'About', path: '/about/', titleContains: 'About' },
+    { name: 'Blog', path: '/blog/', titleContains: 'Blog' },
     { name: 'Blog: FFRS', path: '/blog/ffrs/', titleContains: 'FFRS' },
     { name: 'Blog: Hardware for LLM training', path: '/blog/hardware-for-llm-training/', titleContains: 'hardware' },
     { name: 'ML Engineering', path: '/disciplines/ml-engineering/', titleContains: 'ML Engineering' },
