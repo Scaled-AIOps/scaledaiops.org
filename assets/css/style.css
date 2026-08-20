@@ -976,6 +976,35 @@ a:hover {
 @media (prefers-reduced-motion: reduce) {
   .fade-in-up { opacity: 1; transform: none; transition: none; }
 }
+/* subtle looping feedback-loop icon, e.g. the About page's "What is ScaledAIOps?" heading */
+.about-lead {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.feedback-loop-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.feedback-loop-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: feedback-loop-spin 6s linear infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes feedback-loop-spin {
+  0%, 20% { transform: rotate(0deg); }
+  50%, 70% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .feedback-loop-icon svg { animation: none; }
+}
 /* tables */
 .post-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1rem 0 2rem; }
 .post-table th, .post-table td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
