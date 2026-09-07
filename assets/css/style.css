@@ -115,10 +115,20 @@ a:hover {
 
 /* Hero */
 .hero {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--color-primary) 100%);
+  background-size: 200% 200%;
+  animation: hero-gradient-drift 18s ease-in-out infinite;
   color: #fff;
   padding: 5rem 1.5rem;
   text-align: center;
+}
+@keyframes hero-gradient-drift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero { animation: none; background-position: 0% 50%; }
 }
 
 .hero .eyebrow {
