@@ -6,8 +6,8 @@ Context for AI-assisted work on this repository. Read this before making changes
 
 ScaledAIOps (scaledaiops.org) is an open, community-maintained, governance-first
 framework for **how organisations work with AI** — adopting AI tools (coding
-assistants, agents, copilots) across the SDLC, CI/CD, DevOps, and knowledge
-work, safely, measurably, and at scale. It restructures the practices teams
+assistants, agents, copilots) across the SDLC, CI/CD, and DevOps,
+safely, measurably, and at scale. It restructures the practices teams
 already run rather than adding a parallel "AI process", from business concept
 to production and retirement. Design of record: `docs/repositioning-spec.md`.
 
