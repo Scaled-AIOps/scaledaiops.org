@@ -5,13 +5,12 @@
 set -euo pipefail
 
 # Feature toggle: FFRS ships the feedback widget + /feedback/ page (live since 2026-08-18). FFRS_ENABLED=false = zero FFRS bytes.
-# The widget is served by the shared FFRS service (ffrs.scaledaiops.org); this site is its default tenant.
 FFRS_ENABLED="${FFRS_ENABLED:-true}"
 FFRS_TURNSTILE_SITEKEY="${FFRS_TURNSTILE_SITEKEY:-0x4AAAAAAEUQz0HJ_ZRQDr3H}"  # public site key
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-# Cache-busting version for CSS: short hash of the asset contents (query string changes only when assets change)
-ASSET_V=$(cat "$SCRIPT_DIR"/assets/css/*.css | shasum | cut -c1-8)
+# Cache-busting version for CSS/JS: short hash of the asset contents (query string changes only when assets change)
+ASSET_V=$(cat "$SCRIPT_DIR"/assets/css/*.css "$SCRIPT_DIR"/assets/js/*.js 2>/dev/null | shasum | cut -c1-8)
 
 
 LAYOUT_DIR="$SCRIPT_DIR/_layout"
@@ -26,9 +25,13 @@ mkdir -p "$DIST_DIR"
 cp -r "$SCRIPT_DIR/assets" "$DIST_DIR/assets"
 
 if [ "$FFRS_ENABLED" = "true" ]; then
-  FFRS_WIDGET="  <script src=\"https://ffrs.scaledaiops.org/widget.js\" data-site=\"scaledaiops\" data-turnstile=\"$FFRS_TURNSTILE_SITEKEY\" data-screenshot=\"bug\" data-hide-on=\"/feedback/\" data-color=\"#1a3a4a\" defer></script>"
+  FFRS_WIDGET="  <link rel=\"stylesheet\" href=\"/assets/css/ffrs-widget.css?v=$ASSET_V\">
+  <script src=\"/assets/js/ffrs-widget.js?v=$ASSET_V\" data-endpoint=\"/api/feedback\" data-site=\"scaledaiops.org\" data-turnstile=\"$FFRS_TURNSTILE_SITEKEY\" defer></script>"
 else
   FFRS_WIDGET=""
+  rm -f "$DIST_DIR/assets/js/ffrs-widget.js" "$DIST_DIR/assets/css/ffrs-widget.css"
+  rm -rf "$DIST_DIR/assets/js/vendor"
+  rmdir "$DIST_DIR/assets/js" 2>/dev/null || true
 fi
 
 # Read layout partials
