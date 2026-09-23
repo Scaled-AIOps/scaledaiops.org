@@ -1,67 +1,163 @@
-<!-- title: Roles · ScaledAIOps – AI Operations Framework -->
-<!-- description: Key roles in AI Operations — from ML Engineers to AI Product Managers. -->
+<!-- title: Roles · ScaledAIOps -->
+<!-- description: The eight roles that make AI adoption work: who directs, verifies, governs, runs and measures AI-assisted work, and which existing roles they evolve from. -->
 <!-- active: roles -->
 
 <section class="hero" style="padding:3.5rem 1.5rem;">
     <div class="container">
       <h1>Roles</h1>
-      <p class="subtitle">The key roles involved in building and operating AI systems at scale.</p>
+      <p class="subtitle">Who directs, verifies, governs, runs and measures AI-assisted work, and which existing roles they grow out of.</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <div class="card-grid">
+    <div class="container content-page">
 
-        <div class="card card--static" id="ml-engineer">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
-          <h3>ML Engineer</h3>
-          <p>Bridges data science and production engineering. Builds training pipelines, serving infrastructure, and automation for the model lifecycle. Owns the path from notebook to production.</p>
-        </div>
+      <p class="lede">Roles are responsibilities, not necessarily new job titles or new headcount. Each one evolves from a role organisations already have and adds the accountability AI adoption demands.</p>
+      <p>A small organisation combines several roles in one person; a large one staffs them separately, often across teams. Either way, every role has a named, accountable human: AI can support the work of any role, but it never holds one.</p>
 
-        <div class="card card--static" id="data-scientist">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M10 2v7.31L4.41 18.5A2 2 0 0 0 6 22h12a2 2 0 0 0 1.59-3.5L14 9.31V2"></path><line x1="8.5" y1="2" x2="15.5" y2="2"></line><line x1="14" y1="9.31" x2="10" y2="9.31"></line></svg></div>
-          <h3>Data Scientist</h3>
-          <p>Develops models, conducts experiments, and performs analysis. Collaborates closely with ML Engineers to ensure models are production-ready and with product teams to align on business objectives.</p>
-        </div>
-
-        <div class="card card--static" id="platform-engineer">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
-          <h3>Platform Engineer</h3>
-          <p>Builds and maintains the ML platform — compute infrastructure, feature stores, model registries, and deployment tooling. Enables self-service for data science and ML engineering teams.</p>
-        </div>
-
-        <div class="card card--static" id="data-engineer">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div>
-          <h3>Data Engineer</h3>
-          <p>Designs and operates data pipelines that feed AI systems. Responsible for data quality, availability, lineage, and governance. Ensures reliable data flows from source to model.</p>
-        </div>
-
-        <div class="card card--static" id="ai-product-manager">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
-          <h3>AI Product Manager</h3>
-          <p>Defines the product vision for AI-powered features. Translates business problems into ML problem statements, prioritizes model improvements, and measures business impact.</p>
-        </div>
-
-        <div class="card card--static" id="sre-ai-ops-engineer">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
-          <h3>SRE / AI Ops Engineer</h3>
-          <p>Ensures reliability and performance of AI systems in production. Defines SLOs, builds monitoring and alerting, manages incident response, and drives operational excellence for ML workloads.</p>
-        </div>
-
-        <div class="card card--static" id="ai-security-engineer">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div>
-          <h3>AI Security Engineer</h3>
-          <p>Secures AI systems against adversarial attacks, data poisoning, model theft, and privacy violations. Conducts threat modeling specific to AI workloads and ensures regulatory compliance.</p>
-        </div>
-
-        <div class="card card--static" id="ai-ethics-lead">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg></div>
-          <h3>AI Ethics Lead</h3>
-          <p>Champions responsible AI practices across the organization. Establishes fairness metrics, bias testing processes, transparency requirements, and governance frameworks for AI systems.</p>
-        </div>
-
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Role</th><th>Evolves from</th><th>Primary disciplines</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#engineering-orchestrator">Engineering Orchestrator</a></td><td>Senior / lead engineer</td><td>AI-Augmented Delivery, Human–AI Workflow Design</td></tr>
+            <tr><td><a href="#eval-engineer">Eval Engineer</a></td><td>QA / test engineer</td><td>AI-Augmented Delivery, Governance &amp; Guardrails</td></tr>
+            <tr><td><a href="#context-engineer">Context Engineer</a></td><td>Technical writer, developer-experience engineer</td><td>Tooling &amp; Context Engineering</td></tr>
+            <tr><td><a href="#ai-workflow-designer">AI Workflow Designer</a></td><td>Business analyst, process engineer</td><td>Human–AI Workflow Design, Governance &amp; Guardrails</td></tr>
+            <tr><td><a href="#ai-adoption-lead">AI Adoption Lead</a></td><td>Agile coach, delivery manager</td><td>Skills &amp; Roles, Value &amp; Measurement</td></tr>
+            <tr><td><a href="#ai-governance-officer">AI Governance Officer</a></td><td>Risk, compliance, information-security officer</td><td>Governance &amp; Guardrails</td></tr>
+            <tr><td><a href="#ai-platform-engineer">AI Platform Engineer</a></td><td>Platform / DevOps engineer</td><td>Tooling &amp; Context Engineering, AI-Augmented Delivery</td></tr>
+            <tr><td><a href="#value-analyst">Value Analyst</a></td><td>Engineering-metrics or finance analyst</td><td>Value &amp; Measurement</td></tr>
+          </tbody>
+        </table>
       </div>
+
+      <div class="role-card" id="engineering-orchestrator">
+        <h2>Engineering Orchestrator</h2>
+        <p class="evolves">Evolves from: senior / lead engineer</p>
+        <p><strong>Mission:</strong> direct AI through every stage of the lifecycle and own each resulting change, its intent and its correctness.</p>
+        <h3>Responsibilities</h3>
+        <ul>
+          <li>Break work into specified, tiered tasks before any generation starts</li>
+          <li>Choose what to delegate to AI within the limits set by the change's risk tier</li>
+          <li>Review generated code, tests and infrastructure-as-code against the agreed specification</li>
+          <li>Mark AI involvement on every change and answer for it in review and incidents</li>
+          <li>Feed back failures and rework into delegation limits and context assets</li>
+        </ul>
+        <p><strong>Key artefacts:</strong> approved specs and acceptance criteria, changes with provenance trailers, ADRs recording AI involvement, review records.</p>
+        <p><strong>Disciplines:</strong> <a href="/disciplines/ai-augmented-delivery/">AI-Augmented Delivery</a> · <a href="/disciplines/human-ai-workflow-design/">Human–AI Workflow Design</a></p>
+      </div>
+
+      <div class="role-card" id="eval-engineer">
+        <h2>Eval Engineer</h2>
+        <p class="evolves">Evolves from: QA / test engineer</p>
+        <p><strong>Mission:</strong> make AI output verifiable by building the evals and checks that decide whether generated work, prompts and agents are fit to ship.</p>
+        <h3>Responsibilities</h3>
+        <ul>
+          <li>Design eval suites for prompts, agents and AI features, with pass thresholds per risk tier</li>
+          <li>Wire evals and test generation into the verify stage of the pipeline</li>
+          <li>Re-run evals when a prompt, context pack, tool or AI service version changes</li>
+          <li>Assemble evidence bundles for high- and critical-tier releases</li>
+          <li>Track escaped defects in AI-assisted work and turn them into new checks</li>
+        </ul>
+        <p><strong>Key artefacts:</strong> eval suites and datasets, pass thresholds per tier, eval run records, evidence bundles.</p>
+        <p><strong>Disciplines:</strong> <a href="/disciplines/ai-augmented-delivery/">AI-Augmented Delivery</a> · <a href="/disciplines/governance-guardrails/">Governance &amp; Guardrails</a></p>
+      </div>
+
+      <div class="role-card" id="context-engineer">
+        <h2>Context Engineer</h2>
+        <p class="evolves">Evolves from: technical writer, developer-experience engineer</p>
+        <p><strong>Mission:</strong> curate the prompts, skills and context packs that AI works from, and manage them as versioned, reviewed and owned assets.</p>
+        <h3>Responsibilities</h3>
+        <ul>
+          <li>Keep prompts, skills and context packs in version control with an owner and a review path</li>
+          <li>Write project context (conventions, architecture notes, domain terms) that AI tools can consume</li>
+          <li>Keep sensitive data out of context and apply context hygiene checks</li>
+          <li>Retire stale or duplicated context assets and record which changes used which version</li>
+          <li>Work with Eval Engineers so every material context change is evaluated before release</li>
+        </ul>
+        <p><strong>Key artefacts:</strong> context packs, prompt and skill libraries, context changelogs, context hygiene rules.</p>
+        <p><strong>Disciplines:</strong> <a href="/disciplines/tooling-context-engineering/">Tooling &amp; Context Engineering</a></p>
+      </div>
+
+      <div class="role-card" id="ai-workflow-designer">
+        <h2>AI Workflow Designer</h2>
+        <p class="evolves">Evolves from: business analyst, process engineer</p>
+        <p><strong>Mission:</strong> design how work moves between people and AI, including what is delegated, where approval gates sit and when a human takes over.</p>
+        <h3>Responsibilities</h3>
+        <ul>
+          <li>Map each workflow step to a delegation level: auto-approve, human-review or human-only</li>
+          <li>Place approval gates according to risk tier criteria, not convenience</li>
+          <li>Define handoffs between agents and people, and the escalation path when AI is uncertain or fails</li>
+          <li>Set agent autonomy levels and the action limits that bound them</li>
+          <li>Revise delegation from evidence: incidents, rework and review burden</li>
+        </ul>
+        <p><strong>Key artefacts:</strong> delegation maps, approval-gate definitions, handoff and escalation runbooks, agent autonomy profiles.</p>
+        <p><strong>Disciplines:</strong> <a href="/disciplines/human-ai-workflow-design/">Human–AI Workflow Design</a> · <a href="/disciplines/governance-guardrails/">Governance &amp; Guardrails</a></p>
+      </div>
+
+      <div class="role-card" id="ai-adoption-lead">
+        <h2>AI Adoption Lead</h2>
+        <p class="evolves">Evolves from: agile coach, delivery manager</p>
+        <p><strong>Mission:</strong> run the adoption programme so that teams take up AI in small, reversible steps, and base each expansion on evidence.</p>
+        <h3>Responsibilities</h3>
+        <ul>
+          <li>Run maturity self-assessments and turn the results into an adoption roadmap</li>
+          <li>Plan and run enablement, including AI literacy for everyone who uses AI tools</li>
+          <li>Select pilot teams, define exit criteria and scale what works</li>
+          <li>Keep AI inside existing ceremonies and practices rather than a parallel process</li>
+          <li>Report progress with the Value Analyst and raise blockers with governance and platform</li>
+        </ul>
+        <p><strong>Key artefacts:</strong> maturity assessments, adoption roadmap, enablement plan and AI literacy records, pilot reviews.</p>
+        <p><strong>Disciplines:</strong> <a href="/disciplines/skills-roles/">Skills &amp; Roles</a> · <a href="/disciplines/value-measurement/">Value &amp; Measurement</a></p>
+      </div>
+
+      <div class="role-card" id="ai-governance-officer">
+        <h2>AI Governance Officer</h2>
+        <p class="evolves">Evolves from: risk, compliance, information-security officer</p>
+        <p><strong>Mission:</strong> set AI controls and assure them from the second line, mapping them to regulation and giving independent assurance that they work.</p>
+        <h3>Responsibilities</h3>
+        <ul>
+          <li>Own the AI usage policy, risk-tier criteria and the inventory of AI tools and services</li>
+          <li>Map controls to the EU AI Act and ISO/IEC 42001 and keep that mapping current</li>
+          <li>Assess third-party AI providers and approve additions to the tool catalogue</li>
+          <li>Test that guardrails, audit trail and monitoring operate as designed</li>
+          <li>Provide second-line oversight of critical-tier work and AI-related incidents</li>
+        </ul>
+        <p><strong>Key artefacts:</strong> AI usage policy, policy-as-code rules, AI inventory, regulatory mapping, assurance reports.</p>
+        <p><strong>Disciplines:</strong> <a href="/disciplines/governance-guardrails/">Governance &amp; Guardrails</a></p>
+      </div>
+
+      <div class="role-card" id="ai-platform-engineer">
+        <h2>AI Platform Engineer</h2>
+        <p class="evolves">Evolves from: platform / DevOps engineer</p>
+        <p><strong>Mission:</strong> provide the platform that makes the safe path the easy one: an AI-aware pipeline, approved tools, governed identities and the means to stop AI quickly.</p>
+        <h3>Responsibilities</h3>
+        <ul>
+          <li>Run the AI-aware pipeline: secret and context checks, provenance, licence and eval gates, tier-driven approvals</li>
+          <li>Provide approved AI tools and integrations through the platform, with data boundaries enforced</li>
+          <li>Manage agents as non-human identities: least privilege, short-lived credentials, recertification</li>
+          <li>Build and test kill switches and action limits for agents and automations</li>
+          <li>Revoke access and archive provenance when AI elements are retired</li>
+        </ul>
+        <p><strong>Key artefacts:</strong> pipeline gate configuration, approved tool catalogue, non-human identity register, kill-switch runbooks.</p>
+        <p><strong>Disciplines:</strong> <a href="/disciplines/tooling-context-engineering/">Tooling &amp; Context Engineering</a> · <a href="/disciplines/ai-augmented-delivery/">AI-Augmented Delivery</a></p>
+      </div>
+
+      <div class="role-card" id="value-analyst">
+        <h2>Value Analyst</h2>
+        <p class="evolves">Evolves from: engineering-metrics or finance analyst</p>
+        <p><strong>Mission:</strong> establish whether AI adoption delivers real value by baselining and measuring outcomes and cost at team and flow level, never for individuals.</p>
+        <h3>Responsibilities</h3>
+        <ul>
+          <li>Baseline cycle time, rework rate, defect escape rate and review burden before adoption</li>
+          <li>Compare AI-assisted and non-assisted work on the same measures over time</li>
+          <li>Track AI tool and service cost against realised value</li>
+          <li>Keep measurement at team and flow level; refuse per-person productivity tracking</li>
+          <li>Challenge vanity metrics such as lines generated or prompts sent</li>
+        </ul>
+        <p><strong>Key artefacts:</strong> metric baselines, value reports, cost and ROI analyses, measurement definitions.</p>
+        <p><strong>Disciplines:</strong> <a href="/disciplines/value-measurement/">Value &amp; Measurement</a></p>
+      </div>
+
     </div>
   </section>
-

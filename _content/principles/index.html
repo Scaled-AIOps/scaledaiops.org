@@ -1,11 +1,11 @@
-<!-- title: Principles · ScaledAIOps – AI Operations Framework -->
-<!-- description: The eight guiding principles of the ScaledAIOps Framework. -->
+<!-- title: Principles · ScaledAIOps -->
+<!-- description: Eight principles for deciding how AI is used across delivery and operations, from accountability and risk-based delegation to provenance, verification and measurable value. -->
 <!-- active: principles -->
 
 <section class="hero" style="padding:3.5rem 1.5rem;">
     <div class="container">
-      <h1>Guiding Principles</h1>
-      <p class="subtitle">The foundational beliefs and architectural mindset that shape how engineering and data teams operate AI at scale.</p>
+      <h1>Principles</h1>
+      <p class="subtitle">Eight principles for deciding how AI is used when the lifecycle, disciplines and pillars do not give a direct answer.</p>
     </div>
   </section>
 
@@ -13,149 +13,155 @@
     <div class="container content-page">
 
       <div class="callout-box" style="margin-top:0; margin-bottom:2.5rem;">
-        <h3><span class="icon-inline"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span> The ScaledAIOps Mindset</h3>
+        <h3><span class="icon-inline"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span> When the model is silent</h3>
         <p style="margin:0; font-size:0.98rem; color:#334155;">
-          Unlike traditional software where logic is deterministic and code-centric, AI systems are probabilistic, data-dependent, and degrade over time. These eight principles guide engineering decisions across every stage of the lifecycle.
+          The <a href="/lifecycle/">lifecycle</a>, <a href="/disciplines/">disciplines</a> and <a href="/pillars/">control pillars</a> cover the common cases. The principles guide decisions where they are silent: a new tool, an unusual change, a request to relax a control. They apply to everyone using AI, from a single engineer choosing how far to trust a suggestion to the board setting risk appetite.
         </p>
       </div>
 
       <!-- Principle 1 -->
-      <div class="principle-detail">
+      <div class="principle-detail" id="human-accountability">
         <div class="principle-header-wrap">
           <div class="principle-title-group">
             <div class="principle-number-badge">1</div>
-            <h2>Production-First Thinking</h2>
+            <h2>Human accountability, always</h2>
           </div>
-          <span class="principle-tag core-phase">Deployment &amp; Serving</span>
+          <span class="principle-tag core-phase">Skills &amp; Roles</span>
         </div>
         <p class="principle-body-text">
-          Every model is built with deployment, monitoring, and maintenance in mind from day one. A model that cannot be served, monitored, and maintained in production delivers zero value. Teams must address operational requirements — latency budgets, throughput limits, memory footprint, fallback mechanisms, and rollback strategies — from the earliest inception.
+          Every AI-assisted outcome has a named human owner who answers for it. AI can draft, propose and execute within limits, but it cannot be accountable to a customer, a regulator or an incident review. Without a named owner, responsibility dissolves between the person who prompted, the person who approved and the tool that generated.
         </p>
         <div class="principle-practice-box">
-          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Define serving requirements before training begins &bull; Include production readiness reviews (PRRs) in model development &bull; Build deployment automation pipelines alongside the model, not as an afterthought.
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> The engineer who opens a change owns it, whoever or whatever wrote the code &bull; Every agent, prompt and integration in the <a href="/lifecycle/#elements">element register</a> has an owner, and loses its access when the owner leaves &bull; Incident timelines name the human who authorised each AI action.<br>
+          <strong>Anti-pattern:</strong> Closing a post-incident review with "the AI generated it", as if that settled who was responsible.
         </div>
       </div>
 
       <!-- Principle 2 -->
-      <div class="principle-detail">
+      <div class="principle-detail" id="delegate-by-risk">
         <div class="principle-header-wrap">
           <div class="principle-title-group">
             <div class="principle-number-badge">2</div>
-            <h2>Automate Relentlessly</h2>
+            <h2>Delegate by risk, not by convenience</h2>
           </div>
-          <span class="principle-tag core-phase">CI/CD &amp; Automation</span>
+          <span class="principle-tag core-phase">Guardrails</span>
         </div>
         <p class="principle-body-text">
-          Pipelines, testing, deployment, and monitoring should be automated to eliminate toil and human error. Manual processes are the primary bottleneck to reliability and velocity. Every repetitive step in the AI lifecycle — data validation, feature extraction, model retraining, regression testing, and canary rollouts — is a candidate for full automation.
+          The <a href="/pillars/#risk-tiers">risk tier</a> of the work decides how much AI may do, not how easy the tool makes it. Blast radius, reversibility, data sensitivity and regulatory exposure set the tier, and the highest criterion wins. A tool that can refactor a payment service in one step does not make that change low risk.
         </p>
         <div class="principle-practice-box">
-          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Invest in CI/CD pipelines tailored for ML artifacts &bull; Automate continuous data quality verification &bull; Manage infrastructure as code (IaC) &bull; Treat pipeline automation as a core engineering priority.
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Assign the tier at planning, before anything is generated &bull; Let the pipeline's policy gate map the tier to the approvals required: auto-approve, human review or human only &bull; Design agent autonomy levels per tier in <a href="/disciplines/human-ai-workflow-design/">Human–AI Workflow Design</a>.<br>
+          <strong>Anti-pattern:</strong> Granting an agent write access to production because it was quicker than setting up a scoped, short-lived credential.
         </div>
       </div>
 
       <!-- Principle 3 -->
-      <div class="principle-detail">
+      <div class="principle-detail" id="provenance-by-default">
         <div class="principle-header-wrap">
           <div class="principle-title-group">
             <div class="principle-number-badge">3</div>
-            <h2>Data as a First-Class Citizen</h2>
+            <h2>Provenance by default</h2>
           </div>
-          <span class="principle-tag core-phase">Data Operations</span>
+          <span class="principle-tag core-phase">Audit Trail</span>
         </div>
         <p class="principle-body-text">
-          Data quality, lineage, and governance are as crucial as model weights and architecture. Models are only as dependable as the data they consume. Organizations must treat datasets, schema contracts, feature stores, and lineage tracking with the same rigor and testing discipline applied to source code.
+          AI involvement is recorded where the work is already recorded: version control, tracker, pipeline and release record. Provenance captures what generated the work, from which context, and who approved it. Recorded at the source, it forms an <a href="/pillars/#audit-trail">audit trail</a> that incidents, audits and retirements can query without a separate store.
         </p>
         <div class="principle-practice-box">
-          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Enforce strict data contracts between upstream producers and AI consumers &bull; Track end-to-end data lineage &bull; Monitor input feature drift continuously &bull; Version and immutably snapshot training datasets.
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Mark AI-assisted changes with a vendor-neutral commit trailer such as <code>AI-assisted: yes</code> &bull; Fail the <a href="/lifecycle/#pipeline">pipeline</a> provenance check when a change carries no marking &bull; Record AI involvement and the human decision in ADRs.<br>
+          <strong>Anti-pattern:</strong> Reconstructing which changes were AI-generated from tool usage logs after an auditor asks.
         </div>
       </div>
 
       <!-- Principle 4 -->
-      <div class="principle-detail">
+      <div class="principle-detail" id="verify-before-trust">
         <div class="principle-header-wrap">
           <div class="principle-title-group">
             <div class="principle-number-badge">4</div>
-            <h2>Continuous Feedback Loops</h2>
+            <h2>Verify before trust</h2>
           </div>
-          <span class="principle-tag core-phase">Observability &amp; Feedback</span>
+          <span class="principle-tag core-phase">AI-Augmented Delivery</span>
         </div>
         <p class="principle-body-text">
-          Production telemetry feeds directly back into development to improve models and data pipelines iteratively. AI systems inevitably degrade due to concept drift and changing real-world dynamics. Continuous observability, ground-truth harvesting, and automated retraining loops keep models aligned with reality.
+          AI output is a proposal until it has been checked against an agreed intent. Fluent code, confident summaries and plausible configuration can still be wrong, insecure or unlicensed. Verification depth follows the tier, and trust is earned from evidence, not from how convincing the output looks.
         </p>
         <div class="principle-practice-box">
-          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Instrument inference endpoints to capture prediction distributions and user feedback &bull; Build automated retraining triggers based on statistical drift thresholds &bull; Conduct regular post-mortems on model drift incidents.
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Agree acceptance criteria and tests before generating, then verify against them at the <a href="/lifecycle/#verify">Verify</a> stage &bull; Use AI pre-review for mechanics and keep humans on intent and risk &bull; Run evals on prompts, agents and AI features as part of the pipeline.<br>
+          <strong>Anti-pattern:</strong> Approving a large AI-generated pull request because the tests it wrote for itself pass.
         </div>
       </div>
 
       <!-- Principle 5 -->
-      <div class="principle-detail">
+      <div class="principle-detail" id="context-is-an-asset">
         <div class="principle-header-wrap">
           <div class="principle-title-group">
             <div class="principle-number-badge">5</div>
-            <h2>Responsible by Default</h2>
+            <h2>Context is an asset</h2>
           </div>
-          <span class="principle-tag core-phase">Security &amp; Ethics</span>
+          <span class="principle-tag core-phase">Tooling &amp; Context Engineering</span>
         </div>
         <p class="principle-body-text">
-          Ethics, fairness, transparency, and security are embedded in every stage of development, never bolted on as a final compliance check. Responsible AI is an engineering design principle: bias testing, model cards, explainability metrics, differential privacy, and adversarial threat modeling must be automated within standard CI pipelines.
+          Prompts, skills, context packs and tool integrations shape what AI produces as much as the code it touches. Treat them like code: versioned, reviewed, owned and retired. Unmanaged context leaks sensitive data, drifts out of date and makes results impossible to reproduce.
         </p>
         <div class="principle-practice-box">
-          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Automate demographic parity and fairness testing in CI &bull; Publish transparent Model Cards for all high-stakes systems &bull; Conduct prompt injection and adversarial threat modeling &bull; Bake privacy controls into data pipelines.
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Keep shared prompts and context packs in version control with review and a named owner &bull; Scan context for secrets and personal data before it reaches a tool &bull; Retire context assets through the <a href="/lifecycle/#retire">Retire</a> stage like any other element; see <a href="/disciplines/tooling-context-engineering/">Tooling &amp; Context Engineering</a>.<br>
+          <strong>Anti-pattern:</strong> Team-critical prompts living in personal chat histories, so they vanish when their author changes role.
         </div>
       </div>
 
       <!-- Principle 6 -->
-      <div class="principle-detail">
+      <div class="principle-detail" id="measure-real-value">
         <div class="principle-header-wrap">
           <div class="principle-title-group">
             <div class="principle-number-badge">6</div>
-            <h2>Cross-Functional Ownership</h2>
+            <h2>Measure real value</h2>
           </div>
-          <span class="principle-tag core-phase">Strategy &amp; Roles</span>
+          <span class="principle-tag core-phase">Value &amp; Measurement</span>
         </div>
         <p class="principle-body-text">
-          AI systems are co-owned by data scientists, ML engineers, platform engineers, product managers, and security leads. The traditional siloed "throw models over the wall" handoff fails in production. Operating AI reliably requires shared Service Level Objectives (SLOs), unified tooling, and joint accountability for business outcomes.
+          Judge AI adoption by outcomes and flow, never by output volume. Lines generated, suggestions accepted and prompts sent say nothing about value and reward the wrong behaviour. Measure teams and systems, not individuals: AI used to evaluate or monitor workers is high-risk under the EU AI Act.
         </p>
         <div class="principle-practice-box">
-          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Embed ML and platform engineers directly alongside data scientists &bull; Establish shared model uptime and quality SLOs &bull; Standardize on a unified internal developer platform for AI development and deployment.
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Baseline cycle time, rework rate, defect escape rate and review burden before a rollout &bull; Compare AI-assisted and other changes on change failure rate &bull; Set cost against measured outcomes in <a href="/disciplines/value-measurement/">Value &amp; Measurement</a>.<br>
+          <strong>Anti-pattern:</strong> A leaderboard of AI suggestions accepted per engineer.
         </div>
       </div>
 
       <!-- Principle 7 -->
-      <div class="principle-detail">
+      <div class="principle-detail" id="adopt-incrementally">
         <div class="principle-header-wrap">
           <div class="principle-title-group">
             <div class="principle-number-badge">7</div>
-            <h2>Measure What Matters</h2>
+            <h2>Adopt incrementally</h2>
           </div>
-          <span class="principle-tag core-phase">Business Value &amp; SRE</span>
+          <span class="principle-tag core-phase">Self-Assessment</span>
         </div>
         <p class="principle-body-text">
-          Business impact and system operational health are tracked alongside offline model accuracy. A 99% accurate model that costs 10x its return or introduces 5-second latency is a failure. Teams must measure real-world business KPIs (revenue impact, conversion, user retention) alongside runtime latency, GPU cost, and error rates.
+          Introduce AI in small, reversible steps and expand delegation only on evidence. Each step changes an existing practice rather than adding a parallel one, so it can be observed, measured and rolled back. Organisations that skip from ad hoc use to broad autonomy lose the evidence needed to know what worked.
         </p>
         <div class="principle-practice-box">
-          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Define measurable business KPIs for every AI initiative prior to development &bull; Track P95/P99 latency, cost per inference, and token utilization &bull; Build executive dashboards connecting model metrics to ROI.
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Start with low-tier work and named pilot teams &bull; Raise delegation limits at the <a href="/lifecycle/#learn">Learn</a> stage, from change failure and rework data &bull; Use the <a href="/maturity/">maturity model</a> to pick the next step, not the final state.<br>
+          <strong>Anti-pattern:</strong> An organisation-wide mandate to "use AI everywhere" with no baseline, no tiers and no way back.
         </div>
       </div>
 
       <!-- Principle 8 -->
-      <div class="principle-detail">
+      <div class="principle-detail" id="governed-openness">
         <div class="principle-header-wrap">
           <div class="principle-title-group">
             <div class="principle-number-badge">8</div>
-            <h2>Embrace Incremental Value</h2>
+            <h2>Governed openness</h2>
           </div>
-          <span class="principle-tag core-phase">Iteration &amp; Delivery</span>
+          <span class="principle-tag core-phase">Governance &amp; Guardrails</span>
         </div>
         <p class="principle-body-text">
-          Ship early, learn from real feedback, and iterate rapidly. The pursuit of a theoretical "perfect" model in isolation is the enemy of enterprise value. A deployed baseline model that solves 80% of the problem and generates real production learning is far superior to an over-engineered model stuck in a notebook.
+          Prefer open standards and portable assets, inside clear <a href="/pillars/#guardrails">guardrails</a>. Tools and vendors change faster than governance cycles, so controls, provenance and context must survive a change of tool. Openness without guardrails invites shadow AI; guardrails without openness create lock-in.
         </p>
         <div class="principle-practice-box">
-          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Start with baseline heuristics or lightweight models &bull; Validate improvements with shadow deployments and A/B canary routing &bull; Reward shipping reliable production systems over offline notebook benchmarks.
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Keep an approved tool catalogue with a fast, published path to add new tools &bull; Hold prompts, context and provenance in formats and systems the organisation controls &bull; Assess third-party AI services for exit cost as well as risk in <a href="/disciplines/governance-guardrails/">Governance &amp; Guardrails</a>.<br>
+          <strong>Anti-pattern:</strong> Provenance and context stored only inside one vendor's platform, so switching tools erases the audit trail.
         </div>
       </div>
 
     </div>
   </section>
-
-
