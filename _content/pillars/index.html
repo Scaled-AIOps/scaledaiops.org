@@ -1,0 +1,99 @@
+<!-- title: Control pillars and risk tiers · ScaledAIOps -->
+<!-- description: The four control pillars of ScaledAIOps (Assess, Prevent, Prove, Detect) and the four risk tiers that make them proportionate. -->
+<!-- active: pillars -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <h1>Control pillars</h1>
+      <p class="subtitle">Assess &rarr; Prevent &rarr; Prove &rarr; Detect. The cross-cutting controls that keep AI use safe, scaled to risk.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2 id="overview">One control loop for every discipline</h2>
+      <p class="lede">The six disciplines describe what an organisation must be good at. The four pillars describe how it stays in control while doing it. Every discipline page states which pillar controls apply at each risk tier.</p>
+
+      <div class="pillar-flow">
+        <div><span class="verb">Assess</span><h3><a href="#self-assessment">Self-Assessment</a></h3><p>Know where you are and what to do next.</p></div>
+        <div><span class="verb">Prevent</span><h3><a href="#guardrails">Guardrails</a></h3><p>Limit what AI may access, do and decide.</p></div>
+        <div><span class="verb">Prove</span><h3><a href="#audit-trail">Audit Trail</a></h3><p>Show what generated the work and who approved it.</p></div>
+        <div><span class="verb">Detect</span><h3><a href="#self-monitoring">Self-Monitoring</a></h3><p>Notice when quality or usage drifts.</p></div>
+      </div>
+
+      <h2 id="risk-tiers">Risk tiers</h2>
+      <p>Controls are proportionate. Each piece of work gets a tier from four criteria: <strong>blast radius</strong>, <strong>reversibility</strong>, <strong>data sensitivity</strong> and <strong>regulatory exposure</strong>. The highest criterion sets the tier. Tiers are assigned when work is planned, so the rules are known before anything is generated.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Tier</th><th>Typical work</th><th>Delegation gate</th><th>Minimum controls</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tier-badge tier-low">Low</span></td><td>Docs drafts, test scaffolding, internal tooling; reversible, no sensitive data</td><td>Auto-approve</td><td>Automated checks pass; provenance recorded</td></tr>
+            <tr><td><span class="tier-badge tier-medium">Medium</span></td><td>Production code and configuration with normal blast radius and standard rollback</td><td>Human review</td><td>One qualified reviewer; pipeline gates; provenance</td></tr>
+            <tr><td><span class="tier-badge tier-high">High</span></td><td>Security, access control, customer data, financial logic, wide-blast-radius infrastructure</td><td>Human review, enhanced</td><td>Two reviewers incl. a specialist; evidence bundle; enhanced monitoring after release</td></tr>
+            <tr><td><span class="tier-badge tier-critical">Critical</span></td><td>Irreversible or regulatory-significant actions: key management, production data deletion, decisions about people, safety functions</td><td>Human only</td><td>AI may inform, never decide or act; documented rationale; second-line oversight</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The tiers follow the EU AI Act's risk-based approach but do not map one-to-one. The Act classifies AI <em>systems</em> by their use (prohibited, high, limited, minimal risk); ScaledAIOps tiers classify <em>work</em>. A low-risk coding assistant can still be used on critical-tier work, and the tier of the work governs.</p>
+
+      <h2 id="self-assessment">1. Self-Assessment <small>(Assess)</small></h2>
+      <p>The <a href="/maturity/">AI Adoption Maturity Model</a> scores each of the six disciplines on five levels, from Ad hoc to Optimised. It turns "how are we doing with AI?" into a profile with a next step per discipline.</p>
+      <ul>
+        <li><strong>Who:</strong> led by the <a href="/roles/#ai-adoption-lead">AI Adoption Lead</a>, with delivery teams and the second line.</li>
+        <li><strong>When:</strong> at the start of adoption, then at least twice a year and after significant incidents.</li>
+        <li><strong>Output:</strong> a maturity profile, the gaps that matter most at your risk exposure, and a short improvement backlog.</li>
+      </ul>
+
+      <h2 id="guardrails">2. Guardrails <small>(Prevent)</small></h2>
+      <p>Preventive controls decide what AI may access, do and decide. They are enforced by tools and pipelines wherever possible, not only written in policy.</p>
+      <ul>
+        <li><strong>Approved tools</strong> — a catalogue stating which tools may be used for which tier of work.</li>
+        <li><strong>Data boundaries</strong> — data classification decides what may enter prompts and context; secrets and personal data stay out.</li>
+        <li><strong>Input and output controls</strong> — secret scanning, licence and IP checks, evals and filters on AI output.</li>
+        <li><strong>Action limits</strong> — autonomy caps by tier; agents act through least-privilege, short-lived non-human identities.</li>
+        <li><strong>Kill switches</strong> — every agent, integration and AI feature can be switched off quickly without a deployment, and the switch is tested.</li>
+      </ul>
+
+      <h2 id="audit-trail">3. Audit Trail <small>(Prove)</small></h2>
+      <p>Provenance of AI-generated work: what generated it, from which context, and who approved it. It is kept in the systems of record the organisation already has, not in a separate store.</p>
+      <ul>
+        <li><strong>Version control</strong> — a vendor-neutral commit trailer marks AI-assisted changes.</li>
+        <li><strong>Pull requests and tickets</strong> — link the specification, the review and the approval.</li>
+        <li><strong>Pipelines</strong> — record which gates ran and passed, and the tier applied.</li>
+        <li><strong>Release and incident records</strong> — list AI-assisted changes and AI actions taken during operations.</li>
+      </ul>
+      <p>A working audit trail answers four questions in minutes: which changes were AI-assisted; who approved them; what context the AI had; and what AI did during an incident.</p>
+
+      <h2 id="self-monitoring">4. Self-Monitoring <small>(Detect)</small></h2>
+      <p>Detective controls watch AI-assisted work over time and escalate when it drifts.</p>
+      <ul>
+        <li><strong>Output quality</strong> — change failure, rework and defect escape rates of AI-assisted work compared with the rest.</li>
+        <li><strong>Usage drift</strong> — unapproved tools, unusual volumes, cost spikes, context assets used outside their scope.</li>
+        <li><strong>Incidents and escalation</strong> — AI-related incidents are tagged, reviewed and fed back into tiers and guardrails.</li>
+      </ul>
+      <p>Thresholds are agreed in advance. Crossing one tightens delegation for the affected work until the cause is understood.</p>
+
+      <h2 id="mapping">Regulatory mapping</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Pillar</th><th>ISO/IEC 42001</th><th>EU AI Act</th></tr></thead>
+          <tbody>
+            <tr><td>Assess</td><td>Performance evaluation (clause 9)</td><td>AI literacy of staff (Art. 4)</td></tr>
+            <tr><td>Prevent</td><td>Planning and operation (clauses 6 and 8)</td><td>Deployer duties for high-risk systems (Art. 26)</td></tr>
+            <tr><td>Prove</td><td>Documented information (clause 7.5)</td><td>Keeping the logs of high-risk systems (Art. 26)</td></tr>
+            <tr><td>Detect</td><td>Monitoring and improvement (clauses 9.1 and 10)</td><td>Monitoring the operation of high-risk systems (Art. 26)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Mappings are orientation, not legal advice, and stay tool-agnostic. Most AI tools used in delivery are not high-risk systems under the Act, but AI used to evaluate or monitor workers is (Annex III, point 4); that is one reason ScaledAIOps measures teams and flow, never individuals.</p>
+
+      <h2 id="related">Related</h2>
+      <ul>
+        <li><a href="/disciplines/governance-guardrails/">Governance &amp; Guardrails</a> — the discipline that runs the pillars</li>
+        <li><a href="/roles/#ai-governance-officer">AI Governance Officer</a> · <a href="/roles/#ai-platform-engineer">AI Platform Engineer</a></li>
+        <li><a href="/principles/#delegate-by-risk">Delegate by risk, not by convenience</a> · <a href="/principles/#provenance-by-default">Provenance by default</a></li>
+      </ul>
+
+    </div>
+  </section>

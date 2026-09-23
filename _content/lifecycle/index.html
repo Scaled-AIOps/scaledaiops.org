@@ -1,0 +1,186 @@
+<!-- title: The AI-augmented lifecycle · ScaledAIOps -->
+<!-- description: How AI takes part in every stage of software delivery from business concept to retirement, the element register that gives every artefact an owner, and the AI-aware CI/CD pipeline. -->
+<!-- active: lifecycle -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <h1>The AI-augmented lifecycle</h1>
+      <p class="subtitle">From business concept to retirement: where AI takes part, where people decide, and how every element is born, changed and retired.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2 id="overview">Restructure, don't replace</h2>
+      <p class="lede">Organisations already run a lifecycle: idea intake, refinement, design review, development, testing, release, operations and decommissioning. ScaledAIOps keeps those stages. It changes what happens inside them so AI can contribute, and adds the controls that keep each contribution owned, checked and recorded.</p>
+
+      <ol class="lifecycle" aria-label="Lifecycle stages">
+        <li class="bookend"><a href="#conceive">Conceive</a>business case</li>
+        <li><a href="#plan">Plan</a>backlog</li>
+        <li><a href="#specify">Specify</a>specs, ADRs</li>
+        <li><a href="#generate">Generate</a>code, IaC</li>
+        <li><a href="#verify">Verify</a>review, evals</li>
+        <li><a href="#release">Release</a>tiered gates</li>
+        <li><a href="#operate">Operate</a>run, respond</li>
+        <li><a href="#learn">Learn</a>adjust</li>
+        <li class="bookend"><a href="#retire">Retire</a>decommission</li>
+      </ol>
+      <p>Each stage has one rule in common: AI may propose, draft and analyse, while a named person decides. How far AI may go beyond proposing is set by the work's <a href="/pillars/#risk-tiers">risk tier</a>.</p>
+
+      <h2 id="stages">The nine stages</h2>
+
+      <div class="stage bookend" id="conceive">
+        <h3>1. Conceive</h3>
+        <dl>
+          <dt>AI contributes</dt><dd>Market and domain research summaries, option framing, a first-cut business case</dd>
+          <dt>Human decides</dt><dd>The sponsor accepts the problem, the value hypothesis and the initial risk tier</dd>
+          <dt>Outputs</dt><dd>Business case, a value hypothesis that can be tested later, initial risk tier</dd>
+          <dt>Restructures</dt><dd>Idea intake and portfolio triage</dd>
+        </dl>
+      </div>
+
+      <div class="stage" id="plan">
+        <h3>2. Plan</h3>
+        <dl>
+          <dt>AI contributes</dt><dd>Backlog drafts, dependency maps, estimate proposals</dd>
+          <dt>Human decides</dt><dd>The product owner prioritises; the tier is confirmed per epic</dd>
+          <dt>Outputs</dt><dd>A prioritised backlog in which every item carries a tier</dd>
+          <dt>Restructures</dt><dd>Roadmapping and refinement</dd>
+        </dl>
+      </div>
+
+      <div class="stage" id="specify">
+        <h3>3. Specify</h3>
+        <dl>
+          <dt>AI contributes</dt><dd>User stories, acceptance criteria, API contracts, test cases, architecture options</dd>
+          <dt>Human decides</dt><dd>The owner approves acceptance criteria and architecture decisions</dd>
+          <dt>Outputs</dt><dd>Approved specifications; ADRs that record AI involvement and the human decision</dd>
+          <dt>Restructures</dt><dd>Requirements engineering and design review</dd>
+        </dl>
+      </div>
+
+      <div class="stage" id="generate">
+        <h3>4. Generate</h3>
+        <dl>
+          <dt>AI contributes</dt><dd>Code, tests, infrastructure-as-code, configuration, migrations, documentation</dd>
+          <dt>Human decides</dt><dd>The engineer owns the change: its intent, its correctness and what is submitted</dd>
+          <dt>Outputs</dt><dd>Changes marked with a vendor-neutral provenance trailer</dd>
+          <dt>Restructures</dt><dd>Development</dd>
+        </dl>
+      </div>
+
+      <div class="stage" id="verify">
+        <h3>5. Verify</h3>
+        <dl>
+          <dt>AI contributes</dt><dd>Pre-review of mechanics, test generation, static-analysis triage, eval runs</dd>
+          <dt>Human decides</dt><dd>Reviewers as the tier requires, with a specialist at high and critical tiers</dd>
+          <dt>Outputs</dt><dd>Review record and an evidence bundle linked to the change</dd>
+          <dt>Restructures</dt><dd>Code review, QA and security testing</dd>
+        </dl>
+      </div>
+
+      <div class="stage" id="release">
+        <h3>6. Release</h3>
+        <dl>
+          <dt>AI contributes</dt><dd>Release notes, change-risk summaries, rollout plans</dd>
+          <dt>Human decides</dt><dd>Approval by tier: automatic, reviewed, or human-only</dd>
+          <dt>Outputs</dt><dd>Release record linked to every change and its provenance</dd>
+          <dt>Restructures</dt><dd>CI/CD and change advisory</dd>
+        </dl>
+      </div>
+
+      <div class="stage" id="operate">
+        <h3>7. Operate</h3>
+        <dl>
+          <dt>AI contributes</dt><dd>Alert triage, runbook suggestions, incident summaries</dd>
+          <dt>Human decides</dt><dd>The incident commander; no autonomous production action above the low tier</dd>
+          <dt>Outputs</dt><dd>Incident timelines that include every AI action</dd>
+          <dt>Restructures</dt><dd>Monitoring and incident management</dd>
+        </dl>
+      </div>
+
+      <div class="stage" id="learn">
+        <h3>8. Learn</h3>
+        <dl>
+          <dt>AI contributes</dt><dd>Retrospective and post-incident synthesis, metric analysis</dd>
+          <dt>Human decides</dt><dd>The team agrees changes to delegation, guardrails and context; the value hypothesis from Conceive is tested</dd>
+          <dt>Outputs</dt><dd>Updated tiers, guardrails and context assets</dd>
+          <dt>Restructures</dt><dd>Retrospectives and problem management</dd>
+        </dl>
+      </div>
+
+      <div class="stage bookend" id="retire">
+        <h3>9. Retire</h3>
+        <dl>
+          <dt>AI contributes</dt><dd>Dependency and usage discovery, decommissioning plans</dd>
+          <dt>Human decides</dt><dd>The owner approves retirement; access is revoked</dd>
+          <dt>Outputs</dt><dd>Retirement record; provenance archived</dd>
+          <dt>Restructures</dt><dd>Decommissioning and access recertification</dd>
+        </dl>
+      </div>
+
+      <h2 id="elements">The element register</h2>
+      <p>An <strong>element</strong> is anything created, changed, run or retired during delivery. Cradle-to-grave governance means every element, including the ones AI adoption adds, has the same four attributes:</p>
+      <ul>
+        <li><strong>Owner</strong> — a named person accountable for it</li>
+        <li><strong>Risk tier</strong> — low, medium, high or critical</li>
+        <li><strong>Provenance</strong> — human, AI-assisted or AI-generated; the context used; who approved it</li>
+        <li><strong>State</strong> — proposed &rarr; approved &rarr; active &rarr; deprecated &rarr; retired</li>
+      </ul>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Element</th><th>Examples</th><th>Retired when</th></tr></thead>
+          <tbody>
+            <tr><td>Business case</td><td>Value hypothesis, sponsor decision</td><td>Hypothesis tested at Learn; outcome recorded</td></tr>
+            <tr><td>Specification</td><td>Stories, acceptance criteria, API contracts, ADRs</td><td>Superseded by a newer decision</td></tr>
+            <tr><td>Code and tests</td><td>Application code, test suites, migrations</td><td>Feature removed; code deleted with its tests</td></tr>
+            <tr><td>Infrastructure</td><td>IaC modules, configuration, pipelines</td><td>Service decommissioned; resources destroyed</td></tr>
+            <tr><td>Context asset</td><td>Prompts, skills, context packs, coding standards for AI</td><td>No consumer left, or replaced by a new version</td></tr>
+            <tr><td>Agent or automation</td><td>Scheduled agents, bots, AI-driven workflows</td><td>Purpose ended; owner leaves without a successor</td></tr>
+            <tr><td>Tool integration</td><td>MCP servers, plugins, API connectors</td><td>Tool removed from the approved catalogue</td></tr>
+            <tr><td>Non-human identity</td><td>Service accounts, tokens and keys used by agents</td><td>Its agent or integration retires; failed recertification</td></tr>
+            <tr><td>AI service dependency</td><td>A hosted assistant or model API the organisation relies on</td><td>Contract ends; exit plan executed</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Start with the elements you already track, such as code, releases and access, and add the AI-specific rows. The register does not need a new system: most of it lives in version control, the service catalogue and identity management.</p>
+
+      <h2 id="pipeline">The AI-aware pipeline</h2>
+      <p>CI/CD gains controls, not stages. Teams keep their pipeline and add these checks:</p>
+      <ol>
+        <li><strong>Pre-commit</strong> — secret scanning; context hygiene, so no secrets or personal data enter prompts or context.</li>
+        <li><strong>Build</strong> — unchanged.</li>
+        <li><strong>Verify</strong> — tests and static analysis as today, plus licence and IP checks on generated code, a provenance check that every AI-assisted change is marked, and evals for prompts, agents and AI features.</li>
+        <li><strong>Policy gate</strong> — policy-as-code maps the change's risk tier to the approvals it needs.</li>
+        <li><strong>Release</strong> — progressive delivery as today, with the release record linking to provenance.</li>
+        <li><strong>Operate and learn</strong> — change failure, rework and review burden of AI-assisted changes feed back into tiers and guardrails.</li>
+      </ol>
+
+      <h2 id="restructure">What changes in existing practice</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Practice</th><th>Change</th></tr></thead>
+          <tbody>
+            <tr><td>Refinement</td><td>AI drafts stories and acceptance criteria; the product owner owns acceptance</td></tr>
+            <tr><td>Architecture</td><td>AI proposes options; ADRs record AI involvement and the human decision</td></tr>
+            <tr><td>Code review</td><td>Risk-tiered; AI pre-reviews mechanics, people review intent and risk</td></tr>
+            <tr><td>Commits</td><td>A vendor-neutral trailer marks AI involvement</td></tr>
+            <tr><td>CI/CD</td><td>Provenance, licence and eval gates; approvals driven by tier</td></tr>
+            <tr><td>Change management</td><td>Low and medium-tier AI-assisted changes become standard changes; high and critical keep full review</td></tr>
+            <tr><td>Identity and access</td><td>Agents are non-human identities with least privilege, short-lived credentials and recertification</td></tr>
+            <tr><td>Incident management</td><td>AI assists triage; a person commands; AI actions appear in the timeline</td></tr>
+            <tr><td>Decommissioning</td><td>Prompts, agents, integrations and credentials are retired like any other asset</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="related">Where to go next</h2>
+      <ul>
+        <li><a href="/disciplines/ai-augmented-delivery/">AI-Augmented Delivery</a> — the discipline that runs this lifecycle</li>
+        <li><a href="/pillars/">Control pillars</a> — the controls applied at each stage</li>
+        <li><a href="/maturity/">Maturity model</a> — how far along your organisation is</li>
+      </ul>
+
+    </div>
+  </section>

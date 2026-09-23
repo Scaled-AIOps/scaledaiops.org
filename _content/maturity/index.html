@@ -1,0 +1,102 @@
+<!-- title: AI Adoption Maturity Model · ScaledAIOps -->
+<!-- description: Six dimensions and five levels, from Ad hoc to Optimised, with a self-assessment that runs entirely in your browser. -->
+<!-- active: none -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="crumb"><a href="/pillars/#self-assessment">Pillar 1: Self-Assessment</a></p>
+      <h1>AI Adoption Maturity Model</h1>
+      <p class="subtitle">Six dimensions, one per discipline, and five levels from Ad hoc to Optimised. Find where you are and what to do next.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+      <h2 id="levels">Five levels</h2>
+      <p class="lede">Levels describe how AI use is organised, not how much AI is used. A team with modest AI use and strong controls is more mature than one with heavy, untracked use.</p>
+      <div class="table-wrap"><table class="data-table">
+        <thead><tr><th>Level</th><th>What it looks like</th></tr></thead>
+        <tbody>
+<tr><td>1. Ad hoc</td><td>Individuals use AI tools on their own initiative; no inventory, no policy; AI output untracked.</td></tr>
+<tr><td>2. Experimenting</td><td>Sanctioned pilots with named tools; a basic usage policy; practice shared informally; value anecdotal.</td></tr>
+<tr><td>3. Managed</td><td>Approved tool catalogue; risk tiers defined and applied in review; provenance recorded; baseline metrics.</td></tr>
+<tr><td>4. Governed</td><td>Controls enforced in pipelines as policy-as-code; audit trail queryable; the second line assures; roles staffed.</td></tr>
+<tr><td>5. Optimised</td><td>Delegation adjusted from evidence; context managed as a product; value and cost optimised continuously.</td></tr>
+        </tbody>
+      </table></div>
+      <p>Aim for the level your risk exposure needs, not for level 5 everywhere. A bank running critical-tier work with AI needs Governed controls; a startup doing low-tier work may be well served by Managed.</p>
+    </div>
+  </section>
+
+  <section class="section" style="background:#fff;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);">
+    <div class="container">
+      <h2 class="section-title" id="model">The full model</h2>
+      <p class="section-subtitle">Each row is a discipline; each cell describes that level for it.</p>
+      <div class="table-wrap"><table class="data-table maturity-grid">
+        <thead><tr><th>Dimension</th><th class="lvl">1. Ad hoc</th><th class="lvl">2. Experimenting</th><th class="lvl">3. Managed</th><th class="lvl">4. Governed</th><th class="lvl">5. Optimised</th></tr></thead>
+        <tbody>
+<tr><td><a href="/disciplines/ai-augmented-delivery/">AI-Augmented Delivery</a></td><td>engineers use AI tools privately; no one can say which changes were AI-assisted.</td><td>named teams pilot approved tools in development; results shared informally.</td><td>tiers applied at planning; AI-assisted changes marked; review depth follows the tier.</td><td>the pipeline enforces provenance, licence, eval and approval gates as policy-as-code across all stages.</td><td>delegation per stage adjusted from change-failure and rework data; retirement automated from the element register.</td></tr>
+<tr><td><a href="/disciplines/human-ai-workflow-design/">Human–AI Workflow Design</a></td><td>individuals decide for themselves what to hand to AI; approvals and escalations are informal or missing.</td><td>pilot teams agree simple delegation rules; agents run at low autonomy with a person watching.</td><td>process maps show human, AI and tier for each step; approval gates and escalation queues defined and used.</td><td>autonomy caps and gates enforced by tooling; approval and escalation records queryable; second line reviews high and critical workflows.</td><td>autonomy levels raised or lowered from override, escalation and incident data; review load balanced continuously.</td></tr>
+<tr><td><a href="/disciplines/tooling-context-engineering/">Tooling &amp; Context Engineering</a></td><td>individuals choose their own tools and paste context by hand; integrations run on personal tokens.</td><td>a shortlist of sanctioned tools; shared prompts circulate in wikis and chat without owners.</td><td>approved catalogue with tiers of use; context assets in repositories with owners; agents have their own identities.</td><td>integrations only through the allow-list or gateway; evals and context hygiene enforced in the pipeline; non-human identities recertified.</td><td>context managed as a product with measured effect on output quality; tools swapped using the exit plan without disruption.</td></tr>
+<tr><td><a href="/disciplines/governance-guardrails/">Governance &amp; Guardrails</a></td><td>AI tools used on personal accounts; no policy, no inventory, no view of which providers hold company data.</td><td>a basic usage policy; sanctioned pilots with named tools; provider terms checked case by case.</td><td>approved tool catalogue and tier-based policy; inventory drawn from the element register; AI providers in vendor management.</td><td>guardrails enforced as policy-as-code; kill switches tested; second line assures from pipeline data; internal audit covers AI-assisted work.</td><td>controls and delegation boundaries tuned from monitoring and audit evidence; revocation is fast and routinely exercised.</td></tr>
+<tr><td><a href="/disciplines/skills-roles/">Skills &amp; Roles</a></td><td>people teach themselves; nobody knows who is competent to review AI-assisted work.</td><td>pilot teams share practice informally; some introductory training exists.</td><td>baseline AI literacy for all tool users; roles assigned as responsibilities; approval authority defined per tier.</td><td>training records and competence checks enforced at the approval gate; roles staffed; second line assures.</td><td>enablement adjusted from review quality and incident data; career paths reward review and specification.</td></tr>
+<tr><td><a href="/disciplines/value-measurement/">Value &amp; Measurement</a></td><td>value claimed from anecdote and licence counts; no baseline exists.</td><td>pilots report usage and satisfaction; outcomes are estimated, not measured.</td><td>baselines taken before adoption; value hypotheses written and tested; AI-assisted vs not compared at team level.</td><td>total cost reported per value stream; portfolio decisions to expand or stop rest on reviewed evidence.</td><td>delegation and spend adjusted continuously from flow, quality and cost data.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+      <h2 id="assess">Self-assessment</h2>
+      <p>Pick the level that best describes your organisation today for each dimension. The descriptor for your choice appears below it. Nothing is stored or sent: the assessment runs entirely in your browser.</p>
+      <form class="assess" id="assess-form" onsubmit="return false;">
+<fieldset data-dim="0"><legend>AI-Augmented Delivery</legend><div class="opts"><label><input type="radio" name="d0" value="1"> 1 Ad hoc</label><label><input type="radio" name="d0" value="2"> 2 Experimenting</label><label><input type="radio" name="d0" value="3"> 3 Managed</label><label><input type="radio" name="d0" value="4"> 4 Governed</label><label><input type="radio" name="d0" value="5"> 5 Optimised</label></div><p class="hint" style="font-size:0.85rem;color:var(--color-text-light);margin:0.5rem 0 0;"></p></fieldset>
+<fieldset data-dim="1"><legend>Human–AI Workflow Design</legend><div class="opts"><label><input type="radio" name="d1" value="1"> 1 Ad hoc</label><label><input type="radio" name="d1" value="2"> 2 Experimenting</label><label><input type="radio" name="d1" value="3"> 3 Managed</label><label><input type="radio" name="d1" value="4"> 4 Governed</label><label><input type="radio" name="d1" value="5"> 5 Optimised</label></div><p class="hint" style="font-size:0.85rem;color:var(--color-text-light);margin:0.5rem 0 0;"></p></fieldset>
+<fieldset data-dim="2"><legend>Tooling &amp; Context Engineering</legend><div class="opts"><label><input type="radio" name="d2" value="1"> 1 Ad hoc</label><label><input type="radio" name="d2" value="2"> 2 Experimenting</label><label><input type="radio" name="d2" value="3"> 3 Managed</label><label><input type="radio" name="d2" value="4"> 4 Governed</label><label><input type="radio" name="d2" value="5"> 5 Optimised</label></div><p class="hint" style="font-size:0.85rem;color:var(--color-text-light);margin:0.5rem 0 0;"></p></fieldset>
+<fieldset data-dim="3"><legend>Governance &amp; Guardrails</legend><div class="opts"><label><input type="radio" name="d3" value="1"> 1 Ad hoc</label><label><input type="radio" name="d3" value="2"> 2 Experimenting</label><label><input type="radio" name="d3" value="3"> 3 Managed</label><label><input type="radio" name="d3" value="4"> 4 Governed</label><label><input type="radio" name="d3" value="5"> 5 Optimised</label></div><p class="hint" style="font-size:0.85rem;color:var(--color-text-light);margin:0.5rem 0 0;"></p></fieldset>
+<fieldset data-dim="4"><legend>Skills &amp; Roles</legend><div class="opts"><label><input type="radio" name="d4" value="1"> 1 Ad hoc</label><label><input type="radio" name="d4" value="2"> 2 Experimenting</label><label><input type="radio" name="d4" value="3"> 3 Managed</label><label><input type="radio" name="d4" value="4"> 4 Governed</label><label><input type="radio" name="d4" value="5"> 5 Optimised</label></div><p class="hint" style="font-size:0.85rem;color:var(--color-text-light);margin:0.5rem 0 0;"></p></fieldset>
+<fieldset data-dim="5"><legend>Value &amp; Measurement</legend><div class="opts"><label><input type="radio" name="d5" value="1"> 1 Ad hoc</label><label><input type="radio" name="d5" value="2"> 2 Experimenting</label><label><input type="radio" name="d5" value="3"> 3 Managed</label><label><input type="radio" name="d5" value="4"> 4 Governed</label><label><input type="radio" name="d5" value="5"> 5 Optimised</label></div><p class="hint" style="font-size:0.85rem;color:var(--color-text-light);margin:0.5rem 0 0;"></p></fieldset>
+        <button type="reset" class="btn btn-outline" style="color:var(--color-primary);border-color:var(--color-primary);margin-top:1rem;">Reset</button>
+        <div class="assess-result" id="assess-result" aria-live="polite" hidden>
+          <h3 style="margin-top:1.5rem;">Your profile</h3>
+          <div id="assess-bars"></div>
+          <p id="assess-summary" style="margin-top:1rem;"></p>
+          <div class="assess-next"><strong>Next steps</strong><ul id="assess-next"></ul></div>
+        </div>
+      </form>
+      <p>Run it with delivery teams and the second line together; the disagreements are often more useful than the score. See also <a href="/pillars/#self-assessment">how self-assessment fits the control pillars</a>.</p>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var DATA = {"AI-Augmented Delivery": ["engineers use AI tools privately; no one can say which changes were AI-assisted.", "named teams pilot approved tools in development; results shared informally.", "tiers applied at planning; AI-assisted changes marked; review depth follows the tier.", "the pipeline enforces provenance, licence, eval and approval gates as policy-as-code across all stages.", "delegation per stage adjusted from change-failure and rework data; retirement automated from the element register."], "Human–AI Workflow Design": ["individuals decide for themselves what to hand to AI; approvals and escalations are informal or missing.", "pilot teams agree simple delegation rules; agents run at low autonomy with a person watching.", "process maps show human, AI and tier for each step; approval gates and escalation queues defined and used.", "autonomy caps and gates enforced by tooling; approval and escalation records queryable; second line reviews high and critical workflows.", "autonomy levels raised or lowered from override, escalation and incident data; review load balanced continuously."], "Tooling & Context Engineering": ["individuals choose their own tools and paste context by hand; integrations run on personal tokens.", "a shortlist of sanctioned tools; shared prompts circulate in wikis and chat without owners.", "approved catalogue with tiers of use; context assets in repositories with owners; agents have their own identities.", "integrations only through the allow-list or gateway; evals and context hygiene enforced in the pipeline; non-human identities recertified.", "context managed as a product with measured effect on output quality; tools swapped using the exit plan without disruption."], "Governance & Guardrails": ["AI tools used on personal accounts; no policy, no inventory, no view of which providers hold company data.", "a basic usage policy; sanctioned pilots with named tools; provider terms checked case by case.", "approved tool catalogue and tier-based policy; inventory drawn from the element register; AI providers in vendor management.", "guardrails enforced as policy-as-code; kill switches tested; second line assures from pipeline data; internal audit covers AI-assisted work.", "controls and delegation boundaries tuned from monitoring and audit evidence; revocation is fast and routinely exercised."], "Skills & Roles": ["people teach themselves; nobody knows who is competent to review AI-assisted work.", "pilot teams share practice informally; some introductory training exists.", "baseline AI literacy for all tool users; roles assigned as responsibilities; approval authority defined per tier.", "training records and competence checks enforced at the approval gate; roles staffed; second line assures.", "enablement adjusted from review quality and incident data; career paths reward review and specification."], "Value & Measurement": ["value claimed from anecdote and licence counts; no baseline exists.", "pilots report usage and satisfaction; outcomes are estimated, not measured.", "baselines taken before adoption; value hypotheses written and tested; AI-assisted vs not compared at team level.", "total cost reported per value stream; portfolio decisions to expand or stop rest on reviewed evidence.", "delegation and spend adjusted continuously from flow, quality and cost data."]};
+      var LEVELS = ["Ad hoc", "Experimenting", "Managed", "Governed", "Optimised"];
+      var names = Object.keys(DATA), form = document.getElementById('assess-form');
+      function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+      function render() {
+        var picked = [];
+        names.forEach(function (n, i) {
+          var r = form.querySelector('input[name="d' + i + '"]:checked'), hint = form.querySelector('fieldset[data-dim="' + i + '"] .hint');
+          hint.textContent = r ? DATA[n][r.value - 1] : '';
+          if (r) picked.push({ name: n, level: +r.value });
+        });
+        var box = document.getElementById('assess-result');
+        box.hidden = picked.length === 0;
+        if (!picked.length) return;
+        document.getElementById('assess-bars').innerHTML = picked.map(function (p) {
+          return '<div class="assess-bar"><span class="name">' + esc(p.name) + '</span><span class="track"><span class="fill" style="width:' + (p.level * 20) + '%"></span></span><span>' + p.level + '/5</span></div>';
+        }).join('');
+        var avg = picked.reduce(function (a, p) { return a + p.level; }, 0) / picked.length;
+        var low = picked.reduce(function (a, p) { return p.level < a.level ? p : a; });
+        document.getElementById('assess-summary').innerHTML = 'Average ' + avg.toFixed(1) + ' across ' + picked.length + ' of 6 dimensions. Lowest: <strong>' + esc(low.name) + '</strong> at ' + esc(LEVELS[low.level - 1]) + '. The weakest dimension usually limits the others, so start there.';
+        document.getElementById('assess-next').innerHTML = picked.slice().sort(function (a, b) { return a.level - b.level; }).map(function (p) {
+          return p.level === 5 ? '<li>' + esc(p.name) + ': at Optimised. Keep the evidence loop running.</li>'
+            : '<li>' + esc(p.name) + ' to ' + esc(LEVELS[p.level]) + ': ' + esc(DATA[p.name][p.level]) + '</li>';
+        }).join('');
+      }
+      form.addEventListener('change', render);
+      form.addEventListener('reset', function () { setTimeout(render, 0); });
+    })();
+  </script>
