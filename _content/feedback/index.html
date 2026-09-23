@@ -31,8 +31,7 @@
       <h2>Send feedback</h2>
       <p>Every submission gets a reference id, is filed as a GitHub issue for maintainers, and — if you leave an email — you hear back when it's resolved. Nothing here needs an account.</p>
 
-      <form class="ffrs-page-form" method="post" action="https://ffrs.scaledaiops.org/api/feedback" enctype="application/x-www-form-urlencoded">
-        <input type="hidden" name="site" value="scaledaiops">
+      <form class="ffrs-page-form" method="post" action="/api/feedback" enctype="application/x-www-form-urlencoded">
         <label>Type
           <select name="kind" required>
             <option value="feature">Feature request</option>
@@ -68,7 +67,7 @@
     if (error) { show('ffrs-error'); document.getElementById('ffrs-error-msg').textContent = error; }
     if (sent && ref) { show('ffrs-sent'); document.getElementById('ffrs-sent-ref').textContent = ref; }
     if (!ref) return;
-    fetch('https://ffrs.scaledaiops.org/api/feedback/' + encodeURIComponent(ref)).then(function (r) { return r.ok ? r.json() : null; }).then(function (s) {
+    fetch('/api/feedback/' + encodeURIComponent(ref)).then(function (r) { return r.ok ? r.json() : null; }).then(function (s) {
       if (!s) { show('ffrs-error'); document.getElementById('ffrs-error-msg').textContent = 'No feedback found for ' + ref + '.'; return; }
       show('ffrs-status'); document.getElementById('ffrs-status-ref').textContent = s.ref;
       var steps = [['Received', s.createdAt], ['Acknowledged', s.acknowledgedAt], ['Routed to maintainers', s.routedAt, s.githubIssueUrl], ['Responded', s.respondedAt], ['Closed' + (s.outcome ? ' — ' + s.outcome : ''), s.closedAt]];
