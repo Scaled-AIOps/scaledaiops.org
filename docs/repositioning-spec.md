@@ -4,7 +4,7 @@ Design of record for the September 2026 repositioning. Pages are built from this
 
 ## 1. Positioning
 
-ScaledAIOps is an open, governance-first framework for **how organisations work with AI**: adopting AI tools (coding assistants, agents, copilots) across the SDLC, CI/CD, DevOps and knowledge work — safely, measurably and at scale.
+ScaledAIOps is an open, governance-first framework for **how organisations work with AI**: adopting AI tools (coding assistants, agents, copilots) across the SDLC, CI/CD and DevOps — safely, measurably and at scale.
 
 - **About using AI, not building it.** Model-building content (training, serving, feature stores, MLOps) is archived on `/legacy/` and never returns to navigation or new content.
 - **Restructure, don't replace.** Organisations already run an SDLC, CI/CD pipelines, change management and incident response. ScaledAIOps changes those practices so AI can take part in them; it does not add a parallel "AI process".
