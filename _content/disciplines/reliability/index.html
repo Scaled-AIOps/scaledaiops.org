@@ -1,53 +1,19 @@
-<!-- title: Reliability &amp; Observability · ScaledAIOps – AI Operations Framework -->
-<!-- description: Monitoring, alerting, incident response, and SLOs for AI workloads in production. -->
-<!-- active: disciplines -->
+<!-- title: Reliability &amp; Observability (archived) · ScaledAIOps -->
+<!-- description: This page moved to the archived legacy MLOps edition of ScaledAIOps. -->
+<!-- active: none -->
 
 <section class="hero" style="padding:3.5rem 1.5rem;">
     <div class="container">
-      <p class="subtitle" style="margin-bottom:0.5rem;"><a href="/disciplines/" style="color:rgba(255,255,255,0.7);">Disciplines</a> &rarr;</p>
+      <p class="crumb">Archive</p>
       <h1>Reliability &amp; Observability</h1>
-      <p class="subtitle">Monitoring, alerting, incident response, and SLOs for AI workloads in production.</p>
+      <p class="subtitle">This page is part of the archived MLOps edition.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container content-page">
-
-      <h2>Overview</h2>
-      <p>Reliability & Observability extends SRE principles to AI systems. AI workloads present unique challenges — models degrade silently, data drift causes subtle failures, and inference latency has different characteristics than traditional services. This discipline ensures AI systems are monitored, reliable, and maintainable in production.</p>
-
-      <h2>Key Practices</h2>
-
-      <h3>AI-Specific SLOs</h3>
-      <p>Define service level objectives that capture both system health (latency, availability, error rate) and model health (prediction quality, drift metrics, freshness). SLOs should be agreed upon with stakeholders and reflect the business impact of degraded AI performance.</p>
-
-      <h3>Model Observability</h3>
-      <p>Go beyond system metrics to observe model behavior. Track prediction distributions, feature value distributions, confidence scores, and model-specific metrics. Detect data drift and concept drift before they impact users.</p>
-
-      <h3>Alerting Strategy</h3>
-      <p>Design alerts that are actionable and prioritized. Distinguish between system-level alerts (the service is down) and model-level alerts (predictions are degrading). Avoid alert fatigue by setting meaningful thresholds and using multi-signal correlation.</p>
-
-      <h3>Incident Response</h3>
-      <p>Establish incident response procedures specific to AI failures. Model degradation may require different runbooks than system outages — rollback to a previous model version, switch to a fallback model, or gracefully degrade to a rules-based system.</p>
-
-      <h3>Capacity Planning</h3>
-      <p>Plan compute and storage capacity for AI workloads, accounting for training bursts, inference scaling patterns, and data growth. GPU/TPU resources are expensive — optimize utilization while maintaining performance headroom.</p>
-
-      <h3>Chaos Engineering for AI</h3>
-      <p>Test AI system resilience by injecting failures — corrupted input data, model serving outages, feature store latency spikes, and upstream data pipeline delays. Verify that fallback mechanisms and graceful degradation work as designed.</p>
-
-      <h2>Related Roles</h2>
-      <ul>
-        <li><a href="/roles/">SRE / AI Ops Engineer</a> — Primary owner of reliability and observability</li>
-        <li><a href="/roles/">ML Engineer</a> — Instruments models and builds monitoring</li>
-        <li><a href="/roles/">Platform Engineer</a> — Provides monitoring infrastructure</li>
-      </ul>
-
-      <h2>Related Principles</h2>
-      <ul>
-        <li><a href="/principles/">Measure What Matters</a> — SLOs connect operational metrics to business outcomes</li>
-        <li><a href="/principles/">Continuous Feedback Loops</a> — Observability data drives model improvement</li>
-      </ul>
-
+      <p class="lede">ScaledAIOps now covers how organisations work with AI rather than how they build it. This page moved unchanged to the <a href="/legacy/#reliability">legacy archive</a>.</p>
+      <p><a class="btn btn-primary" href="/legacy/#reliability">Open it in the archive</a> <a class="btn btn-outline" href="/" style="color:var(--color-primary);border-color:var(--color-primary);">Current framework</a></p>
     </div>
   </section>
+  <script>location.replace('/legacy/#reliability');</script>

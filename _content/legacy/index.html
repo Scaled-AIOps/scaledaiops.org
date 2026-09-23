@@ -1,0 +1,921 @@
+<!-- title: Legacy MLOps edition (archived) · ScaledAIOps -->
+<!-- description: The archived pre-September-2026 edition of ScaledAIOps, which covered building and operating AI systems. Kept for reference and no longer maintained. -->
+<!-- active: none -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="crumb">Archive</p>
+      <h1>Legacy MLOps edition</h1>
+      <p class="subtitle">The pre-September-2026 edition of ScaledAIOps, about building and operating AI systems. Archived for reference.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+      <div class="legacy-banner"><strong>Archived and not maintained.</strong> In September 2026 ScaledAIOps was repositioned as a framework for how organisations <em>work with</em> AI. The content below is the earlier edition about <em>building</em> AI systems, kept unchanged so existing links and references still resolve. For the current framework, start at the <a href="/">home page</a>.</div>
+      <nav class="page-toc" aria-label="Contents"><strong>Contents</strong><ol>
+<li><a href="#disciplines">Disciplines</a><ul><li><a href="#ml-engineering">ML Engineering &amp; Platform</a></li><li><a href="#model-lifecycle">Model Lifecycle Management</a></li><li><a href="#data-operations">Data Operations</a></li><li><a href="#reliability">Reliability &amp; Observability</a></li><li><a href="#security-ethics">Security, Ethics &amp; Compliance</a></li><li><a href="#strategy">Strategy &amp; Organization</a></li></ul></li>
+<li><a href="#principles">Guiding principles</a></li>
+<li><a href="#roles">Roles</a></li>
+<li><a href="#hardware-for-llm-training">Minimum hardware for training and fine-tuning LLMs and SLMs</a> (blog post)</li>
+<li><a href="#lifecycle">From classic SDLC to the AI development lifecycle</a> (diagram)</li>
+      </ol></nav>
+
+      <div class="legacy-section" id="disciplines">
+        <h2>Disciplines (MLOps edition)</h2>
+<div class="callout-box" style="margin-top:0; margin-bottom:2.5rem;">
+        <h4><span class="icon-inline"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></span> How the 6 Disciplines Map to the AI Lifecycle</h4>
+        <p style="margin:0; font-size:0.98rem; color:#334155; line-height:1.6;">
+          Unlike monolithic software frameworks, ScaledAIOps organizes organizational capability into six clear disciplines. Each discipline addresses a distinct operational requirement — from upstream data governance and model training platforms to continuous inference observability and enterprise AI strategy.
+        </p>
+      </div>
+
+      <div class="card-grid card-grid--clickable">
+
+        <div class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
+          <a href="#ml-engineering"><h4>ML Engineering &amp; Platform</h4></a>
+          <p>Infrastructure, tooling, distributed training, and serving engines that enable teams to build, train, and host models with high reliability and low latency.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
+          <a href="#model-lifecycle"><h4>Model Lifecycle Management</h4></a>
+          <p>End-to-end governance of models from experimental notebooks through model registry approvals, artifact versioning, rollout gating, and retirement.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div>
+          <a href="#data-operations"><h4>Data Operations</h4></a>
+          <p>Ensuring data quality, immutable lineage, schema contracts, feature store reliability, and privacy governance to fuel trustworthy AI systems.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+          <a href="#reliability"><h4>Reliability &amp; Observability</h4></a>
+          <p>Real-time telemetry, data and concept drift detection, AI-specific SLOs, incident response playbooks, and automated retraining triggers.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div>
+          <a href="#security-ethics"><h4>Security, Ethics &amp; Compliance</h4></a>
+          <p>Responsible AI practices, prompt injection threat modeling, fairness testing, explainability cards, and regulatory adherence (EU AI Act, NIST AI RMF).</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
+          <a href="#strategy"><h4>Strategy &amp; Organization</h4></a>
+          <p>Aligning AI investments with business value, structuring cross-functional team topologies, measuring ROI, and scaling AI literacy across the enterprise.</p>
+        </div>
+
+      </div>
+      </div>
+
+      <div class="legacy-section" id="ml-engineering">
+        <h2>ML Engineering &amp; Platform</h2>
+<h3>Overview</h3>
+      <p>ML Engineering & Platform is the foundation that all other disciplines build upon. It encompasses the compute infrastructure, development environments, training pipelines, serving systems, and platform tooling that enable data scientists and ML engineers to go from idea to production efficiently.</p>
+
+      <h3>Key Practices</h3>
+
+      <h4>Training Infrastructure</h4>
+      <p>Provide scalable, cost-efficient compute for model training. This includes GPU/TPU cluster management, job scheduling, distributed training frameworks, and resource allocation policies. Teams should be able to launch training jobs without managing infrastructure directly.</p>
+
+      <h4>Serving &amp; Inference</h4>
+      <p>Deploy models as reliable, low-latency services. This covers model serving frameworks, autoscaling, batching strategies, A/B testing infrastructure, and canary deployments. Serving systems must handle traffic spikes, graceful degradation, and zero-downtime updates.</p>
+
+      <h4>Feature Stores</h4>
+      <p>Centralize feature computation and serving to ensure consistency between training and inference. Feature stores reduce duplicated effort, prevent training-serving skew, and provide a shared vocabulary of features across teams.</p>
+
+      <h4>Experiment Tracking</h4>
+      <p>Track experiments systematically — hyperparameters, metrics, artifacts, and code versions. Reproducibility is essential for debugging, auditing, and iterating on models. Every experiment should be traceable back to its exact configuration.</p>
+
+      <h4>ML Pipelines</h4>
+      <p>Orchestrate end-to-end workflows from data ingestion through training, evaluation, and deployment. Pipelines should be versioned, testable, and composable. Invest in pipeline reliability — a broken pipeline blocks the entire team.</p>
+
+      <h4>Developer Experience</h4>
+      <p>Reduce friction for practitioners. This includes standardized project templates, local development environments that mirror production, clear documentation, and self-service tooling. The best platform is one that teams actually want to use.</p>
+
+      <h3>Related Roles</h3>
+      <ul>
+        <li><a href="#roles">ML Engineer</a> — Builds and maintains training and serving pipelines</li>
+        <li><a href="#roles">Platform Engineer</a> — Develops and operates the ML platform</li>
+        <li><a href="#roles">Data Scientist</a> — Primary consumer of the platform</li>
+      </ul>
+
+      <h3>Related Principles</h3>
+      <ul>
+        <li><a href="#principles">Automate Relentlessly</a> — Automation is the backbone of a reliable ML platform</li>
+        <li><a href="#principles">Production-First Thinking</a> — Platform design should prioritize production readiness</li>
+      </ul>
+      </div>
+
+      <div class="legacy-section" id="model-lifecycle">
+        <h2>Model Lifecycle Management</h2>
+<h3>Overview</h3>
+      <p>Model Lifecycle Management covers the complete journey of a model — from initial development and validation through production deployment, ongoing monitoring, and eventual retirement. It provides the governance structure that ensures models are reliable, auditable, and aligned with business objectives throughout their lifespan.</p>
+
+      <h3>Key Practices</h3>
+
+      <h4>Model Registry</h4>
+      <p>Maintain a centralized catalog of all models, their versions, metadata, and lineage. The registry serves as the single source of truth for what models exist, where they are deployed, and who owns them. Every model in production should be traceable in the registry.</p>
+
+      <h4>Model Validation &amp; Testing</h4>
+      <p>Validate models rigorously before deployment. This includes offline evaluation against holdout sets, fairness and bias testing, performance benchmarks, integration tests with downstream systems, and shadow deployment validation. No model should reach production without passing a defined set of quality gates.</p>
+
+      <h4>Deployment Strategies</h4>
+      <p>Use progressive deployment techniques — canary releases, shadow mode, A/B testing, and blue-green deployments — to reduce risk. Define rollback criteria and automate rollback when thresholds are breached. Every deployment should be reversible.</p>
+
+      <h4>Model Monitoring</h4>
+      <p>Monitor models continuously in production for data drift, concept drift, prediction quality degradation, and performance anomalies. Set up alerts that trigger retraining or human review when models deviate from expected behavior.</p>
+
+      <h4>Version Control &amp; Reproducibility</h4>
+      <p>Version everything — code, data, configurations, and model artifacts. Any model version should be fully reproducible from its inputs. This is critical for debugging production issues, meeting audit requirements, and building trust.</p>
+
+      <h4>Model Retirement</h4>
+      <p>Define clear criteria for when models should be retrained, replaced, or decommissioned. Retired models should be archived with their full context — training data references, evaluation results, and the rationale for retirement.</p>
+
+      <h3>Related Roles</h3>
+      <ul>
+        <li><a href="#roles">ML Engineer</a> — Implements deployment and monitoring infrastructure</li>
+        <li><a href="#roles">Data Scientist</a> — Develops and validates models</li>
+        <li><a href="#roles">AI Product Manager</a> — Defines success criteria and retirement decisions</li>
+      </ul>
+
+      <h3>Related Principles</h3>
+      <ul>
+        <li><a href="#principles">Continuous Feedback Loops</a> — Production monitoring drives model improvement</li>
+        <li><a href="#principles">Embrace Incremental Value</a> — Ship early, iterate based on real-world signals</li>
+      </ul>
+      </div>
+
+      <div class="legacy-section" id="data-operations">
+        <h2>Data Operations</h2>
+<h3>Overview</h3>
+      <p>Data Operations is the discipline of managing the data that powers AI systems with the same rigor applied to production software. It encompasses data pipelines, quality assurance, lineage tracking, access controls, and governance — ensuring that models are built on a reliable, well-understood data foundation.</p>
+
+      <h3>Key Practices</h3>
+
+      <h4>Data Quality</h4>
+      <p>Implement automated data quality checks at every stage of the pipeline — completeness, consistency, accuracy, timeliness, and validity. Define data quality SLOs and alert when they are breached. Treat data quality failures as production incidents.</p>
+
+      <h4>Data Lineage</h4>
+      <p>Track the origin, transformation, and consumption of every dataset. Lineage enables impact analysis (what breaks if this source changes?), debugging (where did this bad prediction come from?), and compliance (can we prove where this data originated?).</p>
+
+      <h4>Data Contracts</h4>
+      <p>Establish formal agreements between data producers and consumers about schema, quality, and delivery guarantees. Data contracts prevent silent breakage when upstream systems change and make dependencies explicit and manageable.</p>
+
+      <h4>Data Versioning</h4>
+      <p>Version datasets alongside code and model artifacts. Reproducibility requires knowing exactly which data was used to train a given model. Use tools that support efficient storage and retrieval of large dataset versions.</p>
+
+      <h4>Data Governance</h4>
+      <p>Define and enforce policies around data access, retention, privacy, and usage. Implement role-based access controls, data classification, and audit logging. Ensure compliance with relevant regulations (GDPR, CCPA, industry-specific requirements).</p>
+
+      <h4>Pipeline Reliability</h4>
+      <p>Build data pipelines that are idempotent, observable, and recoverable. Implement retry logic, dead letter queues, and backfill capabilities. Monitor pipeline freshness and alert on delays — stale data leads to stale models.</p>
+
+      <h3>Related Roles</h3>
+      <ul>
+        <li><a href="#roles">Data Engineer</a> — Builds and operates data pipelines</li>
+        <li><a href="#roles">ML Engineer</a> — Consumes data for training and inference</li>
+        <li><a href="#roles">AI Ethics Lead</a> — Ensures data governance meets ethical standards</li>
+      </ul>
+
+      <h3>Related Principles</h3>
+      <ul>
+        <li><a href="#principles">Data as a First-Class Citizen</a> — The core principle behind this discipline</li>
+        <li><a href="#principles">Automate Relentlessly</a> — Data quality and pipeline management must be automated</li>
+      </ul>
+      </div>
+
+      <div class="legacy-section" id="reliability">
+        <h2>Reliability &amp; Observability</h2>
+<h3>Overview</h3>
+      <p>Reliability & Observability extends SRE principles to AI systems. AI workloads present unique challenges — models degrade silently, data drift causes subtle failures, and inference latency has different characteristics than traditional services. This discipline ensures AI systems are monitored, reliable, and maintainable in production.</p>
+
+      <h3>Key Practices</h3>
+
+      <h4>AI-Specific SLOs</h4>
+      <p>Define service level objectives that capture both system health (latency, availability, error rate) and model health (prediction quality, drift metrics, freshness). SLOs should be agreed upon with stakeholders and reflect the business impact of degraded AI performance.</p>
+
+      <h4>Model Observability</h4>
+      <p>Go beyond system metrics to observe model behavior. Track prediction distributions, feature value distributions, confidence scores, and model-specific metrics. Detect data drift and concept drift before they impact users.</p>
+
+      <h4>Alerting Strategy</h4>
+      <p>Design alerts that are actionable and prioritized. Distinguish between system-level alerts (the service is down) and model-level alerts (predictions are degrading). Avoid alert fatigue by setting meaningful thresholds and using multi-signal correlation.</p>
+
+      <h4>Incident Response</h4>
+      <p>Establish incident response procedures specific to AI failures. Model degradation may require different runbooks than system outages — rollback to a previous model version, switch to a fallback model, or gracefully degrade to a rules-based system.</p>
+
+      <h4>Capacity Planning</h4>
+      <p>Plan compute and storage capacity for AI workloads, accounting for training bursts, inference scaling patterns, and data growth. GPU/TPU resources are expensive — optimize utilization while maintaining performance headroom.</p>
+
+      <h4>Chaos Engineering for AI</h4>
+      <p>Test AI system resilience by injecting failures — corrupted input data, model serving outages, feature store latency spikes, and upstream data pipeline delays. Verify that fallback mechanisms and graceful degradation work as designed.</p>
+
+      <h3>Related Roles</h3>
+      <ul>
+        <li><a href="#roles">SRE / AI Ops Engineer</a> — Primary owner of reliability and observability</li>
+        <li><a href="#roles">ML Engineer</a> — Instruments models and builds monitoring</li>
+        <li><a href="#roles">Platform Engineer</a> — Provides monitoring infrastructure</li>
+      </ul>
+
+      <h3>Related Principles</h3>
+      <ul>
+        <li><a href="#principles">Measure What Matters</a> — SLOs connect operational metrics to business outcomes</li>
+        <li><a href="#principles">Continuous Feedback Loops</a> — Observability data drives model improvement</li>
+      </ul>
+      </div>
+
+      <div class="legacy-section" id="security-ethics">
+        <h2>Security, Ethics &amp; Compliance</h2>
+<h3>Overview</h3>
+      <p>AI systems introduce unique security risks and ethical challenges that traditional security and compliance practices do not fully address. This discipline covers the specific threats, governance requirements, and ethical obligations that come with deploying AI in production — from adversarial attacks to algorithmic bias to emerging regulation.</p>
+
+      <h3>Key Practices</h3>
+
+      <h4>AI Threat Modeling</h4>
+      <p>Identify and assess threats specific to AI systems — adversarial inputs, data poisoning, model extraction, membership inference, and prompt injection. Conduct threat modeling as part of the development lifecycle, not as an afterthought before launch.</p>
+
+      <h4>Bias Testing &amp; Fairness</h4>
+      <p>Evaluate models for bias across protected attributes before and after deployment. Define fairness metrics appropriate to the use case (demographic parity, equalized odds, calibration). Build bias testing into the CI/CD pipeline so it runs automatically with every model update.</p>
+
+      <h4>Explainability &amp; Transparency</h4>
+      <p>Provide appropriate explanations for model decisions. High-stakes applications (lending, hiring, healthcare) require interpretable models or robust post-hoc explanation methods. Document model capabilities, limitations, and intended use cases in model cards.</p>
+
+      <h4>Privacy &amp; Data Protection</h4>
+      <p>Implement privacy controls at every stage — differential privacy in training, data minimization in feature engineering, secure inference for sensitive inputs, and right-to-erasure compliance. Conduct privacy impact assessments for AI systems that process personal data.</p>
+
+      <h4>Regulatory Compliance</h4>
+      <p>Stay current with AI-specific regulation (EU AI Act, NIST AI RMF, industry-specific guidelines) and implement compliance controls proactively. Maintain audit trails, documentation, and governance structures that demonstrate compliance.</p>
+
+      <h4>Secure ML Infrastructure</h4>
+      <p>Harden the ML infrastructure stack — secure model artifact storage, encrypt data in transit and at rest, implement access controls on training data and model endpoints, and audit access patterns. Treat ML infrastructure with the same security rigor as any production system.</p>
+
+      <h3>Related Roles</h3>
+      <ul>
+        <li><a href="#roles">AI Security Engineer</a> — Leads threat modeling and security implementation</li>
+        <li><a href="#roles">AI Ethics Lead</a> — Champions fairness, transparency, and governance</li>
+        <li><a href="#roles">Data Engineer</a> — Implements data privacy and governance controls</li>
+      </ul>
+
+      <h3>Related Principles</h3>
+      <ul>
+        <li><a href="#principles">Responsible by Default</a> — Ethics and security are embedded, not bolted on</li>
+        <li><a href="#principles">Measure What Matters</a> — Fairness and safety metrics alongside performance</li>
+      </ul>
+      </div>
+
+      <div class="legacy-section" id="strategy">
+        <h2>Strategy &amp; Organization</h2>
+<h3>Overview</h3>
+      <p>Strategy & Organization addresses the human and organizational dimensions of scaling AI. Technology alone is insufficient — success requires aligning AI investments with business strategy, building the right team structures, developing talent, and creating a culture that supports experimentation and operational excellence.</p>
+
+      <h3>Key Practices</h3>
+
+      <h4>AI Strategy Alignment</h4>
+      <p>Connect AI initiatives directly to business objectives. Every AI project should have a clear hypothesis about the business value it will deliver and measurable criteria for success. Avoid "AI for AI's sake" — the technology is a means, not an end.</p>
+
+      <h4>Portfolio Management</h4>
+      <p>Manage AI initiatives as a portfolio, balancing quick wins with long-term bets, and exploratory research with production-grade systems. Prioritize ruthlessly — the number of models you can operate well is finite. Kill projects early when the value hypothesis is disproven.</p>
+
+      <h4>Team Topology</h4>
+      <p>Design team structures that enable flow. Common patterns include centralized AI teams, embedded ML engineers within product teams, and platform teams that serve multiple product teams. The right topology depends on organizational maturity and scale — most organizations evolve through multiple stages.</p>
+
+      <h4>Talent Development</h4>
+      <p>Invest in growing AI capabilities across the organization. This goes beyond hiring data scientists — it includes upskilling engineers on ML operations, training product managers on AI product management, and building AI literacy among leadership.</p>
+
+      <h4>Experimentation Culture</h4>
+      <p>Create an environment where teams can experiment safely. This means allocating time and resources for exploration, celebrating learnings from failed experiments, and establishing clear paths from experiment to production. Fast iteration requires psychological safety.</p>
+
+      <h4>Value Measurement</h4>
+      <p>Build the capability to measure the business impact of AI systems. This requires instrumentation, attribution models, and close collaboration between AI teams and business stakeholders. If you cannot measure the value, you cannot justify the investment or guide improvements.</p>
+
+      <h3>Related Roles</h3>
+      <ul>
+        <li><a href="#roles">AI Product Manager</a> — Drives strategy alignment and value measurement</li>
+        <li><a href="#roles">AI Ethics Lead</a> — Ensures strategy includes responsible AI considerations</li>
+      </ul>
+
+      <h3>Related Principles</h3>
+      <ul>
+        <li><a href="#principles">Measure What Matters</a> — Business impact drives strategy</li>
+        <li><a href="#principles">Cross-Functional Ownership</a> — Organization design enables collaboration</li>
+        <li><a href="#principles">Embrace Incremental Value</a> — Portfolio management favors iterative delivery</li>
+      </ul>
+      </div>
+
+      <div class="legacy-section" id="principles">
+        <h2>Guiding principles (MLOps edition)</h2>
+<div class="callout-box" style="margin-top:0; margin-bottom:2.5rem;">
+        <h4><span class="icon-inline"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span> The ScaledAIOps Mindset</h4>
+        <p style="margin:0; font-size:0.98rem; color:#334155;">
+          Unlike traditional software where logic is deterministic and code-centric, AI systems are probabilistic, data-dependent, and degrade over time. These eight principles guide engineering decisions across every stage of the lifecycle.
+        </p>
+      </div>
+
+      <!-- Principle 1 -->
+      <div class="principle-detail">
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">1</div>
+            <h3>Production-First Thinking</h3>
+          </div>
+          <span class="principle-tag core-phase">Deployment &amp; Serving</span>
+        </div>
+        <p class="principle-body-text">
+          Every model is built with deployment, monitoring, and maintenance in mind from day one. A model that cannot be served, monitored, and maintained in production delivers zero value. Teams must address operational requirements — latency budgets, throughput limits, memory footprint, fallback mechanisms, and rollback strategies — from the earliest inception.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Define serving requirements before training begins &bull; Include production readiness reviews (PRRs) in model development &bull; Build deployment automation pipelines alongside the model, not as an afterthought.
+        </div>
+      </div>
+
+      <!-- Principle 2 -->
+      <div class="principle-detail">
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">2</div>
+            <h3>Automate Relentlessly</h3>
+          </div>
+          <span class="principle-tag core-phase">CI/CD &amp; Automation</span>
+        </div>
+        <p class="principle-body-text">
+          Pipelines, testing, deployment, and monitoring should be automated to eliminate toil and human error. Manual processes are the primary bottleneck to reliability and velocity. Every repetitive step in the AI lifecycle — data validation, feature extraction, model retraining, regression testing, and canary rollouts — is a candidate for full automation.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Invest in CI/CD pipelines tailored for ML artifacts &bull; Automate continuous data quality verification &bull; Manage infrastructure as code (IaC) &bull; Treat pipeline automation as a core engineering priority.
+        </div>
+      </div>
+
+      <!-- Principle 3 -->
+      <div class="principle-detail">
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">3</div>
+            <h3>Data as a First-Class Citizen</h3>
+          </div>
+          <span class="principle-tag core-phase">Data Operations</span>
+        </div>
+        <p class="principle-body-text">
+          Data quality, lineage, and governance are as crucial as model weights and architecture. Models are only as dependable as the data they consume. Organizations must treat datasets, schema contracts, feature stores, and lineage tracking with the same rigor and testing discipline applied to source code.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Enforce strict data contracts between upstream producers and AI consumers &bull; Track end-to-end data lineage &bull; Monitor input feature drift continuously &bull; Version and immutably snapshot training datasets.
+        </div>
+      </div>
+
+      <!-- Principle 4 -->
+      <div class="principle-detail">
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">4</div>
+            <h3>Continuous Feedback Loops</h3>
+          </div>
+          <span class="principle-tag core-phase">Observability &amp; Feedback</span>
+        </div>
+        <p class="principle-body-text">
+          Production telemetry feeds directly back into development to improve models and data pipelines iteratively. AI systems inevitably degrade due to concept drift and changing real-world dynamics. Continuous observability, ground-truth harvesting, and automated retraining loops keep models aligned with reality.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Instrument inference endpoints to capture prediction distributions and user feedback &bull; Build automated retraining triggers based on statistical drift thresholds &bull; Conduct regular post-mortems on model drift incidents.
+        </div>
+      </div>
+
+      <!-- Principle 5 -->
+      <div class="principle-detail">
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">5</div>
+            <h3>Responsible by Default</h3>
+          </div>
+          <span class="principle-tag core-phase">Security &amp; Ethics</span>
+        </div>
+        <p class="principle-body-text">
+          Ethics, fairness, transparency, and security are embedded in every stage of development, never bolted on as a final compliance check. Responsible AI is an engineering design principle: bias testing, model cards, explainability metrics, differential privacy, and adversarial threat modeling must be automated within standard CI pipelines.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Automate demographic parity and fairness testing in CI &bull; Publish transparent Model Cards for all high-stakes systems &bull; Conduct prompt injection and adversarial threat modeling &bull; Bake privacy controls into data pipelines.
+        </div>
+      </div>
+
+      <!-- Principle 6 -->
+      <div class="principle-detail">
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">6</div>
+            <h3>Cross-Functional Ownership</h3>
+          </div>
+          <span class="principle-tag core-phase">Strategy &amp; Roles</span>
+        </div>
+        <p class="principle-body-text">
+          AI systems are co-owned by data scientists, ML engineers, platform engineers, product managers, and security leads. The traditional siloed "throw models over the wall" handoff fails in production. Operating AI reliably requires shared Service Level Objectives (SLOs), unified tooling, and joint accountability for business outcomes.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Embed ML and platform engineers directly alongside data scientists &bull; Establish shared model uptime and quality SLOs &bull; Standardize on a unified internal developer platform for AI development and deployment.
+        </div>
+      </div>
+
+      <!-- Principle 7 -->
+      <div class="principle-detail">
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">7</div>
+            <h3>Measure What Matters</h3>
+          </div>
+          <span class="principle-tag core-phase">Business Value &amp; SRE</span>
+        </div>
+        <p class="principle-body-text">
+          Business impact and system operational health are tracked alongside offline model accuracy. A 99% accurate model that costs 10x its return or introduces 5-second latency is a failure. Teams must measure real-world business KPIs (revenue impact, conversion, user retention) alongside runtime latency, GPU cost, and error rates.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Define measurable business KPIs for every AI initiative prior to development &bull; Track P95/P99 latency, cost per inference, and token utilization &bull; Build executive dashboards connecting model metrics to ROI.
+        </div>
+      </div>
+
+      <!-- Principle 8 -->
+      <div class="principle-detail">
+        <div class="principle-header-wrap">
+          <div class="principle-title-group">
+            <div class="principle-number-badge">8</div>
+            <h3>Embrace Incremental Value</h3>
+          </div>
+          <span class="principle-tag core-phase">Iteration &amp; Delivery</span>
+        </div>
+        <p class="principle-body-text">
+          Ship early, learn from real feedback, and iterate rapidly. The pursuit of a theoretical "perfect" model in isolation is the enemy of enterprise value. A deployed baseline model that solves 80% of the problem and generates real production learning is far superior to an over-engineered model stuck in a notebook.
+        </p>
+        <div class="principle-practice-box">
+          <strong><span class="icon-inline"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span> In practice:</strong> Start with baseline heuristics or lightweight models &bull; Validate improvements with shadow deployments and A/B canary routing &bull; Reward shipping reliable production systems over offline notebook benchmarks.
+        </div>
+      </div>
+      </div>
+
+      <div class="legacy-section" id="roles">
+        <h2>Roles (MLOps edition)</h2>
+<div class="card-grid">
+
+        <div class="card card--static" id="ml-engineer">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
+          <h4>ML Engineer</h4>
+          <p>Bridges data science and production engineering. Builds training pipelines, serving infrastructure, and automation for the model lifecycle. Owns the path from notebook to production.</p>
+        </div>
+
+        <div class="card card--static" id="data-scientist">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M10 2v7.31L4.41 18.5A2 2 0 0 0 6 22h12a2 2 0 0 0 1.59-3.5L14 9.31V2"></path><line x1="8.5" y1="2" x2="15.5" y2="2"></line><line x1="14" y1="9.31" x2="10" y2="9.31"></line></svg></div>
+          <h4>Data Scientist</h4>
+          <p>Develops models, conducts experiments, and performs analysis. Collaborates closely with ML Engineers to ensure models are production-ready and with product teams to align on business objectives.</p>
+        </div>
+
+        <div class="card card--static" id="platform-engineer">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+          <h4>Platform Engineer</h4>
+          <p>Builds and maintains the ML platform — compute infrastructure, feature stores, model registries, and deployment tooling. Enables self-service for data science and ML engineering teams.</p>
+        </div>
+
+        <div class="card card--static" id="data-engineer">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div>
+          <h4>Data Engineer</h4>
+          <p>Designs and operates data pipelines that feed AI systems. Responsible for data quality, availability, lineage, and governance. Ensures reliable data flows from source to model.</p>
+        </div>
+
+        <div class="card card--static" id="ai-product-manager">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
+          <h4>AI Product Manager</h4>
+          <p>Defines the product vision for AI-powered features. Translates business problems into ML problem statements, prioritizes model improvements, and measures business impact.</p>
+        </div>
+
+        <div class="card card--static" id="sre-ai-ops-engineer">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+          <h4>SRE / AI Ops Engineer</h4>
+          <p>Ensures reliability and performance of AI systems in production. Defines SLOs, builds monitoring and alerting, manages incident response, and drives operational excellence for ML workloads.</p>
+        </div>
+
+        <div class="card card--static" id="ai-security-engineer">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div>
+          <h4>AI Security Engineer</h4>
+          <p>Secures AI systems against adversarial attacks, data poisoning, model theft, and privacy violations. Conducts threat modeling specific to AI workloads and ensures regulatory compliance.</p>
+        </div>
+
+        <div class="card card--static" id="ai-ethics-lead">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg></div>
+          <h4>AI Ethics Lead</h4>
+          <p>Champions responsible AI practices across the organization. Establishes fairness metrics, bias testing processes, transparency requirements, and governance frameworks for AI systems.</p>
+        </div>
+
+      </div>
+      </div>
+
+      <div class="legacy-section" id="hardware-for-llm-training">
+        <h2>Minimum hardware for training and fine-tuning LLMs and SLMs</h2>
+<p class="post-meta">Published 20 August 2026 on the blog.</p>
+
+      <p><strong>A note on scope and staleness before anything else:</strong> GPU models, VRAM capacities and cloud rental prices change every few months, and this page will not be updated to track them. What follows describes durable categories and the trade-offs between them, not specific current products or prices — treat any dollar figures as order-of-magnitude and check a vendor's current listing before buying or renting anything.</p>
+
+      <h3>Training, fine-tuning and pretraining are different asks</h3>
+      <p>"Minimum hardware for training an LLM" has no single answer because "training" covers very different workloads:</p>
+      <ul>
+        <li><strong>Inference / running a model</strong> — loading a pretrained model and generating text from it. Cheapest by far; a quantized small model can run on a laptop CPU.</li>
+        <li><strong>Parameter-efficient fine-tuning</strong> (LoRA, QLoRA, adapters) — adjusting a small fraction of a pretrained model's weights on your own data. This is what "fine-tune an LLM on a consumer GPU" articles are usually describing, and it's realistic on modest hardware because the base model's weights stay frozen and quantized.</li>
+        <li><strong>Full fine-tuning</strong> — updating all of a pretrained model's weights. Needs to hold gradients and optimizer state for every parameter, which multiplies memory needs several times over LoRA for the same model size.</li>
+        <li><strong>Pretraining from scratch</strong> — training a model's weights from random initialization on a large corpus. Even for a "small" language model (SLM) this needs far more compute and data-pipeline engineering than fine-tuning; pretraining a frontier-scale LLM from scratch is a multi-node, multi-million-dollar undertaking and out of scope for a "minimum hardware" post.</li>
+      </ul>
+      <p>The tiers below are organized around the first two — the workloads an individual or small team can actually run — with a note on where full fine-tuning and small-scale pretraining fit.</p>
+
+      <h3>The tiers</h3>
+      <div class="table-wrap"><table class="post-table">
+        <thead><tr><th>Tier</th><th>What it looks like</th><th>Realistic for</th><th>Cost shape</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Consumer / hobbyist</strong></td>
+            <td>One modern consumer GPU with mid-to-high VRAM (the kind sold for gaming), in a normal desktop.</td>
+            <td>Local inference of small-to-mid models (quantized); LoRA/QLoRA fine-tuning of small models (roughly single-digit billions of parameters, quantized to 4-bit).</td>
+            <td>One-time purchase; hundreds to low thousands of currency units. Runs indefinitely at the cost of electricity.</td>
+          </tr>
+          <tr>
+            <td><strong>Prosumer / workstation</strong></td>
+            <td>One high-VRAM "workstation-class" GPU, or two-to-four consumer/prosumer GPUs in one machine.</td>
+            <td>LoRA fine-tuning of larger models; full fine-tuning of small models; small-scale architecture experiments; comfortably running larger quantized models for inference.</td>
+            <td>One-time purchase; low-to-mid thousands, scaling with GPU count. Same ongoing electricity cost, now non-trivial.</td>
+          </tr>
+          <tr>
+            <td><strong>Cloud rental</strong></td>
+            <td>Pay-by-the-hour access to one or many data-center-class GPUs (much higher VRAM per card than consumer parts), from a cloud or GPU-rental provider.</td>
+            <td>Anything above, without the upfront cost; the only realistic option for full fine-tuning of large models or pretraining an SLM, since it lets you rent many GPUs for a short burst instead of owning them.</td>
+            <td>No upfront cost; billed per GPU-hour. A single card runs a small fraction of a currency unit to a few units per hour depending on the card and provider; a multi-GPU pretraining run can still add up to a meaningful sum over days.</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <h3>The lever that matters most: quantization</h3>
+      <p>Across all three tiers, the single biggest factor in what fits is <strong>quantization</strong> — representing model weights (and sometimes optimizer state) in fewer bits than the 16 or 32 bits they were trained in. Loading a model in 4-bit roughly quarters its memory footprint against a 16-bit load, which is why techniques like QLoRA make it possible to fine-tune models on consumer GPUs that would otherwise need a data-center card just to load. The trade-off is a small amount of quality loss, which is usually acceptable for fine-tuning and often negligible for inference.</p>
+
+      <h3>What actually constrains you</h3>
+      <ul>
+        <li><strong>VRAM, not raw compute, is usually the wall.</strong> A card can be fast and still unable to fit the model, its activations, gradients and optimizer state in memory at once. This is why "how much VRAM" is the first question, and why quantization and parameter-efficient methods matter more than raw FLOPS for getting started.</li>
+        <li><strong>Multi-GPU needs fast interconnect to scale well.</strong> Two GPUs in one desktop can split a model, but training throughput across GPUs (and across machines) depends heavily on how fast they can exchange data — a detail that matters far more once you move past a single card.</li>
+        <li><strong>Data engineering, not hardware, is usually the actual bottleneck</strong> for anyone starting out — sourcing, cleaning and formatting training data (see <a href="#data-operations">Data Operations</a>) — regardless of which hardware tier you're on.</li>
+      </ul>
+
+      <h3>Where to start</h3>
+      <p>For most people asking this question, the practical path is: start with parameter-efficient fine-tuning of a small, openly-licensed model on whatever consumer GPU you already have or can afford, using an established fine-tuning library rather than writing a training loop from scratch. Move to a prosumer machine or cloud rental only once you've validated that the approach works and you specifically need more scale — renting compute for a focused run is usually cheaper and faster than buying hardware for an unproven workload.</p>
+
+      <p class="post-cta">This page is deliberately light on specific model names and prices, since both go stale fast — <a href="#ml-engineering">ML Engineering &amp; Platform</a> and <a href="#model-lifecycle">Model Lifecycle Management</a> cover the durable practices around building and operating models once you're past the hardware question.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="arch-section" id="lifecycle">
+    <div class="container">
+      <div class="arch-header">
+        <div class="arch-badge">
+          <span class="arch-badge-dot"></span>
+          Operational Architecture Comparison
+        </div>
+        <h2 class="section-title">From Classic SDLC to ScaledAIOps</h2>
+        <p class="section-subtitle">
+          Traditional Software Development is code-centric and deterministic. ScaledAIOps operationalizes probabilistic AI systems through continuous feedback loops, governed data pipelines, and full model lifecycle observability.
+        </p>
+        <p style="text-align:center; font-size:0.9rem; color:var(--color-text-light); margin:-0.5rem 0 1.5rem;">
+        </p>
+      </div>
+
+      <div class="arch-container" id="native-arch-box">
+        
+        <!-- Left: SDLC Column -->
+        <div class="arch-column sdlc-col">
+          <div class="arch-col-header">
+            <div class="arch-col-title">Traditional SDLC</div>
+            <span class="arch-col-tag">Deterministic &bull; Code-Centric &bull; Static Logic</span>
+          </div>
+
+          <div class="arch-flow-stage" id="live-sdlc-area">
+            <svg class="arch-svg-overlay" id="live-sdlc-svg"></svg>
+            
+            <div class="arch-nodes-layer">
+              <!-- Step 1 -->
+              <div class="arch-card main-step" id="ls-1">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">1. Requirements &amp; Scoping</div>
+                  <div class="arch-card-sub">Functional Specs &amp; User Stories</div>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="arch-card main-step" id="ls-2">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">2. System Architecture &amp; Design</div>
+                  <div class="arch-card-sub">Technical &amp; API Specifications</div>
+                </div>
+              </div>
+
+              <!-- Subnodes -->
+              <div class="arch-subnodes-row">
+                <div class="arch-subnode" id="ls-2a">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+                  <div class="arch-subnode-label">System Architecture</div>
+                </div>
+                <div class="arch-subnode" id="ls-2b">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+                  <div class="arch-subnode-label">Module &amp; API Design</div>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="arch-card main-step" id="ls-3">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">3. Implementation &amp; Coding</div>
+                  <div class="arch-card-sub">Deterministic Codebase &amp; Unit Tests</div>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="arch-card main-step" id="ls-4">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">4. Quality Assurance &amp; Testing</div>
+                  <div class="arch-card-sub">Code Coverage &amp; Functional Checks</div>
+                </div>
+              </div>
+
+              <!-- Subnodes -->
+              <div class="arch-subnodes-row">
+                <div class="arch-subnode" id="ls-4a">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+                  <div class="arch-subnode-label">Unit-Level Testing</div>
+                </div>
+                <div class="arch-subnode" id="ls-4b">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M6 21V9a9 9 0 0 0 9 9"></path></svg></div>
+                  <div class="arch-subnode-label">Integration Testing</div>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="arch-card main-step" id="ls-5">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">5. Release &amp; Deployment</div>
+                  <div class="arch-card-sub">CI/CD Binary Artifacts to Cloud</div>
+                </div>
+              </div>
+
+              <!-- Step 6 -->
+              <div class="arch-card main-step" id="ls-6">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">6. Maintenance &amp; Bug Fixes</div>
+                  <div class="arch-card-sub">Infrastructure &amp; Patch Releases</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: ScaledAIOps Column -->
+        <div class="arch-column aidlc-col">
+          <div class="arch-col-header">
+            <div class="arch-col-title">ScaledAIOps Lifecycle</div>
+            <span class="arch-col-tag">Probabilistic &bull; Data-Centric &bull; 6 Core Disciplines</span>
+          </div>
+
+          <div class="arch-flow-stage" id="live-aidlc-area">
+            <svg class="arch-svg-overlay" id="live-aidlc-svg"></svg>
+            <div class="arch-feedback-ribbon">Continuous Feedback Loop &uarr;</div>
+
+            <div class="arch-nodes-layer">
+              <!-- Step 1 -->
+              <a href="#strategy" class="arch-card main-step" id="la-1">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">1. Problem Framing &amp; Strategy</div>
+                  <div class="arch-card-sub">Strategy &amp; Organization Discipline</div>
+                </div>
+              </a>
+
+              <!-- Step 2 -->
+              <a href="#data-operations" class="arch-card main-step" id="la-2">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">2. Data Operations &amp; Lineage</div>
+                  <div class="arch-card-sub">Data Operations Discipline</div>
+                </div>
+              </a>
+
+              <!-- Subnodes -->
+              <div class="arch-subnodes-row">
+                <div class="arch-subnode" id="la-2a">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><line x1="6" y1="3" x2="6" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg></div>
+                  <div class="arch-subnode-label">Data Lineage &amp; Ingestion</div>
+                </div>
+                <div class="arch-subnode" id="la-2b">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></div>
+                  <div class="arch-subnode-label">Annotation &amp; Cleansing</div>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <a href="#ml-engineering" class="arch-card main-step" id="la-3">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">3. Model Building &amp; Architecture</div>
+                  <div class="arch-card-sub">ML Engineering &amp; Platform</div>
+                </div>
+              </a>
+
+              <!-- Step 4 -->
+              <a href="#security-ethics" class="arch-card main-step" id="la-4">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">4. Validation &amp; Responsible AI</div>
+                  <div class="arch-card-sub">Security, Ethics &amp; Compliance</div>
+                </div>
+              </a>
+
+              <!-- Subnodes -->
+              <div class="arch-subnodes-row">
+                <div class="arch-subnode" id="la-4a">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg></div>
+                  <div class="arch-subnode-label">Training &amp; Tuning</div>
+                </div>
+                <div class="arch-subnode" id="la-4b">
+                  <div class="arch-subnode-icon"><svg viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg></div>
+                  <div class="arch-subnode-label">Bias, Fairness &amp; Threat Scans</div>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <a href="#model-lifecycle" class="arch-card main-step" id="la-5">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">5. Serving &amp; Model Governance</div>
+                  <div class="arch-card-sub">Model Lifecycle Management</div>
+                </div>
+              </a>
+
+              <!-- Step 6 -->
+              <a href="#reliability" class="arch-card main-step" id="la-6">
+                <div class="arch-icon-wrap"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+                <div class="arch-card-info">
+                  <div class="arch-card-title">6. Observability &amp; Continuous Feedback</div>
+                  <div class="arch-card-sub">Reliability &amp; Observability Discipline</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center; margin-top:1.5rem;">
+        <p style="font-size:0.9rem; color:var(--color-text-light); margin-bottom:0.75rem;">
+          Want to use this animated diagram in your slides or documentation?
+        </p>
+        <div style="display:inline-flex; gap:0.75rem; flex-wrap:wrap; justify-content:center;">
+          <a href="/assets/img/scaledaiops-sdlc-vs-aidlc.gif" download class="btn btn-outline" style="border-color:var(--color-border); color:var(--color-primary); font-size:0.85rem; padding:0.5rem 1.25rem; display:inline-flex; align-items:center; gap:0.4rem;">
+            <svg viewBox="0 0 24 24" style="width:16px; height:16px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download Animated Infographic (GIF)
+          </a>
+          <a href="/assets/img/scaledaiops-sdlc-vs-aidlc-landscape.gif" download class="btn btn-outline" style="border-color:var(--color-border); color:var(--color-primary); font-size:0.85rem; padding:0.5rem 1.25rem; display:inline-flex; align-items:center; gap:0.4rem;">
+            <svg viewBox="0 0 24 24" style="width:16px; height:16px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download 16:9 Slide (GIF)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Live Browser Flow Animation for SDLC vs ScaledAIOps Diagram
+    (function() {
+      function getRelPos(el, parent) {
+        if (!el || !parent) return { x: 0, yTop: 0, yBottom: 0, xRight: 0, height: 0 };
+        const elRect = el.getBoundingClientRect();
+        const pRect = parent.getBoundingClientRect();
+        return {
+          x: elRect.left - pRect.left + elRect.width / 2,
+          yTop: elRect.top - pRect.top,
+          yBottom: elRect.bottom - pRect.top,
+          xLeft: elRect.left - pRect.left,
+          xRight: elRect.right - pRect.left,
+          width: elRect.width,
+          height: elRect.height
+        };
+      }
+
+      function setupTrack(prefix, color, svgId, areaId, hasFeedback) {
+        const area = document.getElementById(areaId);
+        const svg = document.getElementById(svgId);
+        if (!area || !svg) return;
+        const w = area.clientWidth;
+        const h = area.clientHeight;
+        if (w === 0 || h === 0) return;
+        svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+
+        const n1 = getRelPos(document.getElementById(prefix + '-1'), area);
+        const n2 = getRelPos(document.getElementById(prefix + '-2'), area);
+        const n2a = getRelPos(document.getElementById(prefix + '-2a'), area);
+        const n2b = getRelPos(document.getElementById(prefix + '-2b'), area);
+        const n3 = getRelPos(document.getElementById(prefix + '-3'), area);
+        const n4 = getRelPos(document.getElementById(prefix + '-4'), area);
+        const n4a = getRelPos(document.getElementById(prefix + '-4a'), area);
+        const n4b = getRelPos(document.getElementById(prefix + '-4b'), area);
+        const n5 = getRelPos(document.getElementById(prefix + '-5'), area);
+        const n6 = getRelPos(document.getElementById(prefix + '-6'), area);
+
+        const paths = [];
+        paths.push('M ' + n1.x + ' ' + n1.yBottom + ' L ' + n2.x + ' ' + n2.yTop);
+
+        const midY1 = (n2.yBottom + n2a.yTop) / 2;
+        const midY2 = (n2a.yBottom + n3.yTop) / 2;
+        paths.push('M ' + n2.x + ' ' + n2.yBottom + ' L ' + n2.x + ' ' + midY1 + ' L ' + n2a.x + ' ' + midY1 + ' L ' + n2a.x + ' ' + n2a.yTop);
+        paths.push('M ' + n2.x + ' ' + n2.yBottom + ' L ' + n2.x + ' ' + midY1 + ' L ' + n2b.x + ' ' + midY1 + ' L ' + n2b.x + ' ' + n2b.yTop);
+        paths.push('M ' + n2a.x + ' ' + n2a.yBottom + ' L ' + n2a.x + ' ' + midY2 + ' L ' + n3.x + ' ' + midY2 + ' L ' + n3.x + ' ' + n3.yTop);
+        paths.push('M ' + n2b.x + ' ' + n2b.yBottom + ' L ' + n2b.x + ' ' + midY2 + ' L ' + n3.x + ' ' + midY2 + ' L ' + n3.x + ' ' + n3.yTop);
+        paths.push('M ' + n2.x + ' ' + midY1 + ' L ' + n3.x + ' ' + midY2);
+
+        paths.push('M ' + n3.x + ' ' + n3.yBottom + ' L ' + n4.x + ' ' + n4.yTop);
+
+        const midY3 = (n4.yBottom + n4a.yTop) / 2;
+        const midY4 = (n4a.yBottom + n5.yTop) / 2;
+        paths.push('M ' + n4.x + ' ' + n4.yBottom + ' L ' + n4.x + ' ' + midY3 + ' L ' + n4a.x + ' ' + midY3 + ' L ' + n4a.x + ' ' + n4a.yTop);
+        paths.push('M ' + n4.x + ' ' + n4.yBottom + ' L ' + n4.x + ' ' + midY3 + ' L ' + n4b.x + ' ' + midY3 + ' L ' + n4b.x + ' ' + n4b.yTop);
+        paths.push('M ' + n4a.x + ' ' + n4a.yBottom + ' L ' + n4a.x + ' ' + midY4 + ' L ' + n5.x + ' ' + midY4 + ' L ' + n5.x + ' ' + n5.yTop);
+        paths.push('M ' + n4b.x + ' ' + n4b.yBottom + ' L ' + n4b.x + ' ' + midY4 + ' L ' + n5.x + ' ' + midY4 + ' L ' + n5.x + ' ' + n5.yTop);
+        paths.push('M ' + n4.x + ' ' + midY3 + ' L ' + n5.x + ' ' + midY4);
+
+        paths.push('M ' + n5.x + ' ' + n5.yBottom + ' L ' + n6.x + ' ' + n6.yTop);
+
+        let feedbackPath = '';
+        if (hasFeedback) {
+          const rightTrack = w - 10;
+          feedbackPath = 'M ' + n6.xRight + ' ' + (n6.yTop + n6.height/2) + ' C ' + (rightTrack + 16) + ' ' + (n6.yTop + n6.height/2 + 20) + ', ' + (rightTrack + 16) + ' ' + (n2.yTop + n2.height/2 - 20) + ', ' + n2.xRight + ' ' + (n2.yTop + n2.height/2);
+        }
+
+        let svgHtml = '<marker id="' + prefix + '-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="' + color + '"/></marker>';
+        paths.forEach(function(d, idx) {
+          svgHtml += '<path id="' + prefix + '-p-' + idx + '" d="' + d + '" fill="none" stroke="' + color + '" stroke-width="2.5" opacity="0.65"/>';
+        });
+
+        if (feedbackPath) {
+          svgHtml += '<path id="' + prefix + '-fb" d="' + feedbackPath + '" fill="none" stroke="' + color + '" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.75" marker-end="url(#' + prefix + '-arrow)"/>';
+        }
+
+        svgHtml += '<g id="' + prefix + '-pts"></g>';
+        svg.innerHTML = svgHtml;
+      }
+
+      function updateAnimation(progress) {
+        ['ls', 'la'].forEach(function(prefix) {
+          const color = prefix === 'ls' ? '#ea580c' : '#0284c7';
+          const glow = prefix === 'ls' ? '#fdba74' : '#7dd3fc';
+          const pGroup = document.getElementById(prefix + '-pts');
+          if (!pGroup) return;
+
+          let circlesHtml = '';
+          const paths = Array.from(document.querySelectorAll('[id^="' + prefix + '-p-"]'));
+          const fb = document.getElementById(prefix + '-fb');
+          if (fb) paths.push(fb);
+
+          paths.forEach(function(pEl) {
+            const len = pEl.getTotalLength();
+            if (len <= 0) return;
+            const isFb = pEl.id.indexOf('-fb') !== -1;
+            const dotCount = isFb ? 3 : Math.max(1, Math.round(len / 55));
+            for (let i = 0; i < dotCount; i++) {
+              const offset = ((progress + (i / dotCount)) % 1.0) * len;
+              const pt = pEl.getPointAtLength(offset);
+              circlesHtml += '<circle cx="' + pt.x + '" cy="' + pt.y + '" r="5.5" fill="' + glow + '" opacity="0.4"/><circle cx="' + pt.x + '" cy="' + pt.y + '" r="3" fill="' + color + '"/><circle cx="' + pt.x + '" cy="' + pt.y + '" r="1.2" fill="#fff"/>';
+            }
+          });
+          pGroup.innerHTML = circlesHtml;
+        });
+      }
+
+      function init() {
+        setupTrack('ls', '#f97316', 'live-sdlc-svg', 'live-sdlc-area', false);
+        setupTrack('la', '#0ea5e9', 'live-aidlc-svg', 'live-aidlc-area', true);
+      }
+
+      window.addEventListener('load', function() {
+        init();
+        let start = null;
+        function loop(timestamp) {
+          if (!start) start = timestamp;
+          const progress = ((timestamp - start) % 2000) / 2000;
+          updateAnimation(progress);
+          requestAnimationFrame(loop);
+        }
+        requestAnimationFrame(loop);
+      });
+
+      let resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(init, 150);
+      });
+    })();
+  </script>
