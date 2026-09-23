@@ -15,10 +15,9 @@ to production and retirement. Design of record: `docs/repositioning-spec.md`.
 *building* AI systems. Legacy MLOps/model-building content lives on a single
 archived legacy page and must not reappear in main navigation or new content.
 
-**Migration status:** in progress. Until the repositioning lands, the
-discipline, principle and role pages still carry the pre-pivot MLOps content,
-and `tests/homepage.spec.js` + `tests/navigation.spec.js` assert those six
-disciplines — replace pages and their tests in the same PR.
+**Legacy:** all pre-pivot content lives on `/legacy/` (one page, anchors per
+old page). Old URLs such as `/disciplines/ml-engineering/` are short pages
+that redirect to their anchor; keep them out of navigation.
 
 **Analogy we use:** what SAFe did for agile at enterprise scale, ScaledAIOps
 does for AI adoption. Built by practitioners from regulated industries —
@@ -134,8 +133,10 @@ locally with `npm run test:local` or `python3 -m http.server 8765 -d dist`.
 `dist/<same path>`.
 - Each content file starts with three metadata comments, one per line:
   `<!-- title: … -->`, `<!-- description: … -->`,
-  `<!-- active: disciplines|principles|roles|about|none -->`. They are
-  substituted with `sed` using `|` as delimiter — never put `|` in them.
+  `<!-- active: lifecycle|disciplines|pillars|principles|roles|about|none -->`.
+  They are substituted with `sed` using `|` as delimiter — never put `|` in
+  them. A new nav item needs `_layout/header.html` and the `for nav` loop in
+  `build.sh`.
 - The stylesheet URL carries `?v=<hash of assets/css>` (`{{ASSET_V}}`) so
   deploys never serve stale CSS. `assets/` is copied verbatim.
 - Clean URLs: every page is `<folder>/index.html`; a CloudFront Function
@@ -146,6 +147,14 @@ locally with `npm run test:local` or `python3 -m http.server 8765 -d dist`.
 **Adding a page:** create `_content/<section>/<slug>/index.html` with the
 metadata block, link it from the section hub (`_content/<section>/index.html`),
 and add it to the URL list in `tests/navigation.spec.js` (the 404 sweep).
+Discipline pages follow the template in `docs/repositioning-spec.md` §10;
+shared components (`.data-table`, `.tier-badge`, `.lifecycle`,
+`.pillar-flow`, `.stage`, `.role-card`) are at the end of `style.css`.
+
+**Pages:** `/` · `/lifecycle/` · `/disciplines/` + 6 · `/pillars/` ·
+`/maturity/` (self-assessment, client-side only) · `/principles/` ·
+`/roles/` · `/about/` · `/blog/` · `/legacy/`. `tests/homepage.spec.js`
+asserts the six disciplines, eight principles and nav; change them together.
 
 **FFRS add-on (feedback):** FFRS is a separate concept, not part of the
 ScaledAIOps framework — never present it as a discipline, pillar, principle
