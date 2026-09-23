@@ -1,53 +1,19 @@
-<!-- title: Data Operations · ScaledAIOps – AI Operations Framework -->
-<!-- description: Ensuring data quality, lineage, access, and governance to fuel trustworthy AI systems. -->
-<!-- active: disciplines -->
+<!-- title: Data Operations (archived) · ScaledAIOps -->
+<!-- description: This page moved to the archived legacy MLOps edition of ScaledAIOps. -->
+<!-- active: none -->
 
 <section class="hero" style="padding:3.5rem 1.5rem;">
     <div class="container">
-      <p class="subtitle" style="margin-bottom:0.5rem;"><a href="/disciplines/" style="color:rgba(255,255,255,0.7);">Disciplines</a> &rarr;</p>
+      <p class="crumb">Archive</p>
       <h1>Data Operations</h1>
-      <p class="subtitle">Ensuring data quality, lineage, access, and governance to fuel trustworthy AI systems.</p>
+      <p class="subtitle">This page is part of the archived MLOps edition.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container content-page">
-
-      <h2>Overview</h2>
-      <p>Data Operations is the discipline of managing the data that powers AI systems with the same rigor applied to production software. It encompasses data pipelines, quality assurance, lineage tracking, access controls, and governance — ensuring that models are built on a reliable, well-understood data foundation.</p>
-
-      <h2>Key Practices</h2>
-
-      <h3>Data Quality</h3>
-      <p>Implement automated data quality checks at every stage of the pipeline — completeness, consistency, accuracy, timeliness, and validity. Define data quality SLOs and alert when they are breached. Treat data quality failures as production incidents.</p>
-
-      <h3>Data Lineage</h3>
-      <p>Track the origin, transformation, and consumption of every dataset. Lineage enables impact analysis (what breaks if this source changes?), debugging (where did this bad prediction come from?), and compliance (can we prove where this data originated?).</p>
-
-      <h3>Data Contracts</h3>
-      <p>Establish formal agreements between data producers and consumers about schema, quality, and delivery guarantees. Data contracts prevent silent breakage when upstream systems change and make dependencies explicit and manageable.</p>
-
-      <h3>Data Versioning</h3>
-      <p>Version datasets alongside code and model artifacts. Reproducibility requires knowing exactly which data was used to train a given model. Use tools that support efficient storage and retrieval of large dataset versions.</p>
-
-      <h3>Data Governance</h3>
-      <p>Define and enforce policies around data access, retention, privacy, and usage. Implement role-based access controls, data classification, and audit logging. Ensure compliance with relevant regulations (GDPR, CCPA, industry-specific requirements).</p>
-
-      <h3>Pipeline Reliability</h3>
-      <p>Build data pipelines that are idempotent, observable, and recoverable. Implement retry logic, dead letter queues, and backfill capabilities. Monitor pipeline freshness and alert on delays — stale data leads to stale models.</p>
-
-      <h2>Related Roles</h2>
-      <ul>
-        <li><a href="/roles/">Data Engineer</a> — Builds and operates data pipelines</li>
-        <li><a href="/roles/">ML Engineer</a> — Consumes data for training and inference</li>
-        <li><a href="/roles/">AI Ethics Lead</a> — Ensures data governance meets ethical standards</li>
-      </ul>
-
-      <h2>Related Principles</h2>
-      <ul>
-        <li><a href="/principles/">Data as a First-Class Citizen</a> — The core principle behind this discipline</li>
-        <li><a href="/principles/">Automate Relentlessly</a> — Data quality and pipeline management must be automated</li>
-      </ul>
-
+      <p class="lede">ScaledAIOps now covers how organisations work with AI rather than how they build it. This page moved unchanged to the <a href="/legacy/#data-operations">legacy archive</a>.</p>
+      <p><a class="btn btn-primary" href="/legacy/#data-operations">Open it in the archive</a> <a class="btn btn-outline" href="/" style="color:var(--color-primary);border-color:var(--color-primary);">Current framework</a></p>
     </div>
   </section>
+  <script>location.replace('/legacy/#data-operations');</script>

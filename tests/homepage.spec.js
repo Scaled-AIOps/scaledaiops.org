@@ -6,14 +6,14 @@ test.describe('Homepage', () => {
   });
 
   test('loads with correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('ScaledAIOps — the open framework for running AI in production');
+    await expect(page).toHaveTitle('ScaledAIOps — the open framework for adopting AI across software delivery');
   });
 
   test('displays hero section', async ({ page }) => {
     const hero = page.locator('.hero');
     await expect(hero).toBeVisible();
-    await expect(hero.locator('h1')).toHaveText('The open framework for running AI in production.');
-    await expect(hero.locator('.subtitle')).toContainText('community-maintained');
+    await expect(hero.locator('h1')).toHaveText('The open framework for adopting AI across software delivery.');
+    await expect(hero.locator('.subtitle')).toContainText('SDLC, CI/CD and DevOps');
   });
 
   test('displays all six discipline cards', async ({ page }) => {
@@ -21,12 +21,12 @@ test.describe('Homepage', () => {
     await expect(cards).toHaveCount(6);
 
     const expectedTitles = [
-      'ML Engineering & Platform',
-      'Model Lifecycle Management',
-      'Data Operations',
-      'Reliability & Observability',
-      'Security, Ethics & Compliance',
-      'Strategy & Organization',
+      'AI-Augmented Delivery',
+      'Human–AI Workflow Design',
+      'Tooling & Context Engineering',
+      'Governance & Guardrails',
+      'Skills & Roles',
+      'Value & Measurement',
     ];
 
     for (let i = 0; i < expectedTitles.length; i++) {
@@ -41,8 +41,10 @@ test.describe('Homepage', () => {
 
   test('has working navigation links', async ({ page }) => {
     const nav = page.locator('.site-nav');
-    await expect(nav.locator('a')).toHaveCount(5);
+    await expect(nav.locator('a')).toHaveCount(7);
+    await expect(nav.locator('a[href="/lifecycle/"]')).toHaveText('Lifecycle');
     await expect(nav.locator('a[href="/disciplines/"]')).toHaveText('Disciplines');
+    await expect(nav.locator('a[href="/pillars/"]')).toHaveText('Pillars');
     await expect(nav.locator('a[href="/principles/"]')).toHaveText('Principles');
     await expect(nav.locator('a[href="/roles/"]')).toHaveText('Roles');
     await expect(nav.locator('a[href="/about/"]')).toHaveText('About');
@@ -64,5 +66,12 @@ test.describe('Homepage', () => {
     const cta = page.locator('.community a.btn-primary');
     await expect(cta).toHaveText('Contribute on GitHub');
     await expect(cta).toHaveAttribute('href', 'https://github.com/Scaled-AIOps');
+  });
+
+  test('shows the lifecycle from Conceive to Retire', async ({ page }) => {
+    const stages = page.locator('#lifecycle .lifecycle li');
+    await expect(stages).toHaveCount(9);
+    await expect(stages.first()).toContainText('Conceive');
+    await expect(stages.last()).toContainText('Retire');
   });
 });

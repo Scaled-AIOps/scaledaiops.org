@@ -1,0 +1,115 @@
+<!-- title: Governance &amp; Guardrails · ScaledAIOps -->
+<!-- description: The four control pillars applied to AI usage: a short tier-based policy, an inventory of AI use, third-party risk for AI providers, tested kill switches and guardrails enforced as policy-as-code. -->
+<!-- active: disciplines -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="crumb"><a href="/disciplines/">Disciplines</a> &rarr; 4 of 6</p>
+      <h1>Governance &amp; Guardrails</h1>
+      <p class="subtitle">The four control pillars applied to AI usage, enforced in the systems you already run and proportionate to the risk of the work.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2 id="overview">Overview</h2>
+      <p class="lede">Governance &amp; Guardrails decides which AI tools, agents and integrations the organisation uses, what they may reach, do and decide, how their use is proven and how problems are detected. It gives the second line controls to assure that are enforced, not merely written down.</p>
+      <p>Governance here is proportionate by design. The <a href="/pillars/#risk-tiers">risk tier</a> of the work sets the controls: low-tier work passes automated checks and moves on, and scrutiny concentrates on high and critical work where a mistake is expensive or irreversible. Controls live in the pipeline, the identity platform and the tracker, not in a separate approval queue.</p>
+
+      <ol class="lifecycle" aria-label="Control pillars">
+        <li><a href="/pillars/#self-assessment">Self-Assessment</a>Assess: baseline</li>
+        <li><a href="/pillars/#guardrails">Guardrails</a>Prevent: limits</li>
+        <li><a href="/pillars/#audit-trail">Audit Trail</a>Prove: provenance</li>
+        <li><a href="/pillars/#self-monitoring">Self-Monitoring</a>Detect: drift, incidents</li>
+      </ol>
+
+      <h2 id="changes">What changes in existing practice</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Practice</th><th>Today</th><th>With Governance &amp; Guardrails</th></tr></thead>
+          <tbody>
+            <tr><td>Information-security policy</td><td>Acceptable-use rules for systems and data</td><td>Adds a short AI usage policy keyed to risk tiers: approved tools, data boundaries, who decides at each tier</td></tr>
+            <tr><td>Risk register</td><td>IT and operational risks per system</td><td>AI use cases, agents and providers registered with an owner, a tier and the controls that cover them</td></tr>
+            <tr><td>Vendor management</td><td>Due diligence scaled to supplier criticality</td><td>AI providers assessed on data use, retention, sub-processors, incident notification, audit rights and exit</td></tr>
+            <tr><td>Change advisory</td><td>Board reviews changes by category</td><td>Low and medium-tier AI-assisted changes become standard changes; the board spends its time on high and critical</td></tr>
+            <tr><td>Internal audit plan</td><td>Periodic audits of IT general controls</td><td>Covers AI-assisted work: tests that tier gates, provenance and kill switches operate as designed</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="practices">Key practices</h2>
+
+      <h3>Keep the usage policy short and tier-based</h3>
+      <p>Most AI usage policies fail by length: a list of prohibitions nobody reads, out of date as soon as a new tool ships. Keep the policy to a page or two: which tools are approved for which data classes, what AI may do at each <a href="/pillars/#risk-tiers">risk tier</a>, who owns the decision at each tier, and how to request a new tool. Everything else lives in the controls that enforce it. A policy that says what is allowed keeps use inside sanctioned tools; one that only forbids pushes it onto personal accounts.</p>
+
+      <h3>Inventory every AI use</h3>
+      <p>What is not visible cannot be governed. The inventory lists the AI tools, agents, integrations and use cases in operation, each with an owner, a tier, the data it can reach and the provider behind it. It is not a separate spreadsheet but a view of the <a href="/lifecycle/#elements">element register</a>, filtered to AI-specific elements. Discovery closes the gap: identity logs, network egress, browser extensions and expense claims reveal use that never went through a request.</p>
+
+      <h3>Treat AI providers as third parties</h3>
+      <p>Every hosted model, assistant or agent platform is a supplier processing your data. Contracts should settle whether inputs and outputs may be used for training, how long they are retained and where, which sub-processors are involved, how quickly incidents are notified, what audit and information rights you hold, and how you exit with prompts, context and logs intact. EU financial entities already manage these providers under DORA's ICT third-party risk rules; AI providers belong in the same register and the same exit planning, not on a side list.</p>
+
+      <h3>Enforce guardrails as policy-as-code</h3>
+      <p>A <a href="/pillars/#guardrails">guardrail</a> that exists only in a document is an intention. Express the rules where work runs: the pipeline's policy gate maps each change's tier to its required approvals, provenance checks fail unmarked changes, agents run as non-human identities with least privilege and short-lived credentials, and egress rules keep sensitive data away from unapproved providers. Policy code is versioned and reviewed like any other change, so the <a href="/pillars/#audit-trail">audit trail</a> shows which rule applied at the time.</p>
+
+      <h3>Build kill switches, and test them</h3>
+      <p>Every tool, agent and integration needs a fast way to stop it: revoke its credentials, disable the integration, block the provider at the network edge, fall back to the manual path. Name who may pull each switch and set a target time to revoke. Then pull it in a planned exercise: confirm the agent actually stops, nothing retries with cached credentials, and the work continues without it. A kill switch that has never been pulled is an assumption.</p>
+
+      <h3>Split ownership across three lines</h3>
+      <p>Delivery teams own and operate the controls on their own AI use: they tier the work, run the gates and keep the inventory current. Second-line risk and compliance set the policy, define control standards per tier and assure that they work, drawing on <a href="/pillars/#self-monitoring">self-monitoring</a> data rather than questionnaires. Internal audit tests the arrangement independently, including sampling AI-assisted changes back to their approvals. No one outside the team becomes a gatekeeper for low-tier work.</p>
+
+      <h2 id="controls">Controls by risk tier</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Tier</th><th>Prevent (Guardrails)</th><th>Prove (Audit Trail)</th><th>Detect (Self-Monitoring)</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tier-badge tier-low">Low</span></td><td>Approved tool catalogue; no sensitive data classes; automated policy checks</td><td>Use recorded in the inventory; provenance on changes</td><td>Use outside the catalogue flagged from identity and egress logs</td></tr>
+            <tr><td><span class="tier-badge tier-medium">Medium</span></td><td>Tier gate in the pipeline; agents with scoped, short-lived credentials</td><td>Approvals and policy version recorded with the change</td><td>Second-line sampling; usage drift per tool and team</td></tr>
+            <tr><td><span class="tier-badge tier-high">High</span></td><td>Provider fully assessed as a third party; tested kill switch; specialist approval</td><td>Evidence bundle retained; agent access recertified</td><td>Alerts on anomalous agent actions; results reviewed by the second line</td></tr>
+            <tr><td><span class="tier-badge tier-critical">Critical</span></td><td>AI may inform, never decide or act, enforced by permissions, not policy text</td><td>Documented rationale; second-line sign-off</td><td>Any AI action in scope raises an incident; internal audit samples every cycle</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="maturity">Maturity path</h2>
+      <ol>
+        <li><strong>Ad hoc</strong> — AI tools used on personal accounts; no policy, no inventory, no view of which providers hold company data.</li>
+        <li><strong>Experimenting</strong> — a basic usage policy; sanctioned pilots with named tools; provider terms checked case by case.</li>
+        <li><strong>Managed</strong> — approved tool catalogue and tier-based policy; inventory drawn from the element register; AI providers in vendor management.</li>
+        <li><strong>Governed</strong> — guardrails enforced as policy-as-code; kill switches tested; second line assures from pipeline data; internal audit covers AI-assisted work.</li>
+        <li><strong>Optimised</strong> — controls and delegation boundaries tuned from monitoring and audit evidence; revocation is fast and routinely exercised.</li>
+      </ol>
+      <p><a href="/maturity/">Assess your organisation &rarr;</a></p>
+
+      <h2 id="measures">Measures</h2>
+      <ul>
+        <li>Share of AI use recorded in the inventory, and unregistered use found by discovery</li>
+        <li>Controls enforced in the pipeline or platform vs documented only</li>
+        <li>Time to revoke a tool, agent or integration, in exercises and real events</li>
+        <li>Audit findings on AI-assisted work, by tier, and time to close them</li>
+        <li>AI providers with contract terms on data use, retention, incident notification and exit</li>
+      </ul>
+
+      <h2 id="anti-patterns">Anti-patterns</h2>
+      <ul>
+        <li><strong>Policy by prohibition</strong> — long lists of banned actions that drive use onto personal accounts, out of sight.</li>
+        <li><strong>Paper guardrails</strong> — controls described in policy but not enforced; the only evidence is a signed attestation.</li>
+        <li><strong>Uniform gatekeeping</strong> — every AI use through the same committee, so low-tier work stalls and teams route around it.</li>
+        <li><strong>Untested kill switches</strong> — revocation that exists on paper and fails when an agent misbehaves.</li>
+        <li><strong>Scoring individuals</strong> — AI usage telemetry turned into ratings of people rather than teams and flow.</li>
+      </ul>
+
+      <h2 id="regulation">Regulatory anchors</h2>
+      <p>The EU AI Act takes a risk-based approach, as ScaledAIOps does, but the two classify different things: the Act classifies AI systems by their use (prohibited, high, limited, minimal risk); ScaledAIOps tiers classify work. The inventory records both. Staff of deployers need sufficient AI literacy (Art. 4), which the short policy and enablement support. Where a system in use is high-risk, deployer obligations apply (Art. 26): use in line with the provider's instructions, human oversight by competent people, monitoring of operation and retention of logs, which the pillars supply. AI used to evaluate or monitor workers is high-risk (Annex III, point 4), so governance measures teams, never individuals.</p>
+      <p>ISO/IEC 42001 frames the pillars as an AI management system: Assess maps to performance evaluation (clause 9), Prevent to planning and operation (clauses 6 and 8), Prove to documented information (7.5), and Detect to monitoring and improvement (9.1, 10).</p>
+
+      <h2 id="related">Related roles and principles</h2>
+      <ul>
+        <li><a href="/roles/#ai-governance-officer">AI Governance Officer</a> — owns the usage policy and control standards, and assures them as second line</li>
+        <li><a href="/roles/#ai-adoption-lead">AI Adoption Lead</a> — keeps governance proportionate so adoption is not stalled</li>
+        <li><a href="/roles/#ai-platform-engineer">AI Platform Engineer</a> — builds policy-as-code, non-human identities and kill switches into the platform</li>
+        <li><a href="/principles/#human-accountability">Human accountability, always</a> · <a href="/principles/#provenance-by-default">Provenance by default</a> · <a href="/principles/#governed-openness">Governed openness</a></li>
+      </ul>
+
+    </div>
+  </section>

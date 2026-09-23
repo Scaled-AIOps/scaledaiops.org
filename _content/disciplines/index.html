@@ -1,11 +1,11 @@
-<!-- title: Disciplines · ScaledAIOps – AI Operations Framework -->
-<!-- description: The six core disciplines for operationalizing AI at scale. -->
+<!-- title: Disciplines · ScaledAIOps -->
+<!-- description: The six disciplines of ScaledAIOps for adopting AI across software delivery, each with controls by risk tier and a maturity path. -->
 <!-- active: disciplines -->
 
 <section class="hero" style="padding:3.5rem 1.5rem;">
     <div class="container">
-      <h1>Core Disciplines</h1>
-      <p class="subtitle">Six interconnected disciplines for building, deploying, and operating AI systems at scale.</p>
+      <h1>Disciplines</h1>
+      <p class="subtitle">Six things an organisation must be good at to adopt AI safely, measurably and at scale.</p>
     </div>
   </section>
 
@@ -13,52 +13,61 @@
     <div class="container">
 
       <div class="callout-box" style="margin-top:0; margin-bottom:2.5rem;">
-        <h3><span class="icon-inline"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></span> How the 6 Disciplines Map to the AI Lifecycle</h3>
+        <h3><span class="icon-inline"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></span> How the disciplines fit together</h3>
         <p style="margin:0; font-size:0.98rem; color:#334155; line-height:1.6;">
-          Unlike monolithic software frameworks, ScaledAIOps organizes organizational capability into six clear disciplines. Each discipline addresses a distinct operational requirement — from upstream data governance and model training platforms to continuous inference observability and enterprise AI strategy.
+          Each discipline is one dimension of the <a href="/maturity/">maturity model</a>. Each states which <a href="/pillars/">control pillars</a> apply at each <a href="/pillars/#risk-tiers">risk tier</a>, and what changes in the practices you already run. Delivery is the work itself; workflow, tooling and skills shape how it is done; governance and measurement keep it safe and show whether it pays off.
         </p>
       </div>
 
       <div class="card-grid card-grid--clickable">
-
         <div class="card">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
-          <a href="/disciplines/ml-engineering/"><h3>ML Engineering &amp; Platform</h3></a>
-          <p>Infrastructure, tooling, distributed training, and serving engines that enable teams to build, train, and host models with high reliability and low latency.</p>
+          <div class="card-icon"><svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg></div>
+          <a href="/disciplines/ai-augmented-delivery/"><h3>AI-Augmented Delivery</h3></a>
+          <p>AI in every stage from business concept to retirement, an AI-aware pipeline, and an element register that gives every artefact an owner.</p>
         </div>
-
         <div class="card">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
-          <a href="/disciplines/model-lifecycle/"><h3>Model Lifecycle Management</h3></a>
-          <p>End-to-end governance of models from experimental notebooks through model registry approvals, artifact versioning, rollout gating, and retirement.</p>
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+          <a href="/disciplines/human-ai-workflow-design/"><h3>Human–AI Workflow Design</h3></a>
+          <p>Who does what: delegation by risk tier, approval gates, agent autonomy levels, handoffs and escalation paths.</p>
         </div>
-
         <div class="card">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div>
-          <a href="/disciplines/data-operations/"><h3>Data Operations</h3></a>
-          <p>Ensuring data quality, immutable lineage, schema contracts, feature store reliability, and privacy governance to fuel trustworthy AI systems.</p>
+          <div class="card-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+          <a href="/disciplines/tooling-context-engineering/"><h3>Tooling &amp; Context Engineering</h3></a>
+          <p>Selecting and integrating tools, including through MCP, agents as non-human identities, and prompts and context as versioned, reviewed assets.</p>
         </div>
-
-        <div class="card">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
-          <a href="/disciplines/reliability/"><h3>Reliability &amp; Observability</h3></a>
-          <p>Real-time telemetry, data and concept drift detection, AI-specific SLOs, incident response playbooks, and automated retraining triggers.</p>
-        </div>
-
         <div class="card">
           <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div>
-          <a href="/disciplines/security-ethics/"><h3>Security, Ethics &amp; Compliance</h3></a>
-          <p>Responsible AI practices, prompt injection threat modeling, fairness testing, explainability cards, and regulatory adherence (EU AI Act, NIST AI RMF).</p>
+          <a href="/disciplines/governance-guardrails/"><h3>Governance &amp; Guardrails</h3></a>
+          <p>The four control pillars applied to AI use: policy, inventory, third-party risk, policy-as-code and the three lines.</p>
         </div>
-
         <div class="card">
-          <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
-          <a href="/disciplines/strategy/"><h3>Strategy &amp; Organization</h3></a>
-          <p>Aligning AI investments with business value, structuring cross-functional team topologies, measuring ROI, and scaling AI literacy across the enterprise.</p>
+          <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></div>
+          <a href="/disciplines/skills-roles/"><h3>Skills &amp; Roles</h3></a>
+          <p>The competency shift to specifying and verifying, redefined roles, team topology, enablement and AI literacy.</p>
         </div>
-
+        <div class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
+          <a href="/disciplines/value-measurement/"><h3>Value &amp; Measurement</h3></a>
+          <p>Cycle time, rework, defect escape, review burden and total cost, measured for teams and flow and never for individuals.</p>
+        </div>
       </div>
+
+      <div class="content-page" style="margin:3rem auto 0;">
+        <h2 id="questions">The question each discipline answers</h2>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Discipline</th><th>Question</th><th>Lead role</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/disciplines/ai-augmented-delivery/">AI-Augmented Delivery</a></td><td>Where does AI take part in our lifecycle, and how do we prove each change was checked?</td><td><a href="/roles/#engineering-orchestrator">Engineering Orchestrator</a></td></tr>
+              <tr><td><a href="/disciplines/human-ai-workflow-design/">Human–AI Workflow Design</a></td><td>What may AI do on its own, and when must a person decide?</td><td><a href="/roles/#ai-workflow-designer">AI Workflow Designer</a></td></tr>
+              <tr><td><a href="/disciplines/tooling-context-engineering/">Tooling &amp; Context Engineering</a></td><td>Which tools, integrations and context do we trust, and who owns them?</td><td><a href="/roles/#context-engineer">Context Engineer</a></td></tr>
+              <tr><td><a href="/disciplines/governance-guardrails/">Governance &amp; Guardrails</a></td><td>Are the controls working, and can we show it?</td><td><a href="/roles/#ai-governance-officer">AI Governance Officer</a></td></tr>
+              <tr><td><a href="/disciplines/skills-roles/">Skills &amp; Roles</a></td><td>Do our people have the judgement to direct and check AI?</td><td><a href="/roles/#ai-adoption-lead">AI Adoption Lead</a></td></tr>
+              <tr><td><a href="/disciplines/value-measurement/">Value &amp; Measurement</a></td><td>Is AI making delivery faster, better or cheaper, and at what total cost?</td><td><a href="/roles/#value-analyst">Value Analyst</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
   </section>
-
-

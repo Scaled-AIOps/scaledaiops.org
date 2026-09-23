@@ -64,7 +64,7 @@ find "$CONTENT_DIR" -name '*.html' | while read -r content_file; do
 
   # Build header with active nav
   page_header="$HEADER"
-  for nav in disciplines principles roles about; do
+  for nav in lifecycle disciplines pillars principles roles about; do
     if [ "$nav" = "$active" ]; then
       page_header=$(echo "$page_header" | sed "s|{{ACTIVE_$nav}}| class=\"active\"|g")
     else
