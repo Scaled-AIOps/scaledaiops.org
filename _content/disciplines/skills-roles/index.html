@@ -1,0 +1,124 @@
+<!-- title: Skills &amp; Roles · ScaledAIOps -->
+<!-- description: The competency shift, redefined roles, team topology and enablement that let people direct, verify and stay accountable for AI-assisted work. -->
+<!-- active: disciplines -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="crumb"><a href="/disciplines/">Disciplines</a> &rarr; 5 of 6</p>
+      <h1>Skills &amp; Roles</h1>
+      <p class="subtitle">The competencies, roles and team structures that keep people able to direct, verify and answer for AI-assisted work.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2 id="overview">Overview</h2>
+      <p class="lede">Skills &amp; Roles covers what people must be good at once AI takes part in delivery. The work shifts from writing everything to specifying, verifying, orchestrating and judging, and that shift makes domain knowledge and review skill matter more, not less.</p>
+      <p>Every other discipline assumes a competent human at the gate: a reviewer who can spot a plausible but wrong change, an owner who can judge a generated specification, an approver with the authority to say no. This discipline makes sure those people exist, are trained for the tier of work they approve, and keep the judgement the organisation relies on as AI takes over more of the typing.</p>
+      <p>The eight ScaledAIOps roles are responsibilities, not necessarily new headcount. Most evolve from roles organisations already have, and small organisations combine several in one person.</p>
+
+      <h2 id="changes">What changes in existing practice</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Practice</th><th>Today</th><th>With Skills &amp; Roles</th></tr></thead>
+          <tbody>
+            <tr><td>Job descriptions</td><td>Defined by what a person produces</td><td>Add specifying, verifying and orchestrating AI work, and the tiers a person may approve</td></tr>
+            <tr><td>Onboarding</td><td>Codebase, tools and team norms</td><td>Adds baseline AI literacy, approved tools, data boundaries and how provenance is recorded</td></tr>
+            <tr><td>Training catalogue</td><td>Languages, frameworks, security awareness</td><td>Adds AI literacy for everyone and training on AI failure modes for reviewers of high-tier work</td></tr>
+            <tr><td>Performance frameworks</td><td>Delivery outcomes and behaviours</td><td>Assess outcomes and judgement, never AI usage volume; review and specification work counts</td></tr>
+            <tr><td>Approval authority</td><td>Implicit in seniority</td><td>Explicit per tier, backed by a training record and a competence check</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="practices">Key practices</h2>
+
+      <h3>Redefine the competency model</h3>
+      <p>When AI drafts the code, the scarce skills are stating intent precisely, recognising when output is subtly wrong, knowing the domain well enough to challenge a confident answer, and deciding what must not be delegated. Write these into competency frameworks at every level, alongside the technical skills they build on.</p>
+
+      <h3>Map the roles to responsibilities</h3>
+      <p>Each role has a clear mission and evolves from work people already do. Assign them as responsibilities first; create a dedicated post only when the load justifies it.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Role</th><th>Evolves from</th></tr></thead>
+          <tbody>
+            <tr><td><a href="/roles/#engineering-orchestrator">Engineering Orchestrator</a></td><td>Senior or lead engineer</td></tr>
+            <tr><td><a href="/roles/#eval-engineer">Eval Engineer</a></td><td>QA or test engineer</td></tr>
+            <tr><td><a href="/roles/#context-engineer">Context Engineer</a></td><td>Technical writer, developer-experience engineer</td></tr>
+            <tr><td><a href="/roles/#ai-workflow-designer">AI Workflow Designer</a></td><td>Business analyst, process engineer</td></tr>
+            <tr><td><a href="/roles/#ai-adoption-lead">AI Adoption Lead</a></td><td>Agile coach, delivery manager</td></tr>
+            <tr><td><a href="/roles/#ai-governance-officer">AI Governance Officer</a></td><td>Risk, compliance or information-security officer</td></tr>
+            <tr><td><a href="/roles/#ai-platform-engineer">AI Platform Engineer</a></td><td>Platform or DevOps engineer</td></tr>
+            <tr><td><a href="/roles/#value-analyst">Value Analyst</a></td><td>Engineering-metrics or finance analyst</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A startup might give one lead engineer the orchestrator, context and platform responsibilities and ask a founder to act as governance officer. A bank will staff most roles separately. The responsibilities are the same; only the headcount differs.</p>
+
+      <h3>Organise teams around the work</h3>
+      <p>Stream-aligned teams own delivery with AI, including the outcome of every AI-assisted change. A platform team provides the AI-aware pipeline, the approved tools and the shared context those teams build on. An enabling team, led by the <a href="/roles/#ai-adoption-lead">AI Adoption Lead</a>, spreads practice by pairing with teams for a while and then stepping back. Governance works as a second-line partner: it sets the rules, assures that they are followed and is involved early, not only at the final gate.</p>
+
+      <h3>Enable in proportion to tier and role</h3>
+      <p>Everyone who uses AI tools gets baseline AI literacy: what the tools can and cannot do, the data boundaries, the tiers and how to record AI involvement. Depth then follows responsibility. Reviewers of high-tier work get deeper training on AI failure modes such as plausible but incorrect logic, invented dependencies, weakened security checks and tests that assert the wrong behaviour. Approvers of critical work hold a recorded competence check, renewed at a defined interval.</p>
+
+      <h3>Protect skill formation</h3>
+      <p>Judgement comes from having done the work. Early-career engineers need deliberate practice, including tasks and reviews done without AI assistance at times, so they learn to recognise good and bad solutions for themselves. Without it the organisation slowly loses the reviewers it depends on. Plan this into onboarding and rotations rather than leaving it to individual choice.</p>
+
+      <h3>Recognise review and specification work</h3>
+      <p>As AI generates more output, careful review and precise specification become the work that protects quality, yet they are easy to overlook in promotion cases. Make them visible in career paths, credit them in performance conversations and give senior engineers a path that grows through orchestration and judgement, not only through output.</p>
+
+      <h2 id="controls">Controls by risk tier</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Tier</th><th>Prevent (Guardrails)</th><th>Prove (Audit Trail)</th><th>Detect (Self-Monitoring)</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tier-badge tier-low">Low</span></td><td>Baseline AI literacy completed before tool access is granted</td><td>Training record per person</td><td>Literacy coverage by team and role</td></tr>
+            <tr><td><span class="tier-badge tier-medium">Medium</span></td><td>Reviewer qualified for the codebase and trained on AI failure modes</td><td>Reviewer's qualification traceable from the approval</td><td>Sampled review quality; defects escaping review</td></tr>
+            <tr><td><span class="tier-badge tier-high">High</span></td><td>Specialist reviewer holds a current competence check; policy gate rejects unqualified approvers</td><td>Approver qualification recorded in the evidence bundle</td><td>Teams below the minimum number of qualified reviewers flagged</td></tr>
+            <tr><td><span class="tier-badge tier-critical">Critical</span></td><td>Only named people with the necessary competence, training and authority decide</td><td>Authority register maintained and reviewed by the second line</td><td>Periodic reassessment; a lapsed check suspends authority</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="maturity">Maturity path</h2>
+      <ol>
+        <li><strong>Ad hoc</strong> — people teach themselves; nobody knows who is competent to review AI-assisted work.</li>
+        <li><strong>Experimenting</strong> — pilot teams share practice informally; some introductory training exists.</li>
+        <li><strong>Managed</strong> — baseline AI literacy for all tool users; roles assigned as responsibilities; approval authority defined per tier.</li>
+        <li><strong>Governed</strong> — training records and competence checks enforced at the approval gate; roles staffed; second line assures.</li>
+        <li><strong>Optimised</strong> — enablement adjusted from review quality and incident data; career paths reward review and specification.</li>
+      </ol>
+      <p><a href="/maturity/">Assess your organisation &rarr;</a></p>
+
+      <h2 id="measures">Measures</h2>
+      <ul>
+        <li>AI literacy coverage by role (target: everyone using AI tools)</li>
+        <li>Qualified reviewers per team for high-tier work</li>
+        <li>Time to proficiency for new joiners</li>
+        <li>Review quality indicators: defects escaping review, sampled review depth</li>
+        <li>Share of high and critical approvals made by people with a current competence check</li>
+      </ul>
+
+      <h2 id="anti-patterns">Anti-patterns</h2>
+      <ul>
+        <li><strong>Usage as performance</strong> — rewarding prompts sent or code generated, which rewards volume over judgement.</li>
+        <li><strong>A new title per role</strong> — hiring for eight roles before anyone has done the work, instead of assigning responsibilities.</li>
+        <li><strong>Tool training only</strong> — teaching which buttons to press but not how AI output fails.</li>
+        <li><strong>Hollowed-out juniors</strong> — early-career engineers who never build the skill to judge what AI produces.</li>
+        <li><strong>Seniority as authority</strong> — approval rights assumed from job grade rather than recorded competence.</li>
+      </ul>
+
+      <h2 id="regulation">Regulatory anchors</h2>
+      <p>The EU AI Act requires providers and deployers to take measures to ensure a sufficient level of AI literacy among their staff (Art. 4); baseline literacy and training records provide it. Deployers of high-risk systems must assign human oversight to people with the necessary competence, training and authority (Art. 26), which the tiered approval authority makes explicit. AI used to evaluate or monitor workers is high-risk (Annex III, point 4), so performance frameworks must not rely on AI-derived individual metrics. ISO/IEC 42001 requires determined competence and awareness for people doing work under the AI management system (clause 7); competence checks and training records are the documented evidence.</p>
+
+      <h2 id="related">Related roles and principles</h2>
+      <ul>
+        <li><a href="/roles/#ai-adoption-lead">AI Adoption Lead</a> — leads the enabling team and spreads practice</li>
+        <li><a href="/roles/#engineering-orchestrator">Engineering Orchestrator</a> — models the specify, verify and judge way of working</li>
+        <li><a href="/roles/#context-engineer">Context Engineer</a> — turns team knowledge into shared, reviewed context</li>
+        <li><a href="/principles/#human-accountability">Human accountability, always</a> · <a href="/principles/#adopt-incrementally">Adopt incrementally</a></li>
+      </ul>
+
+    </div>
+  </section>

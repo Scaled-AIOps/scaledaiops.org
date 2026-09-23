@@ -1,0 +1,106 @@
+<!-- title: Value &amp; Measurement · ScaledAIOps -->
+<!-- description: Measure what AI adoption changes in flow, quality and cost, at team and value-stream level, against a baseline taken before adoption. -->
+<!-- active: disciplines -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="crumb"><a href="/disciplines/">Disciplines</a> &rarr; 6 of 6</p>
+      <h1>Value &amp; Measurement</h1>
+      <p class="subtitle">Evidence, not anecdote: what AI adoption changes in flow, quality and cost, measured for teams against a baseline.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2 id="overview">Overview</h2>
+      <p class="lede">Value &amp; Measurement decides whether AI adoption is working. It sets a baseline before adoption, compares AI-assisted with non-assisted work, counts the full cost of AI use and reports the result honestly, including where AI made work slower or worse.</p>
+      <p>Claims that AI makes teams faster are easy to make and hard to verify. Generating code quickly is not the same as delivering change quickly: time saved writing can reappear as review queues, rework and incidents. This discipline measures the whole flow, from accepted idea to working change in production, so that decisions to expand, hold or withdraw AI use rest on evidence. It measures teams and value streams, never individuals.</p>
+      <p>The established delivery measures give the outcome frame: lead time for changes, deployment frequency, change failure rate and time to restore service. Around them sit the measures that show where AI helps or hurts: cycle time, rework rate, defect escape rate, review burden and cost.</p>
+
+      <h2 id="changes">What changes in existing practice</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Practice</th><th>Today</th><th>With Value &amp; Measurement</th></tr></thead>
+          <tbody>
+            <tr><td>Engineering metrics dashboards</td><td>Delivery measures for the whole team</td><td>The same measures split by AI-assisted vs not, plus review burden and rework; aggregated to team level, with no per-person views</td></tr>
+            <tr><td>Business cases and benefit tracking</td><td>Benefits estimated once, rarely checked</td><td>A value hypothesis written at Conceive, with a baseline, and tested at Learn</td></tr>
+            <tr><td>Finance and chargeback</td><td>Licences budgeted as a tooling line</td><td>Total cost of AI use allocated to the value streams that incur it</td></tr>
+            <tr><td>Portfolio reviews</td><td>Progress against plan</td><td>AI initiatives reviewed on measured outcomes and cost; expand, hold or stop decided on evidence</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="practices">Key practices</h2>
+
+      <h3>Write the value hypothesis at Conceive</h3>
+      <p>Every AI initiative states what it expects to change, by how much, for which value stream, and how that will be measured. The hypothesis is written at <a href="/lifecycle/#conceive">Conceive</a> alongside the business case, and tested at <a href="/lifecycle/#learn">Learn</a> against the measured result. An initiative that cannot name its measure is not ready to start.</p>
+
+      <h3>Take a baseline before adoption</h3>
+      <p>Measure cycle time, rework rate, defect escape rate and review burden for the affected teams before AI tools arrive, over a period long enough to cover normal variation. Without a baseline, any later number is uninterpretable and every trend becomes a story told after the fact.</p>
+
+      <h3>Compare like with like</h3>
+      <p>Compare AI-assisted with non-assisted work at team or value-stream level, using the provenance already recorded on each change. Control for what else changed: team composition, work mix, release calendar, a new platform. Attributing a result to AI is an inference; record the method and the confounders with the result, and have someone outside the delivering team review both.</p>
+
+      <h3>Count the total cost</h3>
+      <p>The licence is the smallest visible part of the cost. Total cost of AI use includes licences, usage charges, reviewer time, rework, incidents traced to AI-assisted changes and the enablement effort to train people and maintain context assets. Report cost per change including review time, so a faster author with a slower reviewer does not look like a gain.</p>
+
+      <h3>Watch review burden</h3>
+      <p>AI shifts effort from writing to checking. Track reviewer hours per change and the time changes wait in review queues. Rising review burden is often the first sign that generated output exceeds what teams can verify, and it predicts rework and escaped defects before they show up in production.</p>
+
+      <h3>Report benefits and costs together</h3>
+      <p>Publish what improved, what did not and where AI slowed work down. A result that shows no gain, or a loss, is a valid finding that saves money and protects quality. Expand delegation only when the evidence supports it, and pull it back when the evidence turns.</p>
+
+      <h2 id="controls">Controls by risk tier</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Tier</th><th>Prevent (Guardrails)</th><th>Prove (Audit Trail)</th><th>Detect (Self-Monitoring)</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tier-badge tier-low">Low</span></td><td>Baseline in place before a pilot starts; team-level aggregation only</td><td>Metric definitions and baseline versioned with the value hypothesis</td><td>Rework and pipeline failure trends, AI-assisted vs not</td></tr>
+            <tr><td><span class="tier-badge tier-medium">Medium</span></td><td>Delegation expanded only after a completed comparison period</td><td>Comparison method, confounders and result recorded and reviewed at Learn</td><td>Review burden and change failure rate against agreed thresholds</td></tr>
+            <tr><td><span class="tier-badge tier-high">High</span></td><td>Expansion requires independent review of the evidence and risk sign-off</td><td>Evidence pack with total cost, attribution reasoning and reviewer</td><td>Defect escapes and incidents tracked for a defined window after each expansion</td></tr>
+            <tr><td><span class="tier-badge tier-critical">Critical</span></td><td>No expansion of delegation on productivity grounds; AI stays advisory</td><td>Documented rationale and second-line sign-off for any change in AI use</td><td>Any measured quality regression triggers review</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="maturity">Maturity path</h2>
+      <ol>
+        <li><strong>Ad hoc</strong> — value claimed from anecdote and licence counts; no baseline exists.</li>
+        <li><strong>Experimenting</strong> — pilots report usage and satisfaction; outcomes are estimated, not measured.</li>
+        <li><strong>Managed</strong> — baselines taken before adoption; value hypotheses written and tested; AI-assisted vs not compared at team level.</li>
+        <li><strong>Governed</strong> — total cost reported per value stream; portfolio decisions to expand or stop rest on reviewed evidence.</li>
+        <li><strong>Optimised</strong> — delegation and spend adjusted continuously from flow, quality and cost data.</li>
+      </ol>
+      <p><a href="/maturity/">Assess your organisation &rarr;</a></p>
+
+      <h2 id="measures">Measures</h2>
+      <ul>
+        <li>Share of AI initiatives with a baseline and a tested value hypothesis</li>
+        <li>Cycle time, rework rate and defect escape rate, AI-assisted vs not</li>
+        <li>Review burden: reviewer hours per change and review queue time</li>
+        <li>Cost per change including review time and rework</li>
+        <li>Share of delegation expansions backed by reviewed evidence</li>
+      </ul>
+
+      <h2 id="anti-patterns">Anti-patterns</h2>
+      <ul>
+        <li><strong>Vanity metrics</strong> — lines generated, suggestion acceptance rate and prompt counts measure activity, not value. More generated code can mean more to review and maintain; accepted suggestions may be rewritten or reverted later; prompt volume rises with struggle as easily as with success.</li>
+        <li><strong>Measuring individuals</strong> — per-person usage or output rankings drive gaming, erode trust and push AI use out of sight, where it is no longer recorded.</li>
+        <li><strong>Goodhart effects</strong> — once a measure becomes a target it stops measuring. Pair every speed measure with a quality measure, rotate what is reviewed and keep the question, not the number, in front of teams.</li>
+        <li><strong>Licence cost as total cost</strong> — business cases that ignore review time, rework and incidents overstate return.</li>
+        <li><strong>Reporting only wins</strong> — suppressing slowdowns and failed pilots leaves the organisation expanding what does not work.</li>
+      </ul>
+
+      <h2 id="regulation">Regulatory anchors</h2>
+      <p>The EU AI Act lists AI systems used to monitor or evaluate the performance and behaviour of workers as high-risk (Annex III, point 4). Scoring individual engineers from AI usage or output data moves towards that category and its obligations, which is one more reason to measure teams and flow, not people. ISO/IEC 42001 expects an AI management system to evaluate its performance (clause 9) and improve continually (clause 10); baselines, tested value hypotheses and reviewed evidence supply both.</p>
+
+      <h2 id="related">Related roles and principles</h2>
+      <ul>
+        <li><a href="/roles/#value-analyst">Value Analyst</a> — designs the measures, runs the comparisons and reports cost and value</li>
+        <li><a href="/roles/#ai-adoption-lead">AI Adoption Lead</a> — turns the evidence into decisions to expand, hold or stop</li>
+        <li><a href="/principles/#measure-real-value">Measure real value</a> · <a href="/principles/#adopt-incrementally">Adopt incrementally</a> · <a href="/principles/#verify-before-trust">Verify before trust</a></li>
+      </ul>
+
+    </div>
+  </section>

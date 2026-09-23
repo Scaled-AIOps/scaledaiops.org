@@ -1,0 +1,119 @@
+<!-- title: Human–AI Workflow Design · ScaledAIOps -->
+<!-- description: Who does what, human or AI: delegation by risk tier, approval gates, agent autonomy levels, handoffs and escalation paths that keep review meaningful. -->
+<!-- active: disciplines -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="crumb"><a href="/disciplines/">Disciplines</a> &rarr; 2 of 6</p>
+      <h1>Human–AI Workflow Design</h1>
+      <p class="subtitle">Who does the work, who approves it and what happens when an agent gets stuck, decided by risk tier rather than by convenience.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2 id="overview">Overview</h2>
+      <p class="lede">Human–AI Workflow Design decides how work is split between people and AI. For every step it answers three questions: who does it, who approves it, and where it goes when something is unclear or fails. The <a href="/pillars/#risk-tiers">risk tier</a> of the work sets the answer, not the capability of the tool or the pressure of the deadline.</p>
+      <p>Most organisations already have the building blocks: responsibility matrices, process maps, change categories and on-call rotas. This discipline extends them so AI appears in them as a participant with defined limits. The outcome is a workflow in which every AI contribution has a named human owner, every approval is a real decision, and no piece of work can disappear between an agent and a person.</p>
+
+      <h2 id="changes">What changes in existing practice</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Practice</th><th>Today</th><th>With Human–AI Workflow Design</th></tr></thead>
+          <tbody>
+            <tr><td>Responsibility matrix (RACI)</td><td>Roles assigned to people and teams</td><td>AI agents appear as performers of named steps; accountability for each step stays with a named person, never with an agent</td></tr>
+            <tr><td>Process maps</td><td>Steps, hand-offs and decision points between people</td><td>Each step marked human, AI or both, with its tier, autonomy level, approval gate and escalation route</td></tr>
+            <tr><td>Change management</td><td>Standard changes pre-approved, normal changes reviewed</td><td>Low and medium-tier AI-assisted changes with passing gates qualify as standard changes; high and critical keep full review and cannot be reclassified by the agent</td></tr>
+            <tr><td>On-call and incident escalation</td><td>Alerts page a person who escalates by severity</td><td>Agent uncertainty, bound violations and failures page a named human queue; AI actions and escalations appear in the incident timeline</td></tr>
+            <tr><td>Code and content review</td><td>Reviewer checks whatever arrives</td><td>Review depth set by tier, reviewer load capped, and each handoff carries the context needed to decide</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="practices">Key practices</h2>
+
+      <h3>Delegate by tier, step by step</h3>
+      <p>Map the workflow, then assign each step to a human, to AI, or to both, using the tier criteria: blast radius, reversibility, data sensitivity and regulatory exposure. The highest applicable criterion wins. A single workflow often mixes tiers: an agent may draft a customer notice (medium) while the decision to send it to regulators stays with a person (critical). Record the delegation where the process is documented, so auditors and new team members read the same rules the agents follow.</p>
+
+      <h3>Cap agent autonomy by tier</h3>
+      <p>Autonomy is a setting, not a property of the tool. Define a small number of levels and let the tier set the ceiling. Raising a step's level is a change like any other: proposed with evidence, approved by the process owner and recorded.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Autonomy level</th><th>What the agent does</th><th>Highest tier allowed</th></tr></thead>
+          <tbody>
+            <tr><td>1 Suggest</td><td>Offers analysis or options; a person does the work</td><td><span class="tier-badge tier-critical">Critical</span></td></tr>
+            <tr><td>2 Draft for approval</td><td>Produces the output; nothing takes effect until a person approves it</td><td><span class="tier-badge tier-high">High</span></td></tr>
+            <tr><td>3 Act with approval</td><td>Prepares and executes the action once a person approves that specific action</td><td><span class="tier-badge tier-medium">Medium</span></td></tr>
+            <tr><td>4 Act within bounds and report</td><td>Acts on its own inside defined limits and reports what it did</td><td><span class="tier-badge tier-low">Low</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Build approval gates into the flow</h3>
+      <p>Each tier maps to a gate: auto-approve at low tier when automated checks pass; one qualified human reviewer at medium; enhanced review at high, with two reviewers including a specialist and an evidence bundle; and human-only at critical, where AI may inform but never decides or acts. Gates are enforced by the pipeline or workflow tool at the <a href="/lifecycle/#verify">Verify</a> and <a href="/lifecycle/#release">Release</a> stages, not by convention, and the agent cannot lower its own tier.</p>
+
+      <h3>Design the handoff, both ways</h3>
+      <p>AI to human: the agent hands over what the reviewer needs to decide, not just the output. That means the goal it was given, what it changed, the context it used, what it could not verify and where it was uncertain. Human to AI: the person hands over a clear specification, including acceptance criteria, boundaries and a definition of done. A vague instruction produces output nobody can review against.</p>
+
+      <h3>Give every escalation a named destination</h3>
+      <p>When an agent is uncertain, hits a boundary or fails, the work goes to a named human queue with an owner and a response target, the same way an alert pages on-call. Retry limits are explicit; after them the agent stops and escalates. Nothing is silently dropped, retried forever or quietly downgraded to a lower tier. During <a href="/lifecycle/#operate">Operate</a>, an incident commander decides and every AI action is visible in the timeline.</p>
+
+      <h3>Keep review meaningful</h3>
+      <p>Human review only controls risk if the reviewer has the time, context and authority to say no. Cap review load per reviewer, so queues are sized to people rather than to agent throughput. Watch for automation bias: approvals that take seconds on large changes, or rejection rates near zero, signal rubber-stamping. At low tier, replace blanket review with sampling, so human attention goes where the risk is. Findings from sampling and overrides feed back into tiers and autonomy levels at the <a href="/lifecycle/#learn">Learn</a> stage.</p>
+
+      <h2 id="controls">Controls by risk tier</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Tier</th><th>Prevent (Guardrails)</th><th>Prove (Audit Trail)</th><th>Detect (Self-Monitoring)</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tier-badge tier-low">Low</span></td><td>Autonomy up to level 4 inside action limits; kill switch; auto-approve only when automated checks pass</td><td>Action log with agent identity, context used and outcome</td><td>Sampled review of auto-approved work; rollback and escalation rates</td></tr>
+            <tr><td><span class="tier-badge tier-medium">Medium</span></td><td>Autonomy capped at level 3; one qualified reviewer; reviewer load limit</td><td>Approval record naming the reviewer, what was reviewed and the decision</td><td>Human override rate; review turnaround against target</td></tr>
+            <tr><td><span class="tier-badge tier-high">High</span></td><td>Autonomy capped at level 2; two reviewers incl. a specialist, independent of the requester</td><td>Both approvals and the evidence bundle linked to the release record</td><td>Rubber-stamp signals such as review time against change size; open escalations past target</td></tr>
+            <tr><td><span class="tier-badge tier-critical">Critical</span></td><td>Human only; agents hold no credentials to act; AI limited to suggestions</td><td>Documented rationale for the human decision; second-line oversight record</td><td>Any attempted AI action is treated as an incident</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="maturity">Maturity path</h2>
+      <ol>
+        <li><strong>Ad hoc</strong> — individuals decide for themselves what to hand to AI; approvals and escalations are informal or missing.</li>
+        <li><strong>Experimenting</strong> — pilot teams agree simple delegation rules; agents run at low autonomy with a person watching.</li>
+        <li><strong>Managed</strong> — process maps show human, AI and tier for each step; approval gates and escalation queues defined and used.</li>
+        <li><strong>Governed</strong> — autonomy caps and gates enforced by tooling; approval and escalation records queryable; second line reviews high and critical workflows.</li>
+        <li><strong>Optimised</strong> — autonomy levels raised or lowered from override, escalation and incident data; review load balanced continuously.</li>
+      </ol>
+      <p><a href="/maturity/">Assess your organisation &rarr;</a></p>
+
+      <h2 id="measures">Measures</h2>
+      <ul>
+        <li>Review turnaround per tier, against the agreed target</li>
+        <li>Escalation rate, and time until a person picks up an escalation</li>
+        <li>Human override rate: AI output rejected or substantially changed</li>
+        <li>Approvals per reviewer per day, against the load limit (reported for teams, never used to rate individuals)</li>
+        <li>Share of auto-approved work sampled, and findings per sample</li>
+        <li>Escalations without an owner or past target (target: none)</li>
+      </ul>
+
+      <h2 id="anti-patterns">Anti-patterns</h2>
+      <ul>
+        <li><strong>Autonomy by convenience</strong> — an agent is given more freedom because review is slow, not because the risk is low.</li>
+        <li><strong>Rubber-stamp review</strong> — approvals given faster than the change could be read, turning a control into a formality.</li>
+        <li><strong>The agent did it</strong> — no named person accountable for an AI step, so failures have no owner.</li>
+        <li><strong>Silent failure</strong> — agents that retry forever, drop work or lower their own tier instead of escalating.</li>
+        <li><strong>Review everything</strong> — full human review at low tier, which floods reviewers and weakens review where it matters.</li>
+      </ul>
+
+      <h2 id="regulation">Regulatory anchors</h2>
+      <p>Deployers of high-risk AI systems must assign human oversight to people with the necessary competence, training and authority (EU AI Act, Art. 26); tier-based gates, named reviewers and load limits make that oversight real rather than nominal. Using AI to evaluate or monitor workers is itself high-risk (Annex III, point 4), which is why reviewer measures describe teams and workflows, not individuals. ISO/IEC 42001 expects operational control of AI use (clause 8) and documented information (clause 7.5); the delegation map, approval records and escalation log provide both.</p>
+
+      <h2 id="related">Related roles and principles</h2>
+      <ul>
+        <li><a href="/roles/#ai-workflow-designer">AI Workflow Designer</a> — maps workflows, sets delegation and escalation paths</li>
+        <li><a href="/roles/#engineering-orchestrator">Engineering Orchestrator</a> — directs agents within their autonomy and owns the outcome</li>
+        <li><a href="/roles/#ai-governance-officer">AI Governance Officer</a> — sets tier criteria and oversees high and critical workflows</li>
+        <li><a href="/principles/#human-accountability">Human accountability, always</a> · <a href="/principles/#delegate-by-risk">Delegate by risk, not by convenience</a> · <a href="/principles/#verify-before-trust">Verify before trust</a></li>
+      </ul>
+
+    </div>
+  </section>

@@ -1,0 +1,117 @@
+<!-- title: AI-Augmented Delivery · ScaledAIOps -->
+<!-- description: AI in every stage of the software lifecycle, from business concept to retirement, inside the SDLC, CI/CD and DevOps practices you already run. -->
+<!-- active: disciplines -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="crumb"><a href="/disciplines/">Disciplines</a> &rarr; 1 of 6</p>
+      <h1>AI-Augmented Delivery</h1>
+      <p class="subtitle">AI in every stage of the lifecycle, from business concept to retirement, inside the delivery practices you already run.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2 id="overview">Overview</h2>
+      <p class="lede">AI-Augmented Delivery is where AI meets the work itself. It covers how AI takes part in each stage of the lifecycle, from shaping a business case to decommissioning a service, and how the pipeline proves that every AI-assisted change was checked before it shipped.</p>
+      <p>The discipline does not introduce a separate "AI process". It adds AI contributions and matching controls to the stages teams already run, so adoption changes how work is done without changing where it is recorded.</p>
+
+      <ol class="lifecycle" aria-label="Lifecycle stages">
+        <li class="bookend"><a href="/lifecycle/#conceive">Conceive</a>business case</li>
+        <li><a href="/lifecycle/#plan">Plan</a>backlog</li>
+        <li><a href="/lifecycle/#specify">Specify</a>specs, ADRs</li>
+        <li><a href="/lifecycle/#generate">Generate</a>code, IaC</li>
+        <li><a href="/lifecycle/#verify">Verify</a>review, evals</li>
+        <li><a href="/lifecycle/#release">Release</a>tiered gates</li>
+        <li><a href="/lifecycle/#operate">Operate</a>run, respond</li>
+        <li><a href="/lifecycle/#learn">Learn</a>adjust</li>
+        <li class="bookend"><a href="/lifecycle/#retire">Retire</a>decommission</li>
+      </ol>
+
+      <h2 id="changes">What changes in existing practice</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Practice</th><th>Today</th><th>With AI-Augmented Delivery</th></tr></thead>
+          <tbody>
+            <tr><td>Refinement</td><td>Stories written by hand</td><td>AI drafts stories and acceptance criteria; the product owner owns acceptance</td></tr>
+            <tr><td>Design</td><td>ADRs record a decision</td><td>AI proposes options; the ADR records AI involvement and the human decision</td></tr>
+            <tr><td>Development</td><td>Engineer writes the change</td><td>AI generates code, tests and IaC; the engineer owns intent and correctness</td></tr>
+            <tr><td>CI/CD</td><td>Build, test, deploy</td><td>Adds provenance, licence and eval checks, and approvals driven by risk tier</td></tr>
+            <tr><td>Decommissioning</td><td>Servers and services</td><td>Also prompts, agents, integrations and non-human credentials</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="practices">Key practices</h2>
+
+      <h3>Tier the work before it starts</h3>
+      <p>Assign a <a href="/pillars/#risk-tiers">risk tier</a> when an epic or change is planned, not when it reaches review. The tier decides how much AI may contribute and which approvals the pipeline will demand, so engineers know the rules before they generate anything.</p>
+
+      <h3>Specify before you generate</h3>
+      <p>Generated code is only as good as the specification it answers. Acceptance criteria, interface contracts and test cases are agreed first, often drafted by AI and approved by a person. Verification then checks the change against an agreed intent, not against whatever the model produced.</p>
+
+      <h3>Mark every AI-assisted change</h3>
+      <p>Record AI involvement where the work is already recorded: a vendor-neutral commit trailer such as <code>AI-assisted: yes</code>, a field on the pull request, a line in the ADR. The <a href="/pillars/#audit-trail">audit trail</a> then comes from the version control system and tracker, with no separate store to maintain.</p>
+
+      <h3>Make the pipeline AI-aware</h3>
+      <p>Keep the existing stages and add controls: secret scanning and context hygiene before commit; licence and IP checks on generated code; evals for prompts, agents and AI features; and a policy gate that maps the change's tier to the approvals required. The <a href="/lifecycle/#pipeline">reference pipeline</a> shows where each control sits.</p>
+
+      <h3>Keep an element register</h3>
+      <p>Every element created during delivery has an owner, a tier, a provenance record and a state from proposed to retired. Start with what you already track, such as code, releases and access, and add the AI-specific elements: prompts, context packs, agents, tool integrations and non-human identities. See the <a href="/lifecycle/#elements">element register</a>.</p>
+
+      <h3>Retire deliberately</h3>
+      <p>AI adoption creates assets that outlive their purpose: prompts nobody owns, agents with standing credentials, integrations to tools no longer approved. Retirement is a lifecycle stage. It finds dependants, revokes access and archives provenance, so nothing keeps running without an owner.</p>
+
+      <h2 id="controls">Controls by risk tier</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Tier</th><th>Prevent (Guardrails)</th><th>Prove (Audit Trail)</th><th>Detect (Self-Monitoring)</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tier-badge tier-low">Low</span></td><td>Approved tools only; automated checks must pass</td><td>Provenance trailer on the change</td><td>Pipeline failure rate on AI-assisted changes</td></tr>
+            <tr><td><span class="tier-badge tier-medium">Medium</span></td><td>One qualified human reviewer; licence and secret checks</td><td>Pull request links spec, review and provenance</td><td>Change failure and rework rate, AI-assisted vs not</td></tr>
+            <tr><td><span class="tier-badge tier-high">High</span></td><td>Two reviewers incl. a specialist; evals or security tests mandatory</td><td>Evidence bundle attached to the release record</td><td>Enhanced monitoring for a defined window after release</td></tr>
+            <tr><td><span class="tier-badge tier-critical">Critical</span></td><td>Human-only authorship and decision; AI may analyse, never act</td><td>Documented rationale; second-line sign-off</td><td>Any AI involvement triggers review</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="maturity">Maturity path</h2>
+      <ol>
+        <li><strong>Ad hoc</strong> — engineers use AI tools privately; no one can say which changes were AI-assisted.</li>
+        <li><strong>Experimenting</strong> — named teams pilot approved tools in development; results shared informally.</li>
+        <li><strong>Managed</strong> — tiers applied at planning; AI-assisted changes marked; review depth follows the tier.</li>
+        <li><strong>Governed</strong> — the pipeline enforces provenance, licence, eval and approval gates as policy-as-code across all stages.</li>
+        <li><strong>Optimised</strong> — delegation per stage adjusted from change-failure and rework data; retirement automated from the element register.</li>
+      </ol>
+      <p><a href="/maturity/">Assess your organisation &rarr;</a></p>
+
+      <h2 id="measures">Measures</h2>
+      <ul>
+        <li>Lead time from approved spec to production, AI-assisted vs not</li>
+        <li>Change failure rate and rework rate of AI-assisted changes</li>
+        <li>Share of changes carrying provenance (target: all)</li>
+        <li>Elements without an owner, and credentials not recertified</li>
+      </ul>
+
+      <h2 id="anti-patterns">Anti-patterns</h2>
+      <ul>
+        <li><strong>A parallel AI process</strong> — separate tickets, pipelines or approvals for "AI work" that drift from the real ones.</li>
+        <li><strong>Generate first, specify later</strong> — review becomes guesswork about what the change was meant to do.</li>
+        <li><strong>Invisible assistance</strong> — AI involvement unrecorded, so incidents and audits cannot tell what was generated.</li>
+        <li><strong>Orphaned agents</strong> — automations and credentials left running after the work they served has ended.</li>
+      </ul>
+
+      <h2 id="regulation">Regulatory anchors</h2>
+      <p>For organisations deploying AI tools, the EU AI Act's AI literacy duty (Art. 4) applies to everyone using them in delivery. ISO/IEC 42001 expects documented information on AI use (clause 7.5) and operational control (clause 8); marking changes and keeping the element register provide both from the systems already in use.</p>
+
+      <h2 id="related">Related roles and principles</h2>
+      <ul>
+        <li><a href="/roles/#engineering-orchestrator">Engineering Orchestrator</a> — directs AI across the lifecycle and owns the change</li>
+        <li><a href="/roles/#eval-engineer">Eval Engineer</a> — builds the checks that verify AI output</li>
+        <li><a href="/roles/#ai-platform-engineer">AI Platform Engineer</a> — runs the AI-aware pipeline</li>
+        <li><a href="/principles/#provenance-by-default">Provenance by default</a> · <a href="/principles/#verify-before-trust">Verify before trust</a> · <a href="/principles/#delegate-by-risk">Delegate by risk, not by convenience</a></li>
+      </ul>
+
+    </div>
+  </section>

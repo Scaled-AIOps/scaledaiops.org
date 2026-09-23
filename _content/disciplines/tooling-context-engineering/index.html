@@ -1,0 +1,107 @@
+<!-- title: Tooling &amp; Context Engineering · ScaledAIOps -->
+<!-- description: Selecting and integrating AI tools a regulated organisation can defend, governing agents as non-human identities, and managing prompts, skills and context as versioned, owned assets. -->
+<!-- active: disciplines -->
+
+<section class="hero" style="padding:3.5rem 1.5rem;">
+    <div class="container">
+      <p class="crumb"><a href="/disciplines/">Disciplines</a> &rarr; 3 of 6</p>
+      <h1>Tooling &amp; Context Engineering</h1>
+      <p class="subtitle">Approved tools, governed integrations and context managed as code, so AI works with the organisation's standards and inside its boundaries.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-page">
+
+      <h2 id="overview">Overview</h2>
+      <p class="lede">Tooling &amp; Context Engineering decides which AI tools may be used, how they connect to the organisation's systems, and what they are told. It covers tool selection and the approved catalogue, integration through open protocols, agents as non-human identities, and the prompts, skills and context packs that shape every AI output.</p>
+      <p>Two things determine the quality and safety of AI-assisted work besides the reviewer: the tool and the context it receives. Both are usually unmanaged at first, chosen by individuals and pasted in by hand. This discipline brings them under the controls that already govern software, access and documentation, so a tool can be defended to an auditor and a prompt can be traced like any other change.</p>
+
+      <h2 id="changes">What changes in existing practice</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Practice</th><th>Today</th><th>With Tooling &amp; Context Engineering</th></tr></thead>
+          <tbody>
+            <tr><td>Procurement</td><td>Licence, price and security questionnaire</td><td>Adds data residency, retention, training use of inputs, audit logs and a documented exit plan</td></tr>
+            <tr><td>Software asset management</td><td>Inventory of installed software and licences</td><td>Approved AI tool catalogue with tiers of permitted use; integrations and agents registered as assets</td></tr>
+            <tr><td>Identity &amp; access</td><td>People and service accounts, periodic recertification</td><td>Agents and tool integrations are non-human identities with an owner, least privilege and short-lived credentials</td></tr>
+            <tr><td>Repository conventions</td><td>Code, tests and pipeline definitions</td><td>Prompts, skills and context packs live beside the code they serve, with owners and review rules</td></tr>
+            <tr><td>Docs-as-code</td><td>Documentation written for people</td><td>Architecture decisions, standards and glossaries curated as context products that people and AI both consume</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="practices">Key practices</h2>
+
+      <h3>Select tools against criteria a regulator would accept</h3>
+      <p>Assess every AI tool before use on data residency, retention periods, whether inputs or outputs are used for training, enterprise administration, audit logs that can be exported, and integration with the organisation's identity provider and access control. Require portability: prompts, context and configuration in open formats, and a documented exit plan stating how the tool would be replaced. A tool without an exit plan is a lock-in decision, taken by default. See <a href="/principles/#governed-openness">Governed openness</a>.</p>
+
+      <h3>Publish an approved tool catalogue</h3>
+      <p>Keep one catalogue of approved tools, each with the highest <a href="/pillars/#risk-tiers">risk tier</a> of work it may support and the data classifications it may receive. A general-purpose assistant might be approved for low-tier drafting only; a coding assistant with enterprise controls for medium- and high-tier work under review; nothing for critical work beyond analysis. The catalogue is a <a href="/pillars/#guardrails">guardrail</a>: requests outside it go through selection, not around it.</p>
+
+      <h3>Integrate through a governed allow-list</h3>
+      <p>Connect tools and agents to repositories, trackers and data sources through open protocols such as the Model Context Protocol (MCP), routed through an allow-list or gateway rather than ad hoc connections from individual machines. Each integration is registered with an owner, the systems it reaches, the actions it may take and the tier it serves. The gateway logs every call, which gives the audit trail and the kill switch in one place.</p>
+
+      <h3>Treat agents and integrations as non-human identities</h3>
+      <p>Every agent, automation and tool integration gets its own identity: never a person's credentials, never a shared account. It holds the least privilege its task needs, uses short-lived credentials issued at run time, has a named human owner and is recertified on the same cycle as privileged human access. When the agent or integration is retired, its identity is revoked and its secrets destroyed. These identities belong in the <a href="/lifecycle/#elements">element register</a>.</p>
+
+      <h3>Manage context as code</h3>
+      <p>Prompts, skills and context packs are versioned in repositories, changed by pull request, reviewed and owned. When one changes, its evals run in the pipeline, because a one-line prompt change can alter every output that depends on it. Provenance records which version of which context produced an AI-assisted change. See <a href="/principles/#context-is-an-asset">Context is an asset</a>.</p>
+
+      <h3>Keep context clean and curate shared context products</h3>
+      <p>Data classification decides what may enter a prompt or context pack: no secrets, credentials or personal data, and nothing above the classification the tool is approved for. Secret scanning and classification checks run before commit and at the gateway. Beyond hygiene, curate shared context products (architecture decisions, coding standards, domain glossaries, approved patterns) with owners and review dates, so AI output reflects how the organisation actually builds rather than generic defaults.</p>
+
+      <h2 id="controls">Controls by risk tier</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Tier</th><th>Prevent (Guardrails)</th><th>Prove (Audit Trail)</th><th>Detect (Self-Monitoring)</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tier-badge tier-low">Low</span></td><td>Catalogue tools only; secret and classification checks on context</td><td>Tool and context version recorded in provenance</td><td>Usage outside the catalogue; stale context assets</td></tr>
+            <tr><td><span class="tier-badge tier-medium">Medium</span></td><td>Integrations via the allow-list only; context changes reviewed by their owner; evals run on change</td><td>Context repository history links each change to its review and eval result</td><td>Eval regressions after context changes; gateway calls outside declared scope</td></tr>
+            <tr><td><span class="tier-badge tier-high">High</span></td><td>Tools approved for high tier and the data classification involved; read-only integrations unless a specialist approves write access; short-lived credentials only</td><td>Gateway logs retained with the evidence bundle; non-human identities recertified with evidence</td><td>Alerts on privilege use, credential age and unusual integration activity</td></tr>
+            <tr><td><span class="tier-badge tier-critical">Critical</span></td><td>No agent or integration holds write access to critical systems; AI tools may analyse copies only</td><td>Documented rationale for any AI tool used; second-line sign-off on context and access</td><td>Any attempt by an agent to reach a critical system triggers an incident</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="maturity">Maturity path</h2>
+      <ol>
+        <li><strong>Ad hoc</strong> — individuals choose their own tools and paste context by hand; integrations run on personal tokens.</li>
+        <li><strong>Experimenting</strong> — a shortlist of sanctioned tools; shared prompts circulate in wikis and chat without owners.</li>
+        <li><strong>Managed</strong> — approved catalogue with tiers of use; context assets in repositories with owners; agents have their own identities.</li>
+        <li><strong>Governed</strong> — integrations only through the allow-list or gateway; evals and context hygiene enforced in the pipeline; non-human identities recertified.</li>
+        <li><strong>Optimised</strong> — context managed as a product with measured effect on output quality; tools swapped using the exit plan without disruption.</li>
+      </ol>
+      <p><a href="/maturity/">Assess your organisation &rarr;</a></p>
+
+      <h2 id="measures">Measures</h2>
+      <ul>
+        <li>Share of AI usage through approved tools (target: all)</li>
+        <li>Context assets with an owner and passing evals</li>
+        <li>Non-human identities recertified on schedule, and credentials older than policy allows</li>
+        <li>Stale context assets: past their review date or unused</li>
+        <li>Integrations in use that are not on the allow-list</li>
+      </ul>
+
+      <h2 id="anti-patterns">Anti-patterns</h2>
+      <ul>
+        <li><strong>Shadow tooling</strong> — tools adopted on personal accounts because the approved route is slower than the workaround.</li>
+        <li><strong>Borrowed identities</strong> — agents acting with an engineer's credentials, so their actions cannot be told apart or revoked.</li>
+        <li><strong>Prompts in chat threads</strong> — context copied between people with no version, owner or review.</li>
+        <li><strong>Lock-in by default</strong> — context and configuration held in a proprietary format with no exit plan.</li>
+        <li><strong>Everything in context</strong> — whole repositories or data extracts passed to a tool regardless of classification.</li>
+      </ul>
+
+      <h2 id="regulation">Regulatory anchors</h2>
+      <p>ISO/IEC 42001 expects documented information on the AI management system (clause 7.5) and operational control over AI use (clause 8); the tool catalogue, the integration register and versioned context repositories provide both. The EU AI Act's AI literacy duty (Art. 4) applies to staff using these tools: the catalogue's tiers of permitted use and data rules are part of what they need to know.</p>
+
+      <h2 id="related">Related roles and principles</h2>
+      <ul>
+        <li><a href="/roles/#context-engineer">Context Engineer</a> — curates prompts, skills and shared context products</li>
+        <li><a href="/roles/#ai-platform-engineer">AI Platform Engineer</a> — runs the catalogue, the gateway and non-human identities</li>
+        <li><a href="/roles/#ai-governance-officer">AI Governance Officer</a> — sets selection criteria and assures tool and access controls</li>
+        <li><a href="/principles/#context-is-an-asset">Context is an asset</a> · <a href="/principles/#governed-openness">Governed openness</a> · <a href="/principles/#provenance-by-default">Provenance by default</a></li>
+      </ul>
+
+    </div>
+  </section>
