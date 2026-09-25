@@ -5,10 +5,11 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-# Created by aiops-tf-infra (s3.tf, cloudfront.tf, ci.tf); the user may only sync this bucket and invalidate this distribution.
+# Created by aiops-tf-infra (s3.tf, cloudfront.tf).
 BUCKET=scaledaiops.org
 DISTRIBUTION=EJE5SGJ73Q1SL
-DEPLOY_USER=arn:aws:iam::546155105471:user/scaledaiops-org-ci-deploy
+# The user's choice (2026-09-25): deploy as admin-cli, the key behind the local `scaledaiops` profile, also held by TeamCity.
+DEPLOY_USER=arn:aws:iam::546155105471:user/admin-cli
 export AWS_DEFAULT_REGION=eu-central-1 AWS_PAGER=""
 
 aws --version | grep -q '^aws-cli/2\.' || { echo "AWS CLI v2 required" >&2; exit 1; }
