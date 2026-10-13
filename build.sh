@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 # ScaledAIOps — Static Site Builder
 # Assembles pages from _layout/ partials and _content/ source files into dist/
 
-set -euo pipefail
+set -eu
+(set -o pipefail) 2>/dev/null && set -o pipefail # not every sh has pipefail
 
 # Feature toggle: FFRS ships the feedback widget + /feedback/ page (live since 2026-08-18). FFRS_ENABLED=false = zero FFRS bytes.
 # The widget is served by the shared FFRS service (ffrs.scaledaiops.org); this site is its default tenant.
@@ -33,7 +34,7 @@ fi
 
 # Read layout partials
 HEAD=$(cat "$LAYOUT_DIR/head.html")
-HEAD="${HEAD//\{\{ASSET_V\}\}/$ASSET_V}"
+HEAD=$(printf '%s\n' "$HEAD" | sed "s|{{ASSET_V}}|$ASSET_V|g")
 HEADER=$(cat "$LAYOUT_DIR/header.html")
 FOOTER=$(cat "$LAYOUT_DIR/footer.html")
 
@@ -60,27 +61,24 @@ find "$CONTENT_DIR" -name '*.html' | while read -r content_file; do
   ' "$content_file")
 
   # Build head with title and description
-  page_head=$(echo "$HEAD" | sed "s|{{TITLE}}|$title|g" | sed "s|{{DESCRIPTION}}|$description|g")
+  page_head=$(printf '%s\n' "$HEAD" | sed "s|{{TITLE}}|$title|g" | sed "s|{{DESCRIPTION}}|$description|g")
 
   # Build header with active nav
   page_header="$HEADER"
   for nav in lifecycle disciplines pillars principles roles about; do
     if [ "$nav" = "$active" ]; then
-      page_header=$(echo "$page_header" | sed "s|{{ACTIVE_$nav}}| class=\"active\"|g")
+      page_header=$(printf '%s\n' "$page_header" | sed "s|{{ACTIVE_$nav}}| class=\"active\"|g")
     else
-      page_header=$(echo "$page_header" | sed "s|{{ACTIVE_$nav}}||g")
+      page_header=$(printf '%s\n' "$page_header" | sed "s|{{ACTIVE_$nav}}||g")
     fi
   done
 
   # Assemble page
   {
-    echo "$page_head"
-    echo ""
-    echo "$page_header"
-    echo ""
-    echo "$body"
-    echo ""
-    echo "${FOOTER//\{\{FFRS_WIDGET\}\}/$FFRS_WIDGET}"
+    printf '%s\n\n' "$page_head"
+    printf '%s\n\n' "$page_header"
+    printf '%s\n\n' "$body"
+    printf '%s\n' "$FOOTER" | sed "s|{{FFRS_WIDGET}}|$FFRS_WIDGET|g"
   } > "$out_file"
 
   echo "  built: $rel_path"
